@@ -7018,15 +7018,8 @@ L5CA0:  lda     #$00                            ; 5CA0 A9 00                    
         rts                                     ; 5CC2 60                       `
 
 ; ----------------------------------------------------------------------------
-        asl     a                               ; 5CC3 0A                       .
-        .byte   $44                             ; 5CC4 44                       D
-        .byte   $3A                             ; 5CC5 3A                       :
-        eor     #$4E                            ; 5CC6 49 4E                    IN
-        eor     #$54                            ; 5CC8 49 54                    IT
-        rol     L414D                           ; 5CCA 2E 4D 41                 .MA
-        .byte   $43                             ; 5CCD 43                       C
-L5CCE:  .byte   $C3                             ; 5CCE C3                       .
-L5CCF:  .byte   $5C                             ; 5CCF 5C                       \
+L5CC3:	.byte	10,"D:INIT.MAC"
+L5CCE:  .addr   L5CC3
         brk                                     ; 5CD0 00                       .
         brk                                     ; 5CD1 00                       .
 L5CD2:  brk                                     ; 5CD2 00                       .
@@ -7074,12 +7067,12 @@ L5D0E:  jsr     L5C9D                           ; 5D0E 20 9D 5C                 
         lda     L5CCE                           ; 5D1C AD CE 5C                 ..\
         adc     #$01                            ; 5D1F 69 01                    i.
         sta     $A1                             ; 5D21 85 A1                    ..
-        lda     L5CCF                           ; 5D23 AD CF 5C                 ..\
+        lda     L5CCE+1                         ; 5D23 AD CF 5C                 ..\
         adc     #$00                            ; 5D26 69 00                    i.
         sta     $A2                             ; 5D28 85 A2                    ..
         lda     L5CCE                           ; 5D2A AD CE 5C                 ..\
         sta     $AC                             ; 5D2D 85 AC                    ..
-        lda     L5CCF                           ; 5D2F AD CF 5C                 ..\
+        lda     L5CCE+1                         ; 5D2F AD CF 5C                 ..\
         sta     $AD                             ; 5D32 85 AD                    ..
         lda     #$00                            ; 5D34 A9 00                    ..
         sta     $A4                             ; 5D36 85 A4                    ..
