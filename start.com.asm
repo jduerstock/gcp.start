@@ -23,7 +23,6 @@ L6172           := $6172
 L6328           := $6328
 L6341           := $6341
 L6365           := $6365
-L6452           := $6452
 L64C5           := $64C5
 L6553           := $6553
 L6620           := $6620
@@ -305,15 +304,7 @@ L2E65:  sbc     $22A0                           ; 2E65 ED A0 22                 
         .byte   $B6                             ; 2E6B B6                       .
 L2E6C:  inc     $1E2C                           ; 2E6C EE 2C 1E                 .,.
         brk                                     ; 2E6F 00                       .
-	.byte	"   ITerm()   "
-        jsr     L3B20                           ; 2E7D 20 20 3B                   ;
-        adc     #$6E                            ; 2E80 69 6E                    in
-        adc     #$74                            ; 2E82 69 74                    it
-        adc     #$61                            ; 2E84 69 61                    ia
-        jmp     (L7A69)                         ; 2E86 6C 69 7A                 liz
-
-; ----------------------------------------------------------------------------
-        .byte   $65                             ; 2E89 65                       e
+	.byte	"   ITerm()     ;initialize"
 L2E8A:  inc     $782C                           ; 2E8A EE 2C 78                 .,x
         brk                                     ; 2E8D 00                       .
         .byte   $74                             ; 2E8E 74                       t
@@ -332,13 +323,7 @@ L2E8A:  inc     $782C                           ; 2E8A EE 2C 78                 
 L2EA3:  brk                                     ; 2EA3 00                       .
         adc     a:$6D,x                         ; 2EA4 7D 6D 00                 }m.
         brk                                     ; 2EA7 00                       .
-	.byte	$19,"  "
-        jsr     L6452                           ; 2EAB 20 52 64                  Rd
-        .byte   $42                             ; 2EAE 42                       B
-        .byte   $6F                             ; 2EAF 6F                       o
-        .byte   $6F                             ; 2EB0 6F                       o
-        .byte   $74                             ; 2EB1 74                       t
-        plp                                     ; 2EB2 28                       (
+	.byte	$19,"   RdBoot("
         jsr     L4422                           ; 2EB3 20 22 44                  "D
         and     ($3A),y                         ; 2EB6 31 3A                    1:
         .byte   $54                             ; 2EB8 54                       T
@@ -2223,7 +2208,7 @@ L3B0F:  jmp     $3B12                           ; 3B0F 4C 12 3B                 
         ldy     L3B09                           ; 3B18 AC 09 3B                 ..;
         ldx     #$00                            ; 3B1B A2 00                    ..
         lda     L3B08                           ; 3B1D AD 08 3B                 ..;
-L3B20:  jsr     L3405                           ; 3B20 20 05 34                  .4
+	jsr     L3405                           ; 3B20 20 05 34                  .4
         lda     #$11                            ; 3B23 A9 11                    ..
         jsr     L31C7                           ; 3B25 20 C7 31                  .1
         lda     #$02                            ; 3B28 A9 02                    ..
