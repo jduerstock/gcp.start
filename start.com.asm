@@ -20,7 +20,6 @@ L2C38           := $2C38
 L6148           := $6148
 L6163           := $6163
 L6172           := $6172
-L6328           := $6328
 L6341           := $6341
 L6365           := $6365
 L64C5           := $64C5
@@ -399,22 +398,7 @@ L2F1B:  .byte   $13                             ; 2F1B 13                       
 L2F1C:  .byte   $2F                             ; 2F1C 2F                       /
 L2F1D:  brk                                     ; 2F1D 00                       .
 L2F1E:  brk                                     ; 2F1E 00                       .
-        jsr     L6328                           ; 2F1F 20 28 63                  (c
-        and     #$31                            ; 2F22 29 31                    )1
-        and     L3338,y                         ; 2F24 39 38 33                 983
-        jsr     L6341                           ; 2F27 20 41 63                  Ac
-        .byte   $74                             ; 2F2A 74                       t
-        adc     #$6F                            ; 2F2B 69 6F                    io
-        ror     L4320                           ; 2F2D 6E 20 43                 n C
-        .byte   $6F                             ; 2F30 6F                       o
-        adc     $7570                           ; 2F31 6D 70 75                 mpu
-        .byte   $74                             ; 2F34 74                       t
-        adc     $72                             ; 2F35 65 72                    er
-        jsr     L6553                           ; 2F37 20 53 65                  Se
-        .byte   $72                             ; 2F3A 72                       r
-        ror     $69,x                           ; 2F3B 76 69                    vi
-        .byte   $63                             ; 2F3D 63                       c
-        adc     $73                             ; 2F3E 65 73                    es
+	.byte	" (c)1983 Action Computer Services"
 L2F40:  ldx     #$FF                            ; 2F40 A2 FF                    ..
         stx     $A6                             ; 2F42 86 A6                    ..
         ldy     #$0C                            ; 2F44 A0 0C                    ..
