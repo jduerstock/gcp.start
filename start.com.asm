@@ -16,7 +16,6 @@ L20B1           := $20B1
 L20B2           := $20B2
 L20B3           := $20B3
 L20CB           := $20CB
-L2C36           := $2C36
 L2C38           := $2C38
 L6148           := $6148
 L6163           := $6163
@@ -284,16 +283,8 @@ L2E30:  inc     $1E2C                           ; 2E30 EE 2C 1E                 
         brk                                     ; 2E35 00                       .
         .byte   $EB                             ; 2E36 EB                       .
         adc     a:$00                           ; 2E37 6D 00 00                 m..
-	.byte	$2E,"  "
-        jsr     L6F42                           ; 2E3D 20 42 6F                  Bo
-        sei                                     ; 2E40 78                       x
-        .byte   $53                             ; 2E41 53                       S
-        .byte   $74                             ; 2E42 74                       t
-        .byte   $72                             ; 2E43 72                       r
-        plp                                     ; 2E44 28                       (
-        jsr     L2C36                           ; 2E45 20 36 2C                  6,
-        jsr     L3031                           ; 2E48 20 31 30                  10
-        bit     $2220                           ; 2E4B 2C 20 22                 , "
+	.byte	$2E,"   BoxStr( 6, 10, "
+	.byte	$22
 L2E4E:  inc     $1E2C                           ; 2E4E EE 2C 1E                 .,.
         brk                                     ; 2E51 00                       .
         .byte   $F4                             ; 2E52 F4                       .
