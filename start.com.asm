@@ -60,6 +60,15 @@ LD9AA           := $D9AA
 CIOV		:= $E456
 ; ----------------------------------------------------------------------------
 
+.macro  Inverse       Arg
+	.repeat .strlen(Arg), I
+		.scope
+			Ch = .strat(Arg, I)
+			.byte Ch | $80
+		.endscope
+	.endrep
+.endmacro
+
 	.segment "HDR00"
 
 	.word	$FFFF
@@ -7133,22 +7142,8 @@ L5E56:  lda     #$00                            ; 5E56 A9 00                    
         jmp     L5EAB                           ; 5E8E 4C AB 5E                 L.^
 
 ; ----------------------------------------------------------------------------
-        ora     $C2A0,y                         ; 5E91 19 A0 C2                 ...
-        .byte   $EF                             ; 5E94 EF                       .
-        .byte   $EF                             ; 5E95 EF                       .
-        .byte   $F4                             ; 5E96 F4                       .
-        sbc     #$EE                            ; 5E97 E9 EE                    ..
-        .byte   $E7                             ; 5E99 E7                       .
-        ldy     #$E9                            ; 5E9A A0 E9                    ..
-        inc     $CDA0                           ; 5E9C EE A0 CD                 ...
-        sbc     ($E9,x)                         ; 5E9F E1 E9                    ..
-        inc     LD0A0                           ; 5EA1 EE A0 D0                 ...
-        .byte   $F2                             ; 5EA4 F2                       .
-        .byte   $EF                             ; 5EA5 EF                       .
-        .byte   $E7                             ; 5EA6 E7                       .
-        .byte   $F2                             ; 5EA7 F2                       .
-        sbc     ($ED,x)                         ; 5EA8 E1 ED                    ..
-        .byte   $A0                             ; 5EAA A0                       .
+	.byte	$19
+	Inverse	" Booting in Main Program "
 L5EAB:  lda     #$5E                            ; 5EAB A9 5E                    .^
         sta     $A3                             ; 5EAD 85 A3                    ..
         ldy     #$91                            ; 5EAF A0 91                    ..
