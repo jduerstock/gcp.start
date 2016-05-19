@@ -1790,25 +1790,8 @@ L389A:  ldx     #$38                            ; 389A A2 38                    
         jmp     L38C3                           ; 38A1 4C C3 38                 L.8
 
 ; ----------------------------------------------------------------------------
-        asl     $6143,x                         ; 38A4 1E 43 61                 .Ca
-        jmp     (L206C)                         ; 38A7 6C 6C 20                 ll 
+	.byte	$1E,"Call GCP, Inc for Assistance%E"
 
-; ----------------------------------------------------------------------------
-        .byte   $47                             ; 38AA 47                       G
-        .byte   $43                             ; 38AB 43                       C
-        bvc     L38DA                           ; 38AC 50 2C                    P,
-        jsr     L6E49                           ; 38AE 20 49 6E                  In
-        .byte   $63                             ; 38B1 63                       c
-        jsr     L6F66                           ; 38B2 20 66 6F                  fo
-        .byte   $72                             ; 38B5 72                       r
-        jsr     L7341                           ; 38B6 20 41 73                  As
-        .byte   $73                             ; 38B9 73                       s
-        adc     #$73                            ; 38BA 69 73                    is
-        .byte   $74                             ; 38BC 74                       t
-        adc     ($6E,x)                         ; 38BD 61 6E                    an
-        .byte   $63                             ; 38BF 63                       c
-        adc     $25                             ; 38C0 65 25                    e%
-        .byte   $45                             ; 38C2 45                       E
 L38C3:  ldx     #$38                            ; 38C3 A2 38                    .8
         lda     #$A4                            ; 38C5 A9 A4                    ..
         jsr     L3355                           ; 38C7 20 55 33                  U3
@@ -7201,14 +7184,8 @@ L5EAB:  lda     #$5E                            ; 5EAB A9 5E                    
         jmp     L5ECA                           ; 5EBB 4C CA 5E                 L.^
 
 ; ----------------------------------------------------------------------------
-        .byte   $0B                             ; 5EBE 0B                       .
-        .byte   $44                             ; 5EBF 44                       D
-        and     ($3A),y                         ; 5EC0 31 3A                    1:
-        .byte   $54                             ; 5EC2 54                       T
-        eor     $52                             ; 5EC3 45 52                    ER
-        eor     L432E                           ; 5EC5 4D 2E 43                 M.C
-        .byte   $4F                             ; 5EC8 4F                       O
-        .byte   $4D                             ; 5EC9 4D                       M
+        .byte   $0B,"D1:TERM.COM"
+
 L5ECA:  ldx     #$5E                            ; 5ECA A2 5E                    .^
         lda     #$BE                            ; 5ECC A9 BE                    ..
         jsr     L3545                           ; 5ECE 20 45 35                  E5
