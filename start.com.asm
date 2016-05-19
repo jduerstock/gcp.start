@@ -6850,22 +6850,9 @@ L5C3B:  lda     #$5C                            ; 5C3B A9 5C                    
         jmp     L5C66                           ; 5C48 4C 66 5C                 Lf\
 
 ; ----------------------------------------------------------------------------
-        .byte   $1A                             ; 5C4B 1A                       .
-        jsr     LD0A0                           ; 5C4C 20 A0 D0                  ..
-        .byte   $F2                             ; 5C4F F2                       .
-        sbc     $F3                             ; 5C50 E5 F3                    ..
-        .byte   $F3                             ; 5C52 F3                       .
-        ldy     #$D3                            ; 5C53 A0 D3                    ..
-        .byte   $D4                             ; 5C55 D4                       .
-        cmp     ($D2,x)                         ; 5C56 C1 D2                    ..
-        .byte   $D4                             ; 5C58 D4                       .
-        ldy     #$F4                            ; 5C59 A0 F4                    ..
-        .byte   $EF                             ; 5C5B EF                       .
-        ldy     #$E3                            ; 5C5C A0 E3                    ..
-        .byte   $EF                             ; 5C5E EF                       .
-        inc     $E9F4                           ; 5C5F EE F4 E9                 ...
-        inc     $E5F5                           ; 5C62 EE F5 E5                 ...
-        .byte   $A0                             ; 5C65 A0                       .
+        .byte   $1A," "
+	Inverse	" Press START to continue "
+
 L5C66:  lda     #$5C                            ; 5C66 A9 5C                    .\
         sta     $A3                             ; 5C68 85 A3                    ..
         ldy     #$4B                            ; 5C6A A0 4B                    .K
@@ -6927,14 +6914,10 @@ L5CCE:  .addr   L5CC3
         brk                                     ; 5CD0 00                       .
         brk                                     ; 5CD1 00                       .
 L5CD2:  brk                                     ; 5CD2 00                       .
-        .byte   $0B                             ; 5CD3 0B                       .
-        eor     (L0054,x)                       ; 5CD4 41 54                    AT
-        eor     ($52,x)                         ; 5CD6 41 52                    AR
-        eor     #$2D                            ; 5CD8 49 2D                    I-
-        lsr     $31,x                           ; 5CDA 56 31                    V1
-        rol     L3630                           ; 5CDC 2E 30 36                 .06
-L5CDF:  .byte   $D3                             ; 5CDF D3                       .
-L5CE0:  .byte   $5C                             ; 5CE0 5C                       \
+L5CD3:	.byte   $0B,"ATARI-V1.06"
+
+L5CDF:  .addr	L5CD3
+
 L5CE1:  jmp     L5CE4                           ; 5CE1 4C E4 5C                 L.\
 
 ; ----------------------------------------------------------------------------
@@ -7026,21 +7009,13 @@ L5DA9:  jsr     L4F19                           ; 5DA9 20 19 4F                 
         jmp     L5DDF                           ; 5DB3 4C DF 5D                 L.]
 
 ; ----------------------------------------------------------------------------
-L5DB6:  .byte   $4C                             ; 5DB6 4C                       L
-        .byte   $CF                             ; 5DB7 CF                       .
-L5DB8:  eor     $A015,x                         ; 5DB8 5D 15 A0                 ]..
-        dec     $A0EF                           ; 5DBB CE EF A0                 ...
-        .byte   $D2                             ; 5DBE D2                       .
-        tsx                                     ; 5DBF BA                       .
-        ldy     #$C8                            ; 5DC0 A0 C8                    ..
-        sbc     ($EE,x)                         ; 5DC2 E1 EE                    ..
-        cpx     $EC                             ; 5DC4 E4 EC                    ..
-        sbc     $F2                             ; 5DC6 E5 F2                    ..
-        ldy     #$E6                            ; 5DC8 A0 E6                    ..
-        .byte   $EF                             ; 5DCA EF                       .
-        sbc     $EE,x                           ; 5DCB F5 EE                    ..
-        cpx     $A0                             ; 5DCD E4 A0                    ..
-        lda     #$5D                            ; 5DCF A9 5D                    .]
+L5DB6:	jmp	L5DCF
+
+	.byte	$15
+	Inverse	" No R: Handler found "
+
+; ----------------------------------------------------------------------------
+L5DCF:	lda     #$5D                            ; 5DCF A9 5D                    .]
         sta     $A3                             ; 5DD1 85 A3                    ..
         ldy     #$B9                            ; 5DD3 A0 B9                    ..
         ldx     #$0A                            ; 5DD5 A2 0A                    ..
@@ -7084,19 +7059,10 @@ L5E16:  jsr     L3DEC                           ; 5E16 20 EC 3D                 
         jmp     L5E37                           ; 5E1E 4C 37 5E                 L7^
 
 ; ----------------------------------------------------------------------------
-        ora     $20,x                           ; 5E21 15 20                    . 
-        ldy     #$C1                            ; 5E23 A0 C1                    ..
-        .byte   $E3                             ; 5E25 E3                       .
-        .byte   $E3                             ; 5E26 E3                       .
-        sbc     $F3                             ; 5E27 E5 F3                    ..
-        .byte   $F3                             ; 5E29 F3                       .
-        sbc     #$EE                            ; 5E2A E9 EE                    ..
-        .byte   $E7                             ; 5E2C E7                       .
-        ldy     #$C7                            ; 5E2D A0 C7                    ..
-        .byte   $C3                             ; 5E2F C3                       .
-        bne     L5DDE                           ; 5E30 D0 AC                    ..
-        ldy     #$C9                            ; 5E32 A0 C9                    ..
-        inc     $A0E3                           ; 5E34 EE E3 A0                 ...
+	.byte	$15," "
+	Inverse	" Accessing GCP, Inc "
+
+; ----------------------------------------------------------------------------
 L5E37:  lda     #$5E                            ; 5E37 A9 5E                    .^
         sta     $A3                             ; 5E39 85 A3                    ..
         ldy     #$21                            ; 5E3B A0 21                    .!
@@ -7118,7 +7084,7 @@ L5E56:  lda     #$00                            ; 5E56 A9 00                    
         sta     $A3                             ; 5E58 85 A3                    ..
         lda     L5CDF                           ; 5E5A AD DF 5C                 ..\
         sta     $AE                             ; 5E5D 85 AE                    ..
-        lda     L5CE0                           ; 5E5F AD E0 5C                 ..\
+        lda     L5CDF+1
         sta     $AF                             ; 5E62 85 AF                    ..
         lda     #$00                            ; 5E64 A9 00                    ..
         sta     $A5                             ; 5E66 85 A5                    ..
@@ -7129,7 +7095,7 @@ L5E56:  lda     #$00                            ; 5E56 A9 00                    
         lda     L5CDF                           ; 5E6F AD DF 5C                 ..\
         adc     #$01                            ; 5E72 69 01                    i.
         sta     $A6                             ; 5E74 85 A6                    ..
-        lda     L5CE0                           ; 5E76 AD E0 5C                 ..\
+        lda     L5CDF+1                         ; 5E76 AD E0 5C                 ..\
         adc     #$00                            ; 5E79 69 00                    i.
         sta     $A7                             ; 5E7B 85 A7                    ..
         ldy     #$6C                            ; 5E7D A0 6C                    .l
@@ -7142,11 +7108,13 @@ L5E56:  lda     #$00                            ; 5E56 A9 00                    
         jmp     L5EAB                           ; 5E8E 4C AB 5E                 L.^
 
 ; ----------------------------------------------------------------------------
-	.byte	$19
+L5E91:	.byte	$19
 	Inverse	" Booting in Main Program "
-L5EAB:  lda     #$5E                            ; 5EAB A9 5E                    .^
+
+; ----------------------------------------------------------------------------
+L5EAB:  lda     #>L5E91
         sta     $A3                             ; 5EAD 85 A3                    ..
-        ldy     #$91                            ; 5EAF A0 91                    ..
+        ldy     #<L5E91
         ldx     #$0A                            ; 5EB1 A2 0A                    ..
         lda     #$06                            ; 5EB3 A9 06                    ..
         jsr     L3BEB                           ; 5EB5 20 EB 3B                  .;
