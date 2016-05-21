@@ -4260,7 +4260,7 @@ L4AA4:  lda     #$7D                            ; 4AA4 A9 7D                    
         jmp     L4AC5                           ; 4AA9 4C C5 4A                 L.J
 
 ; ----------------------------------------------------------------------------
-	.byte	$18," "
+L4AAC:	.byte	$18," "
 	Inverse	" Press OPTION for menu "
 
 L4AC5:  lda     #$4A                            ; 4AC5 A9 4A                    .J
@@ -4272,21 +4272,9 @@ L4AC5:  lda     #$4A                            ; 4AC5 A9 4A                    
         jmp     L4AEC                           ; 4AD2 4C EC 4A                 L.J
 
 ; ----------------------------------------------------------------------------
-        asl     $20,x                           ; 4AD5 16 20                    . 
-        ldy     #$D7                            ; 4AD7 A0 D7                    ..
-        sbc     ($E9,x)                         ; 4AD9 E1 E9                    ..
-        .byte   $F4                             ; 4ADB F4                       .
-        sbc     #$EE                            ; 4ADC E9 EE                    ..
-        .byte   $E7                             ; 4ADE E7                       .
-        ldy     #$C6                            ; 4ADF A0 C6                    ..
-        .byte   $EF                             ; 4AE1 EF                       .
-        .byte   $F2                             ; 4AE2 F2                       .
-        ldy     #$C3                            ; 4AE3 A0 C3                    ..
-        sbc     ($F2,x)                         ; 4AE5 E1 F2                    ..
-        .byte   $F2                             ; 4AE7 F2                       .
-        sbc     #$E5                            ; 4AE8 E9 E5                    ..
-        .byte   $F2                             ; 4AEA F2                       .
-        .byte   $A0                             ; 4AEB A0                       .
+L4AD5:	.byte	$16," "
+	Inverse	" Waiting For Carrier "
+
 L4AEC:  lda     #$4A                            ; 4AEC A9 4A                    .J
         sta     $A3                             ; 4AEE 85 A3                    ..
         ldy     #$D5                            ; 4AF0 A0 D5                    ..
