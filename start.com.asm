@@ -4142,8 +4142,7 @@ L496E:  ldx     #$49                            ; 496E A2 49                    
 
 ; ----------------------------------------------------------------------------
         .byte   $27," "
-	Inverse	"            Termin"
-        .byte   $E1                             ; 498C E1                       .
+	Inverse	"            Termina"
 L498D:  cpx     $EDA0                           ; 498D EC A0 ED                 ...
         .byte   $EF                             ; 4990 EF                       .
         cpx     $E5                             ; 4991 E4 E5                    ..
@@ -4168,7 +4167,6 @@ L49A4:  jsr     sub_3151
         sbc     $F3                             ; 49B2 E5 F3                    ..
         .byte   $F3                             ; 49B4 F3                       .
         ldy     #$CF                            ; 49B5 A0 CF                    ..
-        ;bne     L498D                           ; 49B7 D0 D4                    ..
 	.byte	$D0,$D4
         cmp     #$CF                            ; 49B9 C9 CF                    ..
         dec     $F4A0                           ; 49BB CE A0 F4                 ...
