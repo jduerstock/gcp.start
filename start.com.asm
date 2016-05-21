@@ -384,14 +384,8 @@ L2F02:	.byte	$05,"123KA"
 L2F08:	.addr	L2F02
 L2F0A:	.byte	$06,"123KAT"
 L2F11:	.addr	L2F0A
-        .byte   $07                             ; 2F13 07                       .
-        and     ($32),y                         ; 2F14 31 32                    12
-        .byte   $33                             ; 2F16 33                       3
-        .byte   $4B                             ; 2F17 4B                       K
-        eor     ($42,x)                         ; 2F18 41 42                    AB
-        .byte   $54                             ; 2F1A 54                       T
-L2F1B:  .byte   $13                             ; 2F1B 13                       .
-L2F1C:  .byte   $2F                             ; 2F1C 2F                       /
+L2F13:	.byte	$07,"123KABT"
+L2F1B:	.addr	L2F13
 L2F1D:  brk                                     ; 2F1D 00                       .
 L2F1E:  brk                                     ; 2F1E 00                       .
 	.byte	" (c)1983 Action Computer Services"
@@ -5848,7 +5842,7 @@ L553E:  lda     L2F11+1
         jmp     L5559                           ; 554A 4C 59 55                 LYU
 
 ; ----------------------------------------------------------------------------
-L554D:  lda     L2F1C                           ; 554D AD 1C 2F                 ../
+L554D:  lda     L2F1B+1                         ; 554D AD 1C 2F                 ../
         sta     L2F1E                           ; 5550 8D 1E 2F                 ../
         lda     L2F1B                           ; 5553 AD 1B 2F                 ../
         sta     L2F1D                           ; 5556 8D 1D 2F                 ../
@@ -5869,18 +5863,10 @@ L555E:  ldy     #$00                            ; 555E A0 00                    
 L5578:  jmp     L558E                           ; 5578 4C 8E 55                 L.U
 
 ; ----------------------------------------------------------------------------
-        .byte   $12                             ; 557B 12                       .
-        jsr     LC3A0                           ; 557C 20 A0 C3                  ..
-        .byte   $EF                             ; 557F EF                       .
-        inc     $E5EE                           ; 5580 EE EE E5                 ...
-        .byte   $E3                             ; 5583 E3                       .
-        .byte   $F4                             ; 5584 F4                       .
-        sbc     #$EF                            ; 5585 E9 EF                    ..
-        inc     $CCA0                           ; 5587 EE A0 CC                 ...
-        .byte   $EF                             ; 558A EF                       .
-        .byte   $F3                             ; 558B F3                       .
-        .byte   $F4                             ; 558C F4                       .
-        .byte   $A0                             ; 558D A0                       .
+L557B:
+	.byte   $12," "
+	Inverse	" Connection Lost "
+
 L558E:  lda     #$55                            ; 558E A9 55                    .U
         sta     $A3                             ; 5590 85 A3                    ..
         ldy     #$7B                            ; 5592 A0 7B                    .{
