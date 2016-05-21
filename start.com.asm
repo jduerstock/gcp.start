@@ -3499,9 +3499,9 @@ L44D6:  lda     #$00                            ; 44D6 A9 00                    
 L44DB:  brk                                     ; 44DB 00                       .
 L44DC:  brk                                     ; 44DC 00                       .
         brk                                     ; 44DD 00                       .
-        jmp     L44E1                           ; 44DE 4C E1 44                 L.D
 
 ; ----------------------------------------------------------------------------
+        jmp     L44E1                           ; 44DE 4C E1 44                 L.D
 L44E1:  lda     L2CF7                           ; 44E1 AD F7 2C                 ..,
         bne     L44E9                           ; 44E4 D0 03                    ..
         jmp     L450E                           ; 44E6 4C 0E 45                 L.E
@@ -5469,14 +5469,10 @@ L5277:  ldx     #$52                            ; 5277 A2 52                    
         jmp     L5290                           ; 527E 4C 90 52                 L.R
 
 ; ----------------------------------------------------------------------------
-	.byte	$0E,"  "
-        cmp     ($75,x)                         ; 5284 C1 75                    .u
-        .byte   $74                             ; 5286 74                       t
-        .byte   $6F                             ; 5287 6F                       o
-        and     $6F63                           ; 5288 2D 63 6F                 -co
-        ror     $656E                           ; 528B 6E 6E 65                 nne
-        .byte   $63                             ; 528E 63                       c
-        .byte   $74                             ; 528F 74                       t
+L5281:	.byte	$0E,"  "
+	Inverse "A"
+	.byte	"uto-connect"
+
 L5290:  ldx     #$52                            ; 5290 A2 52                    .R
         lda     #$81                            ; 5292 A9 81                    ..
         jsr     sub_3151
@@ -5489,13 +5485,10 @@ L5290:  ldx     #$52                            ; 5290 A2 52                    
 L52A1:  jmp     L52B0                           ; 52A1 4C B0 52                 L.R
 
 ; ----------------------------------------------------------------------------
-        .byte   $0B                             ; 52A4 0B                       .
-        jsr     LC220                           ; 52A5 20 20 C2                   .
-        adc     ($75,x)                         ; 52A8 61 75                    au
-        .byte   $64                             ; 52AA 64                       d
-        jsr     L6172                           ; 52AB 20 72 61                  ra
-        .byte   $74                             ; 52AE 74                       t
-        .byte   $65                             ; 52AF 65                       e
+L52A4:	.byte   $0B,"  "
+	Inverse "B"
+	.byte	"aud rate"
+
 L52B0:  ldx     #$52                            ; 52B0 A2 52                    .R
         lda     #$A4                            ; 52B2 A9 A4                    ..
         jsr     sub_3151
@@ -6827,20 +6820,10 @@ L5C1A:  lda     #$7D                            ; 5C1A A9 7D                    
         jmp     L5C3B                           ; 5C1F 4C 3B 5C                 L;\
 
 ; ----------------------------------------------------------------------------
-        clc                                     ; 5C22 18                       .
-        jsr     LD0A0                           ; 5C23 20 A0 D0                  ..
-        .byte   $F2                             ; 5C26 F2                       .
-        sbc     $F3                             ; 5C27 E5 F3                    ..
-        .byte   $F3                             ; 5C29 F3                       .
-        ldy     #$CF                            ; 5C2A A0 CF                    ..
-        bne     L5C02                           ; 5C2C D0 D4                    ..
-        cmp     #$CF                            ; 5C2E C9 CF                    ..
-        dec     $E6A0                           ; 5C30 CE A0 E6                 ...
-        .byte   $EF                             ; 5C33 EF                       .
-        .byte   $F2                             ; 5C34 F2                       .
-        ldy     #$ED                            ; 5C35 A0 ED                    ..
-        sbc     $EE                             ; 5C37 E5 EE                    ..
-        sbc     $A0,x                           ; 5C39 F5 A0                    ..
+	.byte	$18," "
+	Inverse	" Press OPTION for menu "
+
+; ----------------------------------------------------------------------------
 L5C3B:  lda     #$5C                            ; 5C3B A9 5C                    .\
         sta     $A3                             ; 5C3D 85 A3                    ..
         ldy     #$22                            ; 5C3F A0 22                    ."
