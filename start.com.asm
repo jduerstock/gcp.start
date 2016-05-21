@@ -4168,7 +4168,8 @@ L49A4:  jsr     sub_3151
         sbc     $F3                             ; 49B2 E5 F3                    ..
         .byte   $F3                             ; 49B4 F3                       .
         ldy     #$CF                            ; 49B5 A0 CF                    ..
-        bne     L498D                           ; 49B7 D0 D4                    ..
+        ;bne     L498D                           ; 49B7 D0 D4                    ..
+	.byte	$D0,$D4
         cmp     #$CF                            ; 49B9 C9 CF                    ..
         dec     $F4A0                           ; 49BB CE A0 F4                 ...
         .byte   $EF                             ; 49BE EF                       .
