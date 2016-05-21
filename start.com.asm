@@ -4260,20 +4260,9 @@ L4AA4:  lda     #$7D                            ; 4AA4 A9 7D                    
         jmp     L4AC5                           ; 4AA9 4C C5 4A                 L.J
 
 ; ----------------------------------------------------------------------------
-        clc                                     ; 4AAC 18                       .
-        jsr     LD0A0                           ; 4AAD 20 A0 D0                  ..
-        .byte   $F2                             ; 4AB0 F2                       .
-        sbc     $F3                             ; 4AB1 E5 F3                    ..
-        .byte   $F3                             ; 4AB3 F3                       .
-        ldy     #$CF                            ; 4AB4 A0 CF                    ..
-        bne     L4A8C                           ; 4AB6 D0 D4                    ..
-        cmp     #$CF                            ; 4AB8 C9 CF                    ..
-        dec     $E6A0                           ; 4ABA CE A0 E6                 ...
-        .byte   $EF                             ; 4ABD EF                       .
-        .byte   $F2                             ; 4ABE F2                       .
-        ldy     #$ED                            ; 4ABF A0 ED                    ..
-        sbc     $EE                             ; 4AC1 E5 EE                    ..
-        sbc     $A0,x                           ; 4AC3 F5 A0                    ..
+	.byte	$18," "
+	Inverse	" Press OPTION for menu "
+
 L4AC5:  lda     #$4A                            ; 4AC5 A9 4A                    .J
         sta     $A3                             ; 4AC7 85 A3                    ..
         ldy     #$AC                            ; 4AC9 A0 AC                    ..
