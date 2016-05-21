@@ -4142,8 +4142,7 @@ L496E:  ldx     #$49                            ; 496E A2 49                    
 
 ; ----------------------------------------------------------------------------
         .byte   $27," "
-	Inverse	"            Ter"
-        sbc     $EEE9                           ; 4989 ED E9 EE                 ...
+	Inverse	"            Termin"
         .byte   $E1                             ; 498C E1                       .
 L498D:  cpx     $EDA0                           ; 498D EC A0 ED                 ...
         .byte   $EF                             ; 4990 EF                       .
