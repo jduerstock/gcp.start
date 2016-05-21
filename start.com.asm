@@ -3917,9 +3917,8 @@ L47D3:  ldx     #$2C                            ; 47D3 A2 2C                    
 L47DA:  rts                                     ; 47DA 60                       `
 
 ; ----------------------------------------------------------------------------
-L47DB:  jmp     L47DE                           ; 47DB 4C DE 47                 L.G
-
-; ----------------------------------------------------------------------------
+sub_47DB:  
+	jmp     L47DE                           ; 47DB 4C DE 47                 L.G
 L47DE:  lda     L2CF7                           ; 47DE AD F7 2C                 ..,
         bne     L47E6                           ; 47E1 D0 03                    ..
         jmp     L47EC                           ; 47E3 4C EC 47                 L.G
@@ -6961,7 +6960,7 @@ L5E56:  lda     #$00                            ; 5E56 A9 00                    
         ldx     #>L5E53
         lda     #<L5E53
         jsr     sub_45D3
-        jsr     L47DB                           ; 5E86 20 DB 47                  .G
+        jsr     sub_47DB
         lda     #$7D                            ; 5E89 A9 7D                    .}
         jsr     L31C7                           ; 5E8B 20 C7 31                  .1
         jmp     L5EAB                           ; 5E8E 4C AB 5E                 L.^
