@@ -4141,20 +4141,10 @@ L496E:  ldx     #$49                            ; 496E A2 49                    
         jmp     L49A0                           ; 4975 4C A0 49                 L.I
 
 ; ----------------------------------------------------------------------------
-        .byte   $27," "
-	Inverse	"            Terminal m"
-        .byte   $EF                             ; 4990 EF                       .
-        cpx     $E5                             ; 4991 E4 E5                    ..
-        tsx                                     ; 4993 BA                       .
-        ldy     #$A0                            ; 4994 A0 A0                    ..
-        ldy     #$A0                            ; 4996 A0 A0                    ..
-        ldy     #$A0                            ; 4998 A0 A0                    ..
-        ldy     #$A0                            ; 499A A0 A0                    ..
-        ldy     #$A0                            ; 499C A0 A0                    ..
-        ldy     #$A0                            ; 499E A0 A0                    ..
-L49A0:  ldx     #$49                            ; 49A0 A2 49                    .I
-        .byte   $A9                             ; 49A2 A9                       .
-L49A3:  sei                                     ; 49A3 78                       x
+L4978:	.byte   $27," "
+	Inverse	"            Terminal mode:            "
+L49A0:  ldx     #>L4978
+	lda	#<L4978
 L49A4:  jsr     sub_3151
         jmp     L49D2                           ; 49A7 4C D2 49                 L.I
 
@@ -4209,7 +4199,7 @@ L49D2:  ldx     #$49                            ; 49D2 A2 49                    
         .byte   $EF                             ; 49FD EF                       .
         ldy     #$C7                            ; 49FE A0 C7                    ..
         .byte   $C3                             ; 4A00 C3                       .
-        bne     L49A3                           ; 4A01 D0 A0                    ..
+	.byte	$D0,$A0
         .byte   $A0                             ; 4A03 A0                       .
 L4A04:  ldx     #$49                            ; 4A04 A2 49                    .I
         lda     #$DC                            ; 4A06 A9 DC                    ..
