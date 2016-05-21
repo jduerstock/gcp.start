@@ -4150,14 +4150,7 @@ L49A4:  jsr     sub_3151
 
 ; ----------------------------------------------------------------------------
 L49AA:	.byte   $27," "
-	Inverse "    "
-        bne     L49A4                           ; 49B0 D0 F2                    ..
-        sbc     $F3                             ; 49B2 E5 F3                    ..
-        .byte   $F3                             ; 49B4 F3                       .
-        ldy     #$CF                            ; 49B5 A0 CF                    ..
-	.byte	$D0,$D4
-        cmp     #$CF                            ; 49B9 C9 CF                    ..
-        dec     $F4A0                           ; 49BB CE A0 F4                 ...
+	Inverse "    Press OPTION t"
         .byte   $EF                             ; 49BE EF                       .
         ldy     #$F2                            ; 49BF A0 F2                    ..
         sbc     $F4                             ; 49C1 E5 F4                    ..
