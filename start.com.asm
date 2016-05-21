@@ -4150,51 +4150,18 @@ L49A4:  jsr     sub_3151
 
 ; ----------------------------------------------------------------------------
 L49AA:	.byte   $27," "
-	Inverse "    Press OPTION t"
-        .byte   $EF                             ; 49BE EF                       .
-        ldy     #$F2                            ; 49BF A0 F2                    ..
-        sbc     $F4                             ; 49C1 E5 F4                    ..
-        sbc     $F2,x                           ; 49C3 F5 F2                    ..
-        inc     $F4A0                           ; 49C5 EE A0 F4                 ...
-        .byte   $EF                             ; 49C8 EF                       .
-        ldy     #$CD                            ; 49C9 A0 CD                    ..
-        sbc     $EE                             ; 49CB E5 EE                    ..
-        sbc     $A0,x                           ; 49CD F5 A0                    ..
-        ldy     #$A0                            ; 49CF A0 A0                    ..
-        .byte   $A0                             ; 49D1 A0                       .
-L49D2:  ldx     #$49                            ; 49D2 A2 49                    .I
-        lda     #$AA                            ; 49D4 A9 AA                    ..
+	Inverse "    Press OPTION to return to Menu    "
+L49D2:  ldx     #>L49AA
+        lda     #<L49AA
         jsr     sub_3151
         jmp     L4A04                           ; 49D9 4C 04 4A                 L.J
 
 ; ----------------------------------------------------------------------------
-        .byte   $27                             ; 49DC 27                       '
-        jsr     LA0A0                           ; 49DD 20 A0 A0                  ..
-        ldy     #$D0                            ; 49E0 A0 D0                    ..
-        .byte   $F2                             ; 49E2 F2                       .
-        sbc     $F3                             ; 49E3 E5 F3                    ..
-        .byte   $F3                             ; 49E5 F3                       .
-        ldy     #$D3                            ; 49E6 A0 D3                    ..
-        .byte   $D4                             ; 49E8 D4                       .
-        cmp     ($D2,x)                         ; 49E9 C1 D2                    ..
-        .byte   $D4                             ; 49EB D4                       .
-        ldy     #$F7                            ; 49EC A0 F7                    ..
-        inx                                     ; 49EE E8                       .
-        sbc     $EE                             ; 49EF E5 EE                    ..
-        ldy     #$E3                            ; 49F1 A0 E3                    ..
-        .byte   $EF                             ; 49F3 EF                       .
-        inc     $E5EE                           ; 49F4 EE EE E5                 ...
-        .byte   $E3                             ; 49F7 E3                       .
-        .byte   $F4                             ; 49F8 F4                       .
-        sbc     $E4                             ; 49F9 E5 E4                    ..
-        ldy     #$F4                            ; 49FB A0 F4                    ..
-        .byte   $EF                             ; 49FD EF                       .
-        ldy     #$C7                            ; 49FE A0 C7                    ..
-        .byte   $C3                             ; 4A00 C3                       .
-	.byte	$D0,$A0
-        .byte   $A0                             ; 4A03 A0                       .
-L4A04:  ldx     #$49                            ; 4A04 A2 49                    .I
-        lda     #$DC                            ; 4A06 A9 DC                    ..
+L49DC:	.byte   $27," "
+	Inverse	"   Press START when connected to GCP  "
+
+L4A04:  ldx     #>L49DC
+        lda     #<L49DC
         jsr     sub_3151
         jsr     L31C5                           ; 4A0B 20 C5 31                  .1
         ldy     #$01                            ; 4A0E A0 01                    ..
