@@ -3847,26 +3847,8 @@ L4727:  jmp     L4762                           ; 4727 4C 62 47                 
 L472A:  jmp     L4754                           ; 472A 4C 54 47                 LTG
 
 ; ----------------------------------------------------------------------------
-        rol     $2A                             ; 472D 26 2A                    &*
-        rol     a                               ; 472F 2A                       *
-        rol     a                               ; 4730 2A                       *
-        jsr     L7550                           ; 4731 20 50 75                  Pu
-        .byte   $74                             ; 4734 74                       t
-        bvc     L47A2                           ; 4735 50 6B                    Pk
-        .byte   $74                             ; 4737 74                       t
-        .byte   $3A                             ; 4738 3A                       :
-        jsr     L6E55                           ; 4739 20 55 6E                  Un
-        .byte   $6B                             ; 473C 6B                       k
-        ror     $776F                           ; 473D 6E 6F 77                 now
-        ror     L6620                           ; 4740 6E 20 66                 n f
-        .byte   $6F                             ; 4743 6F                       o
-        .byte   $72                             ; 4744 72                       r
-        adc     $7461                           ; 4745 6D 61 74                 mat
-        jsr     L7974                           ; 4748 20 74 79                  ty
-        bvs     L47B2                           ; 474B 70 65                    pe
-        jsr     L203A                           ; 474D 20 3A 20                  : 
-        and     $43                             ; 4750 25 43                    %C
-        and     $45                             ; 4752 25 45                    %E
+L472D:	.byte	$26,"*** PutPkt: Unknown format type : %C%E"
+
 L4754:  lda     #$00                            ; 4754 A9 00                    ..
         sta     $A3                             ; 4756 85 A3                    ..
         ldy     L4570                           ; 4758 AC 70 45                 .pE
@@ -5933,14 +5915,12 @@ L55FF:  lda     #$2E                            ; 55FF A9 2E                    
 L560E:  jmp     L5621                           ; 560E 4C 21 56                 L!V
 
 ; ----------------------------------------------------------------------------
-        .byte   $0F                             ; 5611 0F                       .
-        jsr     L64C5                           ; 5612 20 C5 64                  .d
-        adc     #$74                            ; 5615 69 74                    it
-        jsr     L726F                           ; 5617 20 6F 72                  or
-        jsr     L69C4                           ; 561A 20 C4 69                  .i
-        adc     ($6C,x)                         ; 561D 61 6C                    al
-        .byte   $3F                             ; 561F 3F                       ?
-        .byte   $20                             ; 5620 20                        
+L5611:	.byte	$0F," "
+	Inverse	"E"
+	.byte	"dit or "
+	Inverse	"D"
+	.byte	"ial? "
+
 L5621:  lda     #$56                            ; 5621 A9 56                    .V
         sta     $A3                             ; 5623 85 A3                    ..
         ldy     #$11                            ; 5625 A0 11                    ..
