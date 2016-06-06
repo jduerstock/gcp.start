@@ -2131,13 +2131,12 @@ L3B0B:  .byte   $59                             ; 3B0B 59                       
 L3B0C:  .byte   $03                             ; 3B0C 03                       .
 L3B0D:  .byte   $8D                             ; 3B0D 8D                       .
 L3B0E:  .byte   $C5                             ; 3B0E C5                       .
-L3B0F:  jmp     $3B12                           ; 3B0F 4C 12 3B                 L.;
 
 ; ----------------------------------------------------------------------------
+L3B0F:  jmp     $3B12                           ; 3B0F 4C 12 3B                 L.;
         jsr     L30C3                           ; 3B12 20 C3 30                  .0
-        php                                     ; 3B15 08                       .
-        .byte   $3B                             ; 3B16 3B                       ;
-        .byte   $03                             ; 3B17 03                       .
+	.addr	L3B08
+	.byte	$03
         ldy     L3B09                           ; 3B18 AC 09 3B                 ..;
         ldx     #$00                            ; 3B1B A2 00                    ..
         lda     L3B08                           ; 3B1D AD 08 3B                 ..;
