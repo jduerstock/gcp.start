@@ -4815,12 +4815,8 @@ L4EC1:  lda     #$7D                            ; 4EC1 A9 7D                    
         jmp     L4EDD                           ; 4EC6 4C DD 4E                 L.N
 
 ; ----------------------------------------------------------------------------
-        .byte   $13                             ; 4EC9 13                       .
-        jsr     LC3A0                           ; 4ECA 20 A0 C3                  ..
-        sbc     ($F2,x)                         ; 4ECD E1 F2                    ..
-        .byte   $F2                             ; 4ECF F2                       .
-        sbc     #$E5                            ; 4ED0 E9 E5                    ..
-        .byte   $F2                             ; 4ED2 F2                       .
+        .byte   $13," "
+	Inverse	" Carrier"
         ldy     #$C4                            ; 4ED3 A0 C4                    ..
         sbc     $F4                             ; 4ED5 E5 F4                    ..
         sbc     $E3                             ; 4ED7 E5 E3                    ..
