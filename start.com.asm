@@ -4842,21 +4842,13 @@ L4F02:  lda     L4D5C                           ; 4F02 AD 5C 4D                 
         rts                                     ; 4F07 60                       `
 
 ; ----------------------------------------------------------------------------
-        ora     L3144                           ; 4F08 0D 44 31                 .D1
-        .byte   $3A                             ; 4F0B 3A                       :
-        .byte   $43                             ; 4F0C 43                       C
-        .byte   $4F                             ; 4F0D 4F                       O
-        lsr     L4946                           ; 4F0E 4E 46 49                 NFI
-        .byte   $47                             ; 4F11 47                       G
-        rol     L4144                           ; 4F12 2E 44 41                 .DA
-        .byte   $54                             ; 4F15 54                       T
-L4F16:  php                                     ; 4F16 08                       .
-L4F17:  .byte   $4F                             ; 4F17 4F                       O
+L4F08:	.byte	13,"D1:CONFIG.DAT"
+L4F16:  .addr	L4F08
 L4F18:  brk                                     ; 4F18 00                       .
-L4F19:  jmp     L4F1C                           ; 4F19 4C 1C 4F                 L.O
 
 ; ----------------------------------------------------------------------------
-L4F1C:  lda     #$05                            ; 4F1C A9 05                    ..
+L4F19:  prolog
+	lda     #$05                            ; 4F1C A9 05                    ..
         jsr     L315E                           ; 4F1E 20 5E 31                  ^1
         ldy     #$00                            ; 4F21 A0 00                    ..
         sty     L347C                           ; 4F23 8C 7C 34                 .|4
@@ -4864,12 +4856,12 @@ L4F1C:  lda     #$05                            ; 4F1C A9 05                    
         lda     L4F16                           ; 4F27 AD 16 4F                 ..O
         adc     #$01                            ; 4F2A 69 01                    i.
         sta     $A1                             ; 4F2C 85 A1                    ..
-        lda     L4F17                           ; 4F2E AD 17 4F                 ..O
+        lda     L4F16+1
         adc     #$00                            ; 4F31 69 00                    i.
         sta     $A2                             ; 4F33 85 A2                    ..
         lda     L4F16                           ; 4F35 AD 16 4F                 ..O
         sta     $AC                             ; 4F38 85 AC                    ..
-        lda     L4F17                           ; 4F3A AD 17 4F                 ..O
+        lda     L4F16+1
         sta     $AD                             ; 4F3D 85 AD                    ..
         lda     #$00                            ; 4F3F A9 00                    ..
         sta     $A4                             ; 4F41 85 A4                    ..
@@ -4945,12 +4937,12 @@ L4FBB:  lda     #$05                            ; 4FBB A9 05                    
         lda     L4F16                           ; 4FC6 AD 16 4F                 ..O
         adc     #$01                            ; 4FC9 69 01                    i.
         sta     $A1                             ; 4FCB 85 A1                    ..
-        lda     L4F17                           ; 4FCD AD 17 4F                 ..O
+        lda     L4F16+1
         adc     #$00                            ; 4FD0 69 00                    i.
         sta     $A2                             ; 4FD2 85 A2                    ..
         lda     L4F16                           ; 4FD4 AD 16 4F                 ..O
         sta     $AC                             ; 4FD7 85 AC                    ..
-        lda     L4F17                           ; 4FD9 AD 17 4F                 ..O
+        lda     L4F16+1
         sta     $AD                             ; 4FDC 85 AD                    ..
         lda     #$00                            ; 4FDE A9 00                    ..
         sta     $A4                             ; 4FE0 85 A4                    ..
