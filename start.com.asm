@@ -5060,11 +5060,8 @@ L50DC:	ldx	#$50
 
 ; ----------------------------------------------------------------------------
         .byte   $27,"  "
-	Inverse	"      Press O"
-        .byte   $D0                             ; 50F6 D0                       .
-L50F7:  .byte   $D4                             ; 50F7 D4                       .
-        cmp     #$CF                            ; 50F8 C9 CF                    ..
-        dec     $E6A0                           ; 50FA CE A0 E6                 ...
+	Inverse	"      Press OPTION "
+	.byte	$E6
         .byte   $EF                             ; 50FD EF                       .
         .byte   $F2                             ; 50FE F2                       .
         ldy     #$F4                            ; 50FF A0 F4                    ..
@@ -5115,7 +5112,7 @@ L5146:  jmp     L5159                           ; 5146 4C 59 51                 
 L514F:  bne     L5121                           ; 514F D0 D0                    ..
         ldy     #$B1                            ; 5151 A0 B1                    ..
         bcs     L5105                           ; 5153 B0 B0                    ..
-        bcs     L50F7                           ; 5155 B0 A0                    ..
+	.byte	$B0,$A0
         ldy     #$A0                            ; 5157 A0 A0                    ..
 L5159:  ldx     #$51                            ; 5159 A2 51                    .Q
         lda     #$49                            ; 515B A9 49                    .I
