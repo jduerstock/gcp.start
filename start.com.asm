@@ -5052,10 +5052,7 @@ L50B0:  jmp     L50DC                           ; 50B0 4C DC 50                 
 
 ; ----------------------------------------------------------------------------
         .byte	$28,"}  "
-	Inverse	"      Games Computers Play, Inc "
-        ldy     #$A0                            ; 50D7 A0 A0                    ..
-        ldy     #$A0                            ; 50D9 A0 A0                    ..
-L50DB:  .byte   $A0                             ; 50DB A0                       .
+	Inverse	"      Games Computers Play, Inc      "
 L50DC:  .byte   $A2                             ; 50DC A2                       .
 L50DD:  
 	;bvc     $5088                           ; 50DD 50 A9                    P.
