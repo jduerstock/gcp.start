@@ -5060,18 +5060,8 @@ L50DC:	ldx	#$50
 
 ; ----------------------------------------------------------------------------
         .byte   $27,"  "
-	Inverse	"      Press OPTION "
-	.byte	$E6
-        .byte   $EF                             ; 50FD EF                       .
-        .byte   $F2                             ; 50FE F2                       .
-        ldy     #$F4                            ; 50FF A0 F4                    ..
-        inx                                     ; 5101 E8                       .
-        sbc     #$F3                            ; 5102 E9 F3                    ..
-        .byte   $A0                             ; 5104 A0                       .
-L5105:  sbc     $EEE5                           ; 5105 ED E5 EE                 ...
-        sbc     $A0,x                           ; 5108 F5 A0                    ..
-        ldy     #$A0                            ; 510A A0 A0                    ..
-        ldy     #$A0                            ; 510C A0 A0                    ..
+	Inverse	"      Press OPTION for this menu     "
+
 L510E:  ldx     #$50                            ; 510E A2 50                    .P
         lda     #$E6                            ; 5110 A9 E6                    ..
         jsr     sub_3151
@@ -5111,7 +5101,7 @@ L5146:  jmp     L5159                           ; 5146 4C 59 51                 
         ldy     #$CD                            ; 514D A0 CD                    ..
 L514F:  bne     L5121                           ; 514F D0 D0                    ..
         ldy     #$B1                            ; 5151 A0 B1                    ..
-        bcs     L5105                           ; 5153 B0 B0                    ..
+	.byte	$B0,$B0
 	.byte	$B0,$A0
         ldy     #$A0                            ; 5157 A0 A0                    ..
 L5159:  ldx     #$51                            ; 5159 A2 51                    .Q
