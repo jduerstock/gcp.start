@@ -5254,16 +5254,11 @@ L52B7:  lda     $B148                           ; 52B7 AD 48 B1                 
 L52C1:  jmp     L52D4                           ; 52C1 4C D4 52                 L.R
 
 ; ----------------------------------------------------------------------------
-	.byte   $0F                             ; 52C4 0F                       .
-	jsr     LD420                           ; 52C5 20 20 D4                   .
-	adc     $72                             ; 52C8 65 72                    er
-	adc     $6E69                           ; 52CA 6D 69 6E                 min
-	adc     ($6C,x)                         ; 52CD 61 6C                    al
-	jsr     L6F6D                           ; 52CF 20 6D 6F                  mo
-	.byte   $64                             ; 52D2 64                       d
-	.byte   $65                             ; 52D3 65                       e
-L52D4:  ldx     #$52                            ; 52D4 A2 52                    .R
-	lda     #$C4                            ; 52D6 A9 C4                    ..
+L52C4:	.byte   $0F,"  "
+	Inverse	"T"
+	.byte	"erminal mode"
+L52D4:  ldx     #>L52C4
+	lda     #<L52C4
 	jsr     sub_3151
 L52DB:  jsr     L31C5                           ; 52DB 20 C5 31                  .1
 	jmp     L52F5                           ; 52DE 4C F5 52                 L.R
@@ -5280,10 +5275,10 @@ L52FD:  brk                                     ; 52FD 00                       
 L52FE:  brk                                     ; 52FE 00                       .
 L52FF:  brk                                     ; 52FF 00                       .
 L5300:  brk                                     ; 5300 00                       .
-L5301:  jmp     L5304                           ; 5301 4C 04 53                 L.S
 
 ; ----------------------------------------------------------------------------
-L5304:  jsr     L30C3                           ; 5304 20 C3 30                  .0
+L5301:  prolog
+	jsr     L30C3                           ; 5304 20 C3 30                  .0
 	sbc     $0252,x                         ; 5307 FD 52 02                 .R.
 	ldy     L52FE                           ; 530A AC FE 52                 ..R
 	ldx     #$00                            ; 530D A2 00                    ..
