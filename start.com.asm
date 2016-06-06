@@ -5014,24 +5014,10 @@ L5054:  rts                                     ; 5054 60                       
 L5055:  jmp     L507A                           ; 5055 4C 7A 50                 LzP
 
 ; ----------------------------------------------------------------------------
-        and     ($20,x)                         ; 5058 21 20                    ! 
-        .byte   $53                             ; 505A 53                       S
-        adc     ($76,x)                         ; 505B 61 76                    av
-        adc     $20                             ; 505D 65 20                    e 
-        .byte   $43                             ; 505F 43                       C
-        .byte   $6F                             ; 5060 6F                       o
-        ror     $6966                           ; 5061 6E 66 69                 nfi
-        .byte   $67                             ; 5064 67                       g
-        adc     $72,x                           ; 5065 75 72                    ur
-        adc     ($74,x)                         ; 5067 61 74                    at
-        adc     #$6F                            ; 5069 69 6F                    io
-        ror     $7420                           ; 506B 6E 20 74                 n t
-        .byte   $6F                             ; 506E 6F                       o
-        jsr     L6944                           ; 506F 20 44 69                  Di
-        .byte   $73                             ; 5072 73                       s
-        .byte   $6B                             ; 5073 6B                       k
-        jsr     LAFD9                           ; 5074 20 D9 AF                  ..
-        dec     $203F                           ; 5077 CE 3F 20                 .? 
+	.byte	$21," Save Configuration to Disk "
+	Inverse	"Y/N"	
+	.byte	"? "
+
 L507A:  lda     #$50                            ; 507A A9 50                    .P
         sta     $A3                             ; 507C 85 A3                    ..
         ldy     #$58                            ; 507E A0 58                    .X
