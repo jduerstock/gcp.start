@@ -5060,11 +5060,7 @@ L50DC:	ldx	#$50
 
 ; ----------------------------------------------------------------------------
         .byte   $27,"  "
-	Inverse	"      P"
-        .byte   $F2                             ; 50F0 F2                       .
-        sbc     $F3                             ; 50F1 E5 F3                    ..
-        .byte   $F3                             ; 50F3 F3                       .
-        ldy     #$CF                            ; 50F4 A0 CF                    ..
+	Inverse	"      Press O"
         .byte   $D0                             ; 50F6 D0                       .
 L50F7:  .byte   $D4                             ; 50F7 D4                       .
         cmp     #$CF                            ; 50F8 C9 CF                    ..
