@@ -4816,13 +4816,8 @@ L4EC1:  lda     #$7D                            ; 4EC1 A9 7D                    
 
 ; ----------------------------------------------------------------------------
         .byte   $13," "
-	Inverse	" Carrier"
-        ldy     #$C4                            ; 4ED3 A0 C4                    ..
-        sbc     $F4                             ; 4ED5 E5 F4                    ..
-        sbc     $E3                             ; 4ED7 E5 E3                    ..
-        .byte   $F4                             ; 4ED9 F4                       .
-        sbc     $E4                             ; 4EDA E5 E4                    ..
-        .byte   $A0                             ; 4EDC A0                       .
+	Inverse	" Carrier Detected "
+
 L4EDD:  lda     #$4E                            ; 4EDD A9 4E                    .N
         sta     $A3                             ; 4EDF 85 A3                    ..
         ldy     #$C9                            ; 4EE1 A0 C9                    ..
