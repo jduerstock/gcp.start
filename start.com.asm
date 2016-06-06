@@ -5051,13 +5051,10 @@ L50AD:  jmp     L50B0                           ; 50AD 4C B0 50                 
 L50B0:  jmp     L50DC                           ; 50B0 4C DC 50                 L.P
 
 ; ----------------------------------------------------------------------------
-        .byte	$28,"}  "
+L50B3:	.byte	$28,"}  "
 	Inverse	"      Games Computers Play, Inc      "
-L50DC:  .byte   $A2                             ; 50DC A2                       .
-L50DD:  
-	;bvc     $5088                           ; 50DD 50 A9                    P.
-	.byte	$50,$A9
-        .byte   $B3                             ; 50DF B3                       .
+L50DC:	ldx	#$50
+	lda	#$B3
         jsr     sub_3151
         jmp     L510E                           ; 50E3 4C 0E 51                 L.Q
 
@@ -5099,7 +5096,7 @@ L511F:  .byte   $4C                             ; 511F 4C                       
 L5121:  eor     ($0F),y                         ; 5121 51 0F                    Q.
         jsr     LA020                           ; 5123 20 20 A0                   .
         ldy     #$B1                            ; 5126 A0 B1                    ..
-L5128:  bcs     L50DD                           ; 5128 B0 B3                    ..
+L5128:	.byte	$B0,$B3
 	.byte	$B0,$AF
         cld                                     ; 512C D8                       .
         cmp     $B0B3                           ; 512D CD B3 B0                 ...
