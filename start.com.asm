@@ -4815,12 +4815,13 @@ L4EC1:  lda     #$7D                            ; 4EC1 A9 7D                    
         jmp     L4EDD                           ; 4EC6 4C DD 4E                 L.N
 
 ; ----------------------------------------------------------------------------
-        .byte   $13," "
+L4EC9:	.byte   $13," "
 	Inverse	" Carrier Detected "
 
-L4EDD:  lda     #$4E                            ; 4EDD A9 4E                    .N
+; ----------------------------------------------------------------------------
+L4EDD:  lda     #>L4EC9
         sta     $A3                             ; 4EDF 85 A3                    ..
-        ldy     #$C9                            ; 4EE1 A0 C9                    ..
+        ldy     #<L4EC9
         ldx     #$0A                            ; 4EE3 A2 0A                    ..
         lda     #$0A                            ; 4EE5 A9 0A                    ..
         jsr     sub_3BEB
