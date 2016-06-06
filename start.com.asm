@@ -5051,24 +5051,8 @@ L50AD:  jmp     L50B0                           ; 50AD 4C B0 50                 
 L50B0:  jmp     L50DC                           ; 50B0 4C DC 50                 L.P
 
 ; ----------------------------------------------------------------------------
-        plp                                     ; 50B3 28                       (
-	.byte	$7D,$20,$20
-        ldy     #$A0                            ; 50B7 A0 A0                    ..
-        ldy     #$A0                            ; 50B9 A0 A0                    ..
-        ldy     #$A0                            ; 50BB A0 A0                    ..
-        .byte   $C7                             ; 50BD C7                       .
-        sbc     ($ED,x)                         ; 50BE E1 ED                    ..
-        sbc     $F3                             ; 50C0 E5 F3                    ..
-        ldy     #$C3                            ; 50C2 A0 C3                    ..
-        .byte   $EF                             ; 50C4 EF                       .
-        sbc     $F5F0                           ; 50C5 ED F0 F5                 ...
-        .byte   $F4                             ; 50C8 F4                       .
-        sbc     $F2                             ; 50C9 E5 F2                    ..
-        .byte   $F3                             ; 50CB F3                       .
-L50CC:  ldy     #$D0                            ; 50CC A0 D0                    ..
-        cpx     $F9E1                           ; 50CE EC E1 F9                 ...
-        ldy     $C9A0                           ; 50D1 AC A0 C9                 ...
-        inc     $A0E3                           ; 50D4 EE E3 A0                 ...
+        .byte	$28,"}  "
+	Inverse	"      Games Computers Play, Inc "
         ldy     #$A0                            ; 50D7 A0 A0                    ..
         ldy     #$A0                            ; 50D9 A0 A0                    ..
 L50DB:  .byte   $A0                             ; 50DB A0                       .
