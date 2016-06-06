@@ -4784,13 +4784,7 @@ L4E71:  lda     #$7D                            ; 4E71 A9 7D                    
 
 ; ----------------------------------------------------------------------------
 	.byte	$18," "
-	Inverse " N"
-        .byte   $EF                             ; 4E7D EF                       .
-        ldy     #$E3                            ; 4E7E A0 E3                    ..
-        sbc     ($F2,x)                         ; 4E80 E1 F2                    ..
-        .byte   $F2                             ; 4E82 F2                       .
-        sbc     #$E5                            ; 4E83 E9 E5                    ..
-        .byte   $F2                             ; 4E85 F2                       .
+	Inverse " No carrier"
         ldy     $F4A0                           ; 4E86 AC A0 F4                 ...
         .byte   $F2                             ; 4E89 F2                       .
         sbc     $E1A0,y                         ; 4E8A F9 A0 E1                 ...
