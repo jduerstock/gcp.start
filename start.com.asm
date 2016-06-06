@@ -189,7 +189,7 @@ L2D8F:  .byte   $53                             ; 2D8F 53                       
 L2D93:  jsr     L4F4C                           ; 2D93 20 4C 4F                  LO
         .byte   $47                             ; 2D96 47                       G
         .byte   $4F                             ; 2D97 4F                       O
-        lsr     L5020                           ; 2D98 4E 20 50                 N P
+	.byte	$4E,$20,$50
         .byte   $4B                             ; 2D9B 4B                       K
         .byte   $54                             ; 2D9C 54                       T
         brk                                     ; 2D9D 00                       .
@@ -4995,10 +4995,9 @@ L500F:  ldy     #$2E                            ; 500F A0 2E                    
         ldy     #$2E                            ; 5018 A0 2E                    ..
         ldx     #$30                            ; 501A A2 30                    .0
         lda     #$05                            ; 501C A9 05                    ..
-        .byte   $20                             ; 501E 20                        
-        cli                                     ; 501F 58                       X
-L5020:  and     ($A0),y                         ; 5020 31 A0                    1.
-        rol     L4EA2                           ; 5022 2E A2 4E                 ..N
+	jsr	L3158
+	ldy	#$2E
+	ldx	#$4E
         lda     #$05                            ; 5025 A9 05                    ..
         jsr     L3158                           ; 5027 20 58 31                  X1
         ldy     #$2E                            ; 502A A0 2E                    ..
