@@ -5145,14 +5145,8 @@ L51A7:  ldx     #$51                            ; 51A7 A2 51                    
 L51B1:  jmp     L51C4                           ; 51B1 4C C4 51                 L.Q
 
 ; ----------------------------------------------------------------------------
-	.byte   $0F                             ; 51B4 0F                       .
-	jsr     LA020                           ; 51B5 20 20 A0                   .
-	cmp     $EE,x                           ; 51B8 D5 EE                    ..
-	.byte   $EB                             ; 51BA EB                       .
-	inc     $F7EF                           ; 51BB EE EF F7                 ...
-	inc     $C2A0                           ; 51BE EE A0 C2                 ...
-	sbc     ($F5,x)                         ; 51C1 E1 F5                    ..
-	.byte   $E4                             ; 51C3 E4                       .
+L51B4:	.byte   $0F,"  "
+	Inverse	" Unknown Baud"
 L51C4:  ldx     #$51                            ; 51C4 A2 51                    .Q
 	lda     #$B4                            ; 51C6 A9 B4                    ..
 	jsr     L3164                           ; 51C8 20 64 31                  d1
