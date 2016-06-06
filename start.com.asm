@@ -5100,7 +5100,7 @@ L5121:  eor     ($0F),y                         ; 5121 51 0F                    
         jsr     LA020                           ; 5123 20 20 A0                   .
         ldy     #$B1                            ; 5126 A0 B1                    ..
 L5128:  bcs     L50DD                           ; 5128 B0 B3                    ..
-        bcs     L50DB                           ; 512A B0 AF                    ..
+	.byte	$B0,$AF
         cld                                     ; 512C D8                       .
         cmp     $B0B3                           ; 512D CD B3 B0                 ...
         lda     ($A0),y                         ; 5130 B1 A0                    ..
