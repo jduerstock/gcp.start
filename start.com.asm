@@ -6056,14 +6056,9 @@ L5929:  lda     L58A2                           ; 5929 AD A2 58                 
 	jmp     L5968                           ; 594C 4C 68 59                 LhY
 
 ; ----------------------------------------------------------------------------
-	.byte	$18," "
-	Inverse	" Press OPTION "
-	.byte	$E6
-	.byte   $EF                             ; 5960 EF                       .
-	.byte   $F2                             ; 5961 F2                       .
-	ldy     #$ED                            ; 5962 A0 ED                    ..
-	sbc     $EE                             ; 5964 E5 EE                    ..
-	sbc     $A0,x                           ; 5966 F5 A0                    ..
+L594F:	.byte	$18," "
+	Inverse	" Press OPTION for menu "
+
 L5968:  lda     #$59                            ; 5968 A9 59                    .Y
 	sta     $A3                             ; 596A 85 A3                    ..
 	ldy     #$4F                            ; 596C A0 4F                    .O
