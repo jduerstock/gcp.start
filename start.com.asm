@@ -10,7 +10,6 @@
 L000A           := $000A
 L0054           := $0054
 off_AE		:= $00AE
-LD0A0           := $D0A0
 LD420           := $D420
 LD8E6           := $D8E6
 LD9AA           := $D9AA
@@ -4574,13 +4573,7 @@ L4D8C:  lda     #$7D                            ; 4D8C A9 7D                    
 
 ; ----------------------------------------------------------------------------
 	.byte	$18," "
-	Inverse	" Press"
-	ldy     #$CF                            ; 4D9C A0 CF                    ..
-	bne     L4D74                           ; 4D9E D0 D4                    ..
-	cmp     #$CF                            ; 4DA0 C9 CF                    ..
-	dec     $E6A0                           ; 4DA2 CE A0 E6                 ...
-	.byte   $EF                             ; 4DA5 EF                       .
-	.byte   $F2                             ; 4DA6 F2                       .
+	Inverse	" Press OPTION for"
 	ldy     #$ED                            ; 4DA7 A0 ED                    ..
 	sbc     $EE                             ; 4DA9 E5 EE                    ..
 	sbc     $A0,x                           ; 4DAB F5 A0                    ..
