@@ -41,9 +41,6 @@ L7020           := $7020
 L726F           := $726F
 L7341           := $7341
 L7361           := $7361
-L7561           := $7561
-L7974           := $7974
-L7A69           := $7A69
 L7D27           := $7D27
 LA020           := $A020
 LA0A0           := $A0A0
@@ -114,7 +111,9 @@ L2CFD:  jsr     $2CEE                           ; 2CFD 20 EE 2C                 
 	bvc     L2D8F                           ; 2D18 50 75                    Pu
 	.byte   $74                             ; 2D1A 74                       t
 	plp                                     ; 2D1B 28                       (
-	jsr     L7D27                           ; 2D1C 20 27 7D                  '}
+	.byte	$20
+	.byte	$27
+	.byte	$7D
 	and     #$00                            ; 2D1F 29 00                    ).
 	brk                                     ; 2D21 00                       .
 	.byte   $FF                             ; 2D22 FF                       .
