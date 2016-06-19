@@ -1239,19 +1239,14 @@ L34C1:  sta     L34BD                           ; 34C1 8D BD 34                 
 	rts                                     ; 34DE 60                       `
 
 ; ----------------------------------------------------------------------------
-L34DF:  jmp     L34E2                           ; 34DF 4C E2 34                 L.4
-
-; ----------------------------------------------------------------------------
-L34E2:  lda     #$02                            ; 34E2 A9 02                    ..
+sub_34DF:  
+	prolog
+	lda     #$02                            ; 34E2 A9 02                    ..
 	jsr     L34BE                           ; 34E4 20 BE 34                  .4
 	lda     #$00                            ; 34E7 A9 00                    ..
 	cmp     $02EB                           ; 34E9 CD EB 02                 ...
-	bcc     L34F1                           ; 34EC 90 03                    ..
-	jmp     L34F5                           ; 34EE 4C F5 34                 L.4
-
-; ----------------------------------------------------------------------------
-L34F1:  ldy     #$00                            ; 34F1 A0 00                    ..
-	sty     $4D                             ; 34F3 84 4D                    .M
+	lbcs	L34F5
+	yldi	$4D, $00
 L34F5:  lda     $02EB                           ; 34F5 AD EB 02                 ...
 	sta     $A0                             ; 34F8 85 A0                    ..
 	rts                                     ; 34FA 60                       `
@@ -1935,7 +1930,7 @@ L39D5:  ldy     #$01                            ; 39D5 A0 01                    
 	rts                                     ; 39DE 60                       `
 
 ; ----------------------------------------------------------------------------
-L39DF:  jsr     L34DF                           ; 39DF 20 DF 34                  .4
+L39DF:  jsr     sub_34DF
 	lda     #$00                            ; 39E2 A9 00                    ..
 	cmp     $A0                             ; 39E4 C5 A0                    ..
 	bcc     L39EB                           ; 39E6 90 03                    ..
@@ -2485,7 +2480,7 @@ L3DEC:  jmp     L3DEF                           ; 3DEC 4C EF 3D                 
 L3DEF:  ldx     #$00                            ; 3DEF A2 00                    ..
 	lda     #$03                            ; 3DF1 A9 03                    ..
 	jsr     sub_3756
-L3DF6:  jsr     L34DF                           ; 3DF6 20 DF 34                  .4
+L3DF6:  jsr     sub_34DF
 	lda     $A0                             ; 3DF9 A5 A0                    ..
 	bne     L3E00                           ; 3DFB D0 03                    ..
 	jmp     L3E0F                           ; 3DFD 4C 0F 3E                 L.>
@@ -2663,23 +2658,18 @@ L3F0B:  brk                                     ; 3F0B 00                       
 L3F0C:  brk                                     ; 3F0C 00                       .
 L3F0D:  brk                                     ; 3F0D 00                       .
 	brk                                     ; 3F0E 00                       .
-L3F0F:  jmp     L3F12                           ; 3F0F 4C 12 3F                 L.?
 
 ; ----------------------------------------------------------------------------
-L3F12:  jsr     L34DF                           ; 3F12 20 DF 34                  .4
-	lda     #$00                            ; 3F15 A9 00                    ..
-	sta     L3F07                           ; 3F17 8D 07 3F                 ..?
+sub_3F0F:
+	prolog
+	jsr     sub_34DF
+	ldi	L3F07, $00
 	lda     $A0                             ; 3F1A A5 A0                    ..
 	sta     L3F06                           ; 3F1C 8D 06 3F                 ..?
-	.byte   $AD                             ; 3F1F AD                       .
-L3F20:  asl     $3F                             ; 3F20 06 3F                    .?
+	lda	L3F06
 	ora     L3F07                           ; 3F22 0D 07 3F                 ..?
-	beq     L3F2A                           ; 3F25 F0 03                    ..
-	jmp     L3F2F                           ; 3F27 4C 2F 3F                 L/?
-
-; ----------------------------------------------------------------------------
-L3F2A:  lda     #$00                            ; 3F2A A9 00                    ..
-	sta     $A0                             ; 3F2C 85 A0                    ..
+	lbne	L3F2F
+	ldi	$A0, $00
 	rts                                     ; 3F2E 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -2749,19 +2739,12 @@ L3F90:  lda     L3F05                           ; 3F90 AD 05 3F                 
 	ldy     #$01                            ; 3FA6 A0 01                    ..
 	sty     L2CF6                           ; 3FA8 8C F6 2C                 ..,
 	sty     L3F09                           ; 3FAB 8C 09 3F                 ..?
-	jsr     L34DF                           ; 3FAE 20 DF 34                  .4
-	lda     #$00                            ; 3FB1 A9 00                    ..
-	sta     L3F07                           ; 3FB3 8D 07 3F                 ..?
-	lda     $A0                             ; 3FB6 A5 A0                    ..
-	sta     L3F06                           ; 3FB8 8D 06 3F                 ..?
-	lda     L3F06                           ; 3FBB AD 06 3F                 ..?
-	ora     L3F07                           ; 3FBE 0D 07 3F                 ..?
-	beq     L3FC6                           ; 3FC1 F0 03                    ..
-	jmp     L3FCB                           ; 3FC3 4C CB 3F                 L.?
-
-; ----------------------------------------------------------------------------
-L3FC6:  lda     #$00                            ; 3FC6 A9 00                    ..
-	sta     $A0                             ; 3FC8 85 A0                    ..
+	jsr     sub_34DF
+	ldi	L3F07, $00
+	mv	L3F06, $A0
+	test16	L3F06
+	lbne	L3FCB
+	ldi	$A0, $00
 	rts                                     ; 3FCA 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -2805,7 +2788,7 @@ L3FFA:  clc                                     ; 3FFA 18                       
 	adc     L3F05                           ; 4015 6D 05 3F                 m.?
 	sta     L3F0B                           ; 4018 8D 0B 3F                 ..?
 	inc     L3F09                           ; 401B EE 09 3F                 ..?
-	jsr     L34DF                           ; 401E 20 DF 34                  .4
+	jsr     sub_34DF
 	lda     #$00                            ; 4021 A9 00                    ..
 	sta     L3F07                           ; 4023 8D 07 3F                 ..?
 	lda     $A0                             ; 4026 A5 A0                    ..
@@ -2892,7 +2875,7 @@ L40B3:  ldy     #$01                            ; 40B3 A0 01                    
 	rts                                     ; 40BC 60                       `
 
 ; ----------------------------------------------------------------------------
-L40BD:  jsr     L34DF                           ; 40BD 20 DF 34                  .4
+L40BD:  jsr     sub_34DF
 	lda     #$00                            ; 40C0 A9 00                    ..
 	sta     L3F07                           ; 40C2 8D 07 3F                 ..?
 	lda     $A0                             ; 40C5 A5 A0                    ..
@@ -3266,12 +3249,10 @@ L4362:  lda     L2CFB                           ; 4362 AD FB 2C                 
 L438E:  brk                                     ; 438E 00                       .
 L438F:  brk                                     ; 438F 00                       .
 L4390:  brk                                     ; 4390 00                       .
-L4391:  jmp     L4394                           ; 4391 4C 94 43                 L.C
-
-; ----------------------------------------------------------------------------
-L4394:  ldy     #$00                            ; 4394 A0 00                    ..
-	sty     L438F                           ; 4396 8C 8F 43                 ..C
-	jsr     L3F0F                           ; 4399 20 0F 3F                  .?
+L4391:
+	prolog
+	yldi	L438F, $00
+	jsr     sub_3F0F
 	lda     $A0                             ; 439C A5 A0                    ..
 	sta     L438E                           ; 439E 8D 8E 43                 ..C
 	lda     L2D5B                           ; 43A1 AD 5B 2D                 .[-
@@ -3472,7 +3453,7 @@ L4509:  lda     #$00                            ; 4509 A9 00                    
 	rts                                     ; 450D 60                       `
 
 ; ----------------------------------------------------------------------------
-L450E:  jsr     L3F0F                           ; 450E 20 0F 3F                  .?
+L450E:  jsr     sub_3F0F
 	lda     $A0                             ; 4511 A5 A0                    ..
 	sta     L44DB                           ; 4513 8D DB 44                 ..D
 	lda     L44DB                           ; 4516 AD DB 44                 ..D
@@ -3885,7 +3866,7 @@ L47E6:  jsr     L4391                           ; 47E6 20 91 43                 
 L47EC:  ldx     #$00                            ; 47EC A2 00                    ..
 	lda     #$03                            ; 47EE A9 03                    ..
 	jsr     sub_3756
-L47F3:  jsr     L34DF                           ; 47F3 20 DF 34                  .4
+L47F3:  jsr     sub_34DF
 	lda     $A0                             ; 47F6 A5 A0                    ..
 	bne     L47FD                           ; 47F8 D0 03                    ..
 	jmp     L480C                           ; 47FA 4C 0C 48                 L.H
@@ -4163,7 +4144,7 @@ L4A42:  lda     #$07                            ; 4A42 A9 07                    
 	ldx     L495F                           ; 4A4C AE 5F 49                 ._I
 	lda     #$02                            ; 4A4F A9 02                    ..
 	jsr     L31CA                           ; 4A51 20 CA 31                  .1
-L4A54:  jsr     L34DF                           ; 4A54 20 DF 34                  .4
+L4A54:  jsr     sub_34DF
 	lda     $A0                             ; 4A57 A5 A0                    ..
 	bne     L4A5E                           ; 4A59 D0 03                    ..
 	jmp     L4A90                           ; 4A5B 4C 90 4A                 L.J
@@ -6087,7 +6068,7 @@ L599A:  lda     #$19                            ; 599A A9 19                    
 	lda     L58A3                           ; 59BE AD A3 58                 ..X
 	adc     #$01                            ; 59C1 69 01                    i.
 	sta     L58A2                           ; 59C3 8D A2 58                 ..X
-L59C6:  jsr     L34DF                           ; 59C6 20 DF 34                  .4
+L59C6:  jsr     sub_34DF
 	lda     #$00                            ; 59C9 A9 00                    ..
 	cmp     $A0                             ; 59CB C5 A0                    ..
 	lbcs	L59EC
