@@ -4407,11 +4407,8 @@ L4CAD:  lda     L4C4C                           ; 4CAD AD 4C 4C                 
 	lbcc	L4CDB
 	lda     #$39                            ; 4CB7 A9 39                    .9
 	cmp     L4C4C                           ; 4CB9 CD 4C 4C                 .LL
-	bcs     L4CC1                           ; 4CBC B0 03                    ..
-	jmp     L4CDB                           ; 4CBE 4C DB 4C                 L.L
-
-; ----------------------------------------------------------------------------
-L4CC1:  lda     L4C4C                           ; 4CC1 AD 4C 4C                 .LL
+	lbcc	L4CDB
+	lda     L4C4C                           ; 4CC1 AD 4C 4C                 .LL
 	sta	$A3
 	lda     #$00                            ; 4CC6 A9 00                    ..
 	sta     $A4                             ; 4CC8 85 A4                    ..
