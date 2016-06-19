@@ -4573,11 +4573,8 @@ L4D8C:  lda     #$7D                            ; 4D8C A9 7D                    
 	jmp     L4DAD                           ; 4D91 4C AD 4D                 L.M
 
 ; ----------------------------------------------------------------------------
-	clc                                     ; 4D94 18                       .
-	jsr     LD0A0                           ; 4D95 20 A0 D0                  ..
-	.byte   $F2                             ; 4D98 F2                       .
-	sbc     $F3                             ; 4D99 E5 F3                    ..
-	.byte   $F3                             ; 4D9B F3                       .
+	.byte	$18," "
+	Inverse	" Press"
 	ldy     #$CF                            ; 4D9C A0 CF                    ..
 	bne     L4D74                           ; 4D9E D0 D4                    ..
 	cmp     #$CF                            ; 4DA0 C9 CF                    ..
