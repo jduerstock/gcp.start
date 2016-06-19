@@ -42,11 +42,7 @@ CIOV		:= $E456
 	.endrep
 .endmacro
 
-.macro	prolog
-	.local realcode
-	jmp	realcode
-	realcode:
-.endmacro
+	.include "action.inc"
 
 	.segment "HDR00"
 
@@ -614,7 +610,8 @@ L30AB:  dex                                     ; 30AB CA                       
 	rts                                     ; 30C2 60                       `
 
 ; ----------------------------------------------------------------------------
-L30C3:  sta     $A0                             ; 30C3 85 A0                    ..
+SArgs:  
+	sta     $A0                             ; 30C3 85 A0                    ..
 	stx     $A1                             ; 30C5 86 A1                    ..
 	sty     $A2                             ; 30C7 84 A2                    ..
 	clc                                     ; 30C9 18                       .
@@ -2114,10 +2111,7 @@ L3B0D:  .byte   $8D                             ; 3B0D 8D                       
 L3B0E:  .byte   $C5                             ; 3B0E C5                       .
 
 ; ----------------------------------------------------------------------------
-L3B0F:  jmp     $3B12                           ; 3B0F 4C 12 3B                 L.;
-	jsr     L30C3                           ; 3B12 20 C3 30                  .0
-	.addr	L3B08
-	.byte	$03
+L3B0F:  stack_prolog L3B08, $03
 	ldy     L3B09                           ; 3B18 AC 09 3B                 ..;
 	ldx     #$00                            ; 3B1B A2 00                    ..
 	lda     L3B08                           ; 3B1D AD 08 3B                 ..;
@@ -2224,10 +2218,7 @@ L3BEA:  brk                                     ; 3BEA 00                       
 
 ; ----------------------------------------------------------------------------
 sub_3BEB:  
-	jmp     L3BEE                           ; 3BEB 4C EE 3B                 L.;
-L3BEE:	jsr     L30C3                           ; 3BEE 20 C3 30                  .0
-	.addr	L3BE7
-	.byte	$03
+	stack_prolog L3BE7, $03
 	lda     L3BE9                           ; 3BF4 AD E9 3B                 ..;
 	sta     $AE                             ; 3BF7 85 AE                    ..
 	lda     L3BEA                           ; 3BF9 AD EA 3B                 ..;
@@ -2943,11 +2934,8 @@ L40FE:  brk                                     ; 40FE 00                       
 L40FF:  brk                                     ; 40FF 00                       .
 L4100:  brk                                     ; 4100 00                       .
 L4101:  brk                                     ; 4101 00                       .
-L4102:  jmp     L4105                           ; 4102 4C 05 41                 L.A
-
-; ----------------------------------------------------------------------------
-L4105:  jsr     L30C3                           ; 4105 20 C3 30                  .0
-	sbc     $0440,y                         ; 4108 F9 40 04                 .@.
+L4102:  
+	stack_prolog L40F9, $04
 	ldy     #$00                            ; 410B A0 00                    ..
 	sty     L40FF                           ; 410D 8C FF 40                 ..@
 	sty     L40FE                           ; 4110 8C FE 40                 ..@
@@ -3044,16 +3032,14 @@ L41B9:  brk                                     ; 41B9 00                       
 L41BA:  brk                                     ; 41BA 00                       .
 L41BB:  brk                                     ; 41BB 00                       .
 L41BC:  brk                                     ; 41BC 00                       .
-L41BD:  jmp     L41C0                           ; 41BD 4C C0 41                 L.A
 
 ; ----------------------------------------------------------------------------
-L41C0:  jsr     L30C3                           ; 41C0 20 C3 30                  .0
-	lda     $41,x                           ; 41C3 B5 41                    .A
-	ora     $AD                             ; 41C5 05 AD                    ..
-	lda     $8541,y                         ; 41C7 B9 41 85                 .A.
-	ldx     $BAAD                           ; 41CA AE AD BA                 ...
-	eor     ($85,x)                         ; 41CD 41 85                    A.
-	.byte   $AF                             ; 41CF AF                       .
+L41BD:
+	stack_prolog L41B5, $05
+	lda	L41B9
+	sta	$AE
+	lda	L41BA
+	sta	$AF
 	clc                                     ; 41D0 18                       .
 	lda     L41B5                           ; 41D1 AD B5 41                 ..A
 	adc     #$03                            ; 41D4 69 03                    i.
@@ -3665,10 +3651,8 @@ L4579:  inc     L5A2C                           ; 4579 EE 2C 5A                 
 	brk                                     ; 45D2 00                       .
 
 ; ----------------------------------------------------------------------------
-sub_45D3:  
-	prolog
-	jsr     L30C3                           ; 45D6 20 C3 30                  .0
-	eor     $0D45,x                         ; 45D9 5D 45 0D                 ]E.
+sub_45D3:
+	stack_prolog L455D, $0D
 	lda     #$45                            ; 45DC A9 45                    .E
 	sta     L456C                           ; 45DE 8D 6C 45                 .lE
 	lda     #$5F                            ; 45E1 A9 5F                    ._
@@ -5250,9 +5234,8 @@ L52FF:  brk                                     ; 52FF 00                       
 L5300:  brk                                     ; 5300 00                       .
 
 ; ----------------------------------------------------------------------------
-L5301:  prolog
-	jsr     L30C3                           ; 5304 20 C3 30                  .0
-	sbc     $0252,x                         ; 5307 FD 52 02                 .R.
+L5301:	
+	stack_prolog L52FD, $02
 	ldy     L52FE                           ; 530A AC FE 52                 ..R
 	ldx     #$00                            ; 530D A2 00                    ..
 	lda     L52FD                           ; 530F AD FD 52                 ..R
@@ -5295,12 +5278,10 @@ L5355:  brk                                     ; 5355 00                       
 L5356:  brk                                     ; 5356 00                       .
 L5357:  brk                                     ; 5357 00                       .
 L5358:  brk                                     ; 5358 00                       .
-L5359:  jmp     L535C                           ; 5359 4C 5C 53                 L\S
 
 ; ----------------------------------------------------------------------------
-L535C:  jsr     L30C3                           ; 535C 20 C3 30                  .0
-	bvc     L53B4                           ; 535F 50 53                    PS
-	.byte   $04                             ; 5361 04                       .
+L5359:
+	stack_prolog L5350, $04
 	lda     #$01                            ; 5362 A9 01                    ..
 	jsr     L38D6                           ; 5364 20 D6 38                  .8
 	ldy     L5354                           ; 5367 AC 54 53                 .TS
@@ -5969,13 +5950,10 @@ L5855:  brk                                     ; 5855 00                       
 L5856:  brk                                     ; 5856 00                       .
 L5857:  brk                                     ; 5857 00                       .
 L5858:  brk                                     ; 5858 00                       .
-L5859:  jmp     L585C                           ; 5859 4C 5C 58                 L\X
 
 ; ----------------------------------------------------------------------------
-L585C:  jsr     L30C3                           ; 585C 20 C3 30                  .0
-	.byte   $54                             ; 585F 54                       T
-	cli                                     ; 5860 58                       X
-	.byte   $03                             ; 5861 03                       .
+L5859:
+	stack_prolog L5854, $03
 	ldy     #$00                            ; 5862 A0 00                    ..
 	sty     L5858                           ; 5864 8C 58 58                 .XX
 L5867:  lda     L5858                           ; 5867 AD 58 58                 .XX
