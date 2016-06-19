@@ -6245,14 +6245,8 @@ L5B2C:  lda     $B148                           ; 5B2C AD 48 B1                 
 	ldx     #$5A                            ; 5B36 A2 5A                    .Z
 	lda     #$35                            ; 5B38 A9 35                    .5
 	jsr     L4D69                           ; 5B3A 20 69 4D                  iM
-L5B3D:  clc                                     ; 5B3D 18                       .
-	lda     L5A2E                           ; 5B3E AD 2E 5A                 ..Z
-	adc     L5A30                           ; 5B41 6D 30 5A                 m0Z
-	sta     $AE                             ; 5B44 85 AE                    ..
-	clc                                     ; 5B46 18                       .
-	lda     $AE                             ; 5B47 A5 AE                    ..
-	adc     #$02                            ; 5B49 69 02                    i.
-	sta     L5A2E                           ; 5B4B 8D 2E 5A                 ..Z
+L5B3D:	add8m	$AE, L5A2E, L5A30
+	add8i	L5A2E, $AE, $02
 	jmp     L5BF4                           ; 5B4E 4C F4 5B                 L.[
 
 ; ----------------------------------------------------------------------------
