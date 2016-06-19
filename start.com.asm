@@ -6199,53 +6199,7 @@ L5A32:  brk                                     ; 5A32 00                       
 L5A33:  brk                                     ; 5A33 00                       .
 L5A34:  brk                                     ; 5A34 00                       .
 L5A35:  inc     L322C                           ; 5A35 EE 2C 32                 .,2
-	brk                                     ; 5A38 00                       .
-	brk                                     ; 5A39 00                       .
-	brk                                     ; 5A3A 00                       .
-	brk                                     ; 5A3B 00                       .
-	brk                                     ; 5A3C 00                       .
-	brk                                     ; 5A3D 00                       .
-	brk                                     ; 5A3E 00                       .
-	brk                                     ; 5A3F 00                       .
-	brk                                     ; 5A40 00                       .
-	brk                                     ; 5A41 00                       .
-	brk                                     ; 5A42 00                       .
-	brk                                     ; 5A43 00                       .
-	brk                                     ; 5A44 00                       .
-	brk                                     ; 5A45 00                       .
-	brk                                     ; 5A46 00                       .
-	brk                                     ; 5A47 00                       .
-	brk                                     ; 5A48 00                       .
-	brk                                     ; 5A49 00                       .
-	brk                                     ; 5A4A 00                       .
-	brk                                     ; 5A4B 00                       .
-	brk                                     ; 5A4C 00                       .
-	brk                                     ; 5A4D 00                       .
-	brk                                     ; 5A4E 00                       .
-	brk                                     ; 5A4F 00                       .
-	brk                                     ; 5A50 00                       .
-	brk                                     ; 5A51 00                       .
-	brk                                     ; 5A52 00                       .
-	brk                                     ; 5A53 00                       .
-	brk                                     ; 5A54 00                       .
-	brk                                     ; 5A55 00                       .
-	brk                                     ; 5A56 00                       .
-	brk                                     ; 5A57 00                       .
-	brk                                     ; 5A58 00                       .
-	brk                                     ; 5A59 00                       .
-	brk                                     ; 5A5A 00                       .
-	brk                                     ; 5A5B 00                       .
-	brk                                     ; 5A5C 00                       .
-	brk                                     ; 5A5D 00                       .
-	brk                                     ; 5A5E 00                       .
-	brk                                     ; 5A5F 00                       .
-	brk                                     ; 5A60 00                       .
-	brk                                     ; 5A61 00                       .
-	brk                                     ; 5A62 00                       .
-	brk                                     ; 5A63 00                       .
-	brk                                     ; 5A64 00                       .
-	brk                                     ; 5A65 00                       .
-	brk                                     ; 5A66 00                       .
+	.res	47,$00
 
 ; ----------------------------------------------------------------------------
 L5A67:  prolog
