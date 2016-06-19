@@ -6009,14 +6009,7 @@ L58B0:  sta     $AE                             ; 58B0 85 AE                    
 
 ; ----------------------------------------------------------------------------
 L58D0:	.byte	$18," "
-	Inverse	" P"
-	.byte   $F2                             ; 58D4 F2                       .
-	sbc     $F3                             ; 58D5 E5 F3                    ..
-	.byte   $F3                             ; 58D7 F3                       .
-	ldy     #$CF                            ; 58D8 A0 CF                    ..
-	bne     L58B0                           ; 58DA D0 D4                    ..
-	cmp     #$CF                            ; 58DC C9 CF                    ..
-	dec     $E6A0                           ; 58DE CE A0 E6                 ...
+	Inverse	" Press OPTION f"
 	.byte   $EF                             ; 58E1 EF                       .
 	.byte   $F2                             ; 58E2 F2                       .
 	ldy     #$ED                            ; 58E3 A0 ED                    ..
