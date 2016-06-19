@@ -4252,17 +4252,11 @@ L4B54:  lda     L4B5F                           ; 4B54 AD 5F 4B                 
 	jmp     L4C0B                           ; 4B5C 4C 0B 4C                 L.L
 
 ; ----------------------------------------------------------------------------
-L4B5F:  brk                                     ; 4B5F 00                       .
-L4B60:  clc                                     ; 4B60 18                       .
-	lda     L4B1E                           ; 4B61 AD 1E 4B                 ..K
-	adc     L4B26                           ; 4B64 6D 26 4B                 m&K
-	sta     $AE                             ; 4B67 85 AE                    ..
-	lda     L4B1F                           ; 4B69 AD 1F 4B                 ..K
-	adc     #$00                            ; 4B6C 69 00                    i.
-	sta     $AF                             ; 4B6E 85 AF                    ..
-	ldy     #$00                            ; 4B70 A0 00                    ..
-	lda     ($AE),y                         ; 4B72 B1 AE                    ..
-	sta     L4B25                           ; 4B74 8D 25 4B                 .%K
+L4B5F:	.byte	$00
+
+; ----------------------------------------------------------------------------
+L4B60:	add16m8	off_AE, L4B1E, L4B26
+	ldp8	L4B25
 	lda     L4B25                           ; 4B77 AD 25 4B                 .%K
 	jsr     L31C7                           ; 4B7A 20 C7 31                  .1
 	lda     L4B25                           ; 4B7D AD 25 4B                 .%K
@@ -4574,6 +4568,7 @@ L4D8C:  lda     #$7D                            ; 4D8C A9 7D                    
 ; ----------------------------------------------------------------------------
 L4D94:	.byte	$18," "
 	Inverse	" Press OPTION for menu "
+
 L4DAD:  lda     #$4D                            ; 4DAD A9 4D                    .M
 	sta     $A3                             ; 4DAF 85 A3                    ..
 	ldy     #$94                            ; 4DB1 A0 94                    ..
