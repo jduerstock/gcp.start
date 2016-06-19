@@ -6211,11 +6211,8 @@ L5ABE:  lda     L5A2F                           ; 5ABE AD 2F 5A                 
 	sta     L5A31                           ; 5AD6 8D 31 5A                 .1Z
 	lda     #$1E                            ; 5AD9 A9 1E                    ..
 	cmp     L5A31                           ; 5ADB CD 31 5A                 .1Z
-	bcc     L5AE3                           ; 5ADE 90 03                    ..
-	jmp     L5AE8                           ; 5AE0 4C E8 5A                 L.Z
-
-; ----------------------------------------------------------------------------
-L5AE3:  lda     #$1E                            ; 5AE3 A9 1E                    ..
+	lbcs	L5AE8
+	lda     #$1E                            ; 5AE3 A9 1E                    ..
 	sta     L5A31                           ; 5AE5 8D 31 5A                 .1Z
 L5AE8:  lda     L5A31                           ; 5AE8 AD 31 5A                 .1Z
 	sta     L5A35                           ; 5AEB 8D 35 5A                 .5Z
