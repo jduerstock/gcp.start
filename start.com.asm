@@ -6009,12 +6009,7 @@ L58B0:  sta     $AE                             ; 58B0 85 AE                    
 
 ; ----------------------------------------------------------------------------
 L58D0:	.byte	$18," "
-	Inverse	" Press OPTION f"
-	.byte   $EF                             ; 58E1 EF                       .
-	.byte   $F2                             ; 58E2 F2                       .
-	ldy     #$ED                            ; 58E3 A0 ED                    ..
-	sbc     $EE                             ; 58E5 E5 EE                    ..
-	sbc     $A0,x                           ; 58E7 F5 A0                    ..
+	Inverse	" Press OPTION for menu "
 L58E9:  lda     #$58                            ; 58E9 A9 58                    .X
 	sta     $A3                             ; 58EB 85 A3                    ..
 	ldy     #$D0                            ; 58ED A0 D0                    ..
@@ -6024,8 +6019,8 @@ L58E9:  lda     #$58                            ; 58E9 A9 58                    
 	jmp     L5904                           ; 58F6 4C 04 59                 L.Y
 
 ; ----------------------------------------------------------------------------
-	asl     a                               ; 58F9 0A                       .
-	jsr     LD0A0                           ; 58FA 20 A0 D0                  ..
+	.byte	$0A," "
+	Inverse	" P"
 	sbc     ($F5,x)                         ; 58FD E1 F5                    ..
 	.byte   $F3                             ; 58FF F3                       .
 	sbc     #$EE                            ; 5900 E9 EE                    ..
