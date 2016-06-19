@@ -6364,11 +6364,8 @@ L5B5B:  ldx     L5A34                           ; 5B5B AE 34 5A                 
 ; ----------------------------------------------------------------------------
 L5BBD:  lda     L5A2C                           ; 5BBD AD 2C 5A                 .,Z
 	eor     #$5E                            ; 5BC0 49 5E                    I^
-	beq     L5BC7                           ; 5BC2 F0 03                    ..
-	jmp     L5BE9                           ; 5BC4 4C E9 5B                 L.[
-
-; ----------------------------------------------------------------------------
-L5BC7:  inc     L5A2E                           ; 5BC7 EE 2E 5A                 ..Z
+	lbne	L5BE9
+	inc     L5A2E                           ; 5BC7 EE 2E 5A                 ..Z
 	ldx     L5A2E                           ; 5BCA AE 2E 5A                 ..Z
 	lda     L2E8A,x                         ; 5BCD BD 8A 2E                 ...
 	sta     L5A2C                           ; 5BD0 8D 2C 5A                 .,Z
