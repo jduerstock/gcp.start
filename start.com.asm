@@ -6087,9 +6087,7 @@ L599A:  lda     #$19                            ; 599A A9 19                    
 	sta     $A0                             ; 59A5 85 A0                    ..
 	lda     $A0                             ; 59A7 A5 A0                    ..
 	jsr     L31C7                           ; 59A9 20 C7 31                  .1
-	.byte   $AD                             ; 59AC AD                       .
-L59AD:  .byte   $A3                             ; 59AD A3                       .
-	cli                                     ; 59AE 58                       X
+	lda	L58A3
 	and     #$7F                            ; 59AF 29 7F                    ).
 	sta     L58A3                           ; 59B1 8D A3 58                 ..X
 	ldy     #$0F                            ; 59B4 A0 0F                    ..
