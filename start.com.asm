@@ -4398,20 +4398,14 @@ L4C7F:  clc                                     ; 4C7F 18                       
 	jsr     L31C7                           ; 4C99 20 C7 31                  .1
 	lda     L4C4C                           ; 4C9C AD 4C 4C                 .LL
 	eor     #$2C                            ; 4C9F 49 2C                    I,
-	beq     L4CA6                           ; 4CA1 F0 03                    ..
-	jmp     L4CAD                           ; 4CA3 4C AD 4C                 L.L
-
-; ----------------------------------------------------------------------------
-L4CA6:  ldx     #$00                            ; 4CA6 A2 00                    ..
+	lbne	L4CAD
+	ldx     #$00                            ; 4CA6 A2 00                    ..
 	lda     #$0A                            ; 4CA8 A9 0A                    ..
 	jsr     sub_3756
 L4CAD:  lda     L4C4C                           ; 4CAD AD 4C 4C                 .LL
 	cmp     #$30                            ; 4CB0 C9 30                    .0
-	bcs     L4CB7                           ; 4CB2 B0 03                    ..
-	jmp     L4CDB                           ; 4CB4 4C DB 4C                 L.L
-
-; ----------------------------------------------------------------------------
-L4CB7:  lda     #$39                            ; 4CB7 A9 39                    .9
+	lbcc	L4CDB
+	lda     #$39                            ; 4CB7 A9 39                    .9
 	cmp     L4C4C                           ; 4CB9 CD 4C 4C                 .LL
 	bcs     L4CC1                           ; 4CBC B0 03                    ..
 	jmp     L4CDB                           ; 4CBE 4C DB 4C                 L.L
