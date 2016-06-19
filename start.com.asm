@@ -6171,11 +6171,8 @@ L5A67:  prolog
 	sty     L5A2E                           ; 5A76 8C 2E 5A                 ..Z
 L5A79:  lda     L5A2D                           ; 5A79 AD 2D 5A                 .-Z
 	cmp     L5A2E                           ; 5A7C CD 2E 5A                 ..Z
-	bcs     L5A84                           ; 5A7F B0 03                    ..
-	jmp     L5C04                           ; 5A81 4C 04 5C                 L.\
-
-; ----------------------------------------------------------------------------
-L5A84:  ldx     L5A2E                           ; 5A84 AE 2E 5A                 ..Z
+	lbcc	L5C04
+	ldx     L5A2E                           ; 5A84 AE 2E 5A                 ..Z
 	lda     L2E8A,x                         ; 5A87 BD 8A 2E                 ...
 	sta     L5A2C                           ; 5A8A 8D 2C 5A                 .,Z
 	clc                                     ; 5A8D 18                       .
