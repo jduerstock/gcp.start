@@ -4572,11 +4572,8 @@ L4D8C:  lda     #$7D                            ; 4D8C A9 7D                    
 	jmp     L4DAD                           ; 4D91 4C AD 4D                 L.M
 
 ; ----------------------------------------------------------------------------
-	.byte	$18," "
-	Inverse	" Press OPTION for"
-	ldy     #$ED                            ; 4DA7 A0 ED                    ..
-	sbc     $EE                             ; 4DA9 E5 EE                    ..
-	sbc     $A0,x                           ; 4DAB F5 A0                    ..
+L4D94:	.byte	$18," "
+	Inverse	" Press OPTION for menu "
 L4DAD:  lda     #$4D                            ; 4DAD A9 4D                    .M
 	sta     $A3                             ; 4DAF 85 A3                    ..
 	ldy     #$94                            ; 4DB1 A0 94                    ..
