@@ -1663,16 +1663,12 @@ L378D:  sta     L3789                           ; 378D 8D 89 37                 
 	rts                                     ; 37AC 60                       `
 
 ; ----------------------------------------------------------------------------
-L37AD:  jmp     L37B0                           ; 37AD 4C B0 37                 L.7
-
-; ----------------------------------------------------------------------------
-L37B0:  lda     L2CF2                           ; 37B0 AD F2 2C                 ..,
+sub_37AD:
+	prolog
+	lda     L2CF2                           ; 37B0 AD F2 2C                 ..,
 	eor     #$01                            ; 37B3 49 01                    I.
-	beq     L37BA                           ; 37B5 F0 03                    ..
-	jmp     L37BF                           ; 37B7 4C BF 37                 L.7
-
-; ----------------------------------------------------------------------------
-L37BA:  lda     #$01                            ; 37BA A9 01                    ..
+	lbne	L37BF
+	lda     #$01                            ; 37BA A9 01                    ..
 	sta     $A0                             ; 37BC 85 A0                    ..
 	rts                                     ; 37BE 60                       `
 
@@ -1983,7 +1979,7 @@ L39EB:  lda     #$00                            ; 39EB A9 00                    
 ; ----------------------------------------------------------------------------
 L3A32:  lda     L3970                           ; 3A32 AD 70 39                 .p9
 	jsr     L31C7                           ; 3A35 20 C7 31                  .1
-L3A38:  jsr     L37AD                           ; 3A38 20 AD 37                  .7
+L3A38:  jsr     sub_37AD
 	lda     $A0                             ; 3A3B A5 A0                    ..
 	bne     L3A42                           ; 3A3D D0 03                    ..
 	jmp     L3A47                           ; 3A3F 4C 47 3A                 LG:
@@ -2508,7 +2504,7 @@ L3E0F:  lda     $B148                           ; 3E0F AD 48 B1                 
 	jmp     L3E6F                           ; 3E16 4C 6F 3E                 Lo>
 
 ; ----------------------------------------------------------------------------
-L3E19:  jsr     L37AD                           ; 3E19 20 AD 37                  .7
+L3E19:  jsr     sub_37AD
 	lda     $A0                             ; 3E1C A5 A0                    ..
 	beq     L3E23                           ; 3E1E F0 03                    ..
 	jmp     L3E56                           ; 3E20 4C 56 3E                 LV>
@@ -4139,7 +4135,7 @@ L4A04:  ldx     #>L49DC
 	jsr     L31C5                           ; 4A0B 20 C5 31                  .1
 	ldy     #$01                            ; 4A0E A0 01                    ..
 	sty     L495E                           ; 4A10 8C 5E 49                 .^I
-L4A13:  jsr     L37AD                           ; 4A13 20 AD 37                  .7
+L4A13:  jsr     sub_37AD
 	lda     $A0                             ; 4A16 A5 A0                    ..
 	bne     L4A1D                           ; 4A18 D0 03                    ..
 	jmp     L4A1E                           ; 4A1A 4C 1E 4A                 L.J
@@ -4389,7 +4385,7 @@ L4BE5:  lda     L4B25                           ; 4BE5 AD 25 4B                 
 L4BEF:  ldx     #$00                            ; 4BEF A2 00                    ..
 	lda     #$0A                            ; 4BF1 A9 0A                    ..
 	jsr     L3756                           ; 4BF3 20 56 37                  V7
-L4BF6:  jsr     L37AD                           ; 4BF6 20 AD 37                  .7
+L4BF6:  jsr     sub_37AD
 	lda     $A0                             ; 4BF9 A5 A0                    ..
 	bne     L4C00                           ; 4BFB D0 03                    ..
 	jmp     L4C05                           ; 4BFD 4C 05 4C                 L.L
@@ -4520,7 +4516,7 @@ L4CC1:  lda     L4C4C                           ; 4CC1 AD 4C 4C                 
 	ldx     #$00                            ; 4CD4 A2 00                    ..
 	lda     #$02                            ; 4CD6 A9 02                    ..
 	jsr     L31D7                           ; 4CD8 20 D7 31                  .1
-L4CDB:  jsr     L37AD                           ; 4CDB 20 AD 37                  .7
+L4CDB:  jsr     sub_37AD
 	lda     $A0                             ; 4CDE A5 A0                    ..
 	bne     L4CE5                           ; 4CE0 D0 03                    ..
 	jmp     L4CEA                           ; 4CE2 4C EA 4C                 L.L
@@ -4555,7 +4551,7 @@ L4D0D:  jsr     L3EBD                           ; 4D0D 20 BD 3E                 
 ; ----------------------------------------------------------------------------
 L4D17:  lda     #$02                            ; 4D17 A9 02                    ..
 	jsr     L34BE                           ; 4D19 20 BE 34                  .4
-	jsr     L37AD                           ; 4D1C 20 AD 37                  .7
+	jsr     sub_37AD
 	lda     $A0                             ; 4D1F A5 A0                    ..
 	eor     #$01                            ; 4D21 49 01                    I.
 	beq     L4D28                           ; 4D23 F0 03                    ..
@@ -5484,7 +5480,7 @@ L54AC:  lda     L5355                           ; 54AC AD 55 53                 
 	inc     L5358                           ; 54D5 EE 58 53                 .XS
 	lda     L5355                           ; 54D8 AD 55 53                 .US
 	jsr     L31C7                           ; 54DB 20 C7 31                  .1
-L54DE:  jsr     L37AD                           ; 54DE 20 AD 37                  .7
+L54DE:  jsr     sub_37AD
 	lda     $A0                             ; 54E1 A5 A0                    ..
 	bne     L54E8                           ; 54E3 D0 03                    ..
 	jmp     L54EB                           ; 54E5 4C EB 54                 L.T
@@ -6145,7 +6141,7 @@ L59D2:  lda     #$02                            ; 59D2 A9 02                    
 ; ----------------------------------------------------------------------------
 L59E6:  lda     L58A2                           ; 59E6 AD A2 58                 ..X
 	jsr     L31C7                           ; 59E9 20 C7 31                  .1
-L59EC:  jsr     L37AD                           ; 59EC 20 AD 37                  .7
+L59EC:  jsr     sub_37AD
 	lda     $A0                             ; 59EF A5 A0                    ..
 	bne     L59F6                           ; 59F1 D0 03                    ..
 	jmp     L59F9                           ; 59F3 4C F9 59                 L.Y
@@ -6383,7 +6379,7 @@ L5BE9:  ldx     L5A2C                           ; 5BE9 AE 2C 5A                 
 	lda     #$02                            ; 5BEC A9 02                    ..
 	jsr     L31CA                           ; 5BEE 20 CA 31                  .1
 	inc     L5A2E                           ; 5BF1 EE 2E 5A                 ..Z
-L5BF4:  jsr     L37AD                           ; 5BF4 20 AD 37                  .7
+L5BF4:  jsr     sub_37AD
 	lda     $A0                             ; 5BF7 A5 A0                    ..
 	lbeq	L5C01
 	jmp     L5C04                           ; 5BFE 4C 04 5C                 L.\
@@ -6392,7 +6388,7 @@ L5BF4:  jsr     L37AD                           ; 5BF4 20 AD 37                 
 L5C01:  jmp	L5A79
 
 ; ----------------------------------------------------------------------------
-L5C04:  jsr     L37AD                           ; 5C04 20 AD 37                  .7
+L5C04:  jsr     sub_37AD
 	lda     $A0                             ; 5C07 A5 A0                    ..
 	bne     L5C0E                           ; 5C09 D0 03                    ..
 	jmp     L5C0F                           ; 5C0B 4C 0F 5C                 L.\
@@ -6440,7 +6436,7 @@ L5C66:  lda     #>L5C4B
 L5C73:  lda     $D01F                           ; 5C73 AD 1F D0                 ...
 	and     #$01                            ; 5C76 29 01                    ).
 	sta     L2CED                           ; 5C78 8D ED 2C                 ..,
-	jsr     L37AD                           ; 5C7B 20 AD 37                  .7
+	jsr     sub_37AD
 	lda     $A0                             ; 5C7E A5 A0                    ..
 	lbeq	L5C88
 L5C85:  jmp     L5C90                           ; 5C85 4C 90 5C                 L.\
