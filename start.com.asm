@@ -2756,30 +2756,16 @@ L3FCB:  lda     #$02                            ; 3FCB A9 02                    
 	jsr     L390E                           ; 3FD8 20 0E 39                  .9
 L3FDB:  lda     L3F09                           ; 3FDB AD 09 3F                 ..?
 	eor     #$01                            ; 3FDE 49 01                    I.
-	beq     L3FE5                           ; 3FE0 F0 03                    ..
-	jmp     L404B                           ; 3FE2 4C 4B 40                 LK@
-
-; ----------------------------------------------------------------------------
-L3FE5:  lda     L3F05                           ; 3FE5 AD 05 3F                 ..?
+	lbne	L404B
+	lda     L3F05                           ; 3FE5 AD 05 3F                 ..?
 	eor     L2D58                           ; 3FE8 4D 58 2D                 MX-
-	bne     L3FF0                           ; 3FEB D0 03                    ..
-	jmp     L3FFA                           ; 3FED 4C FA 3F                 L.?
-
-; ----------------------------------------------------------------------------
-L3FF0:  ldy     #$01                            ; 3FF0 A0 01                    ..
-	sty     L3F08                           ; 3FF2 8C 08 3F                 ..?
-	lda     #$00                            ; 3FF5 A9 00                    ..
-	sta     $A0                             ; 3FF7 85 A0                    ..
+	lbeq	L3FFA
+	yldi	L3F08, $01
+	ldi	$A0, $00
 	rts                                     ; 3FF9 60                       `
 
 ; ----------------------------------------------------------------------------
-L3FFA:  clc                                     ; 3FFA 18                       .
-	lda     L3F0C                           ; 3FFB AD 0C 3F                 ..?
-	adc     L3F09                           ; 3FFE 6D 09 3F                 m.?
-	sta     $AE                             ; 4001 85 AE                    ..
-	lda     L3F0D                           ; 4003 AD 0D 3F                 ..?
-	adc     #$00                            ; 4006 69 00                    i.
-	sta     $AF                             ; 4008 85 AF                    ..
+L3FFA:	add16m8 $AE, L3F0C, L3F09
 	lda     L3F05                           ; 400A AD 05 3F                 ..?
 	ldy     #$00                            ; 400D A0 00                    ..
 	sta     ($AE),y                         ; 400F 91 AE                    ..
