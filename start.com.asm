@@ -1767,11 +1767,8 @@ sub_38D6:
 	sta	L38D5
 	lda     L38D5                           ; 38DC AD D5 38                 ..8
 	eor     #$01                            ; 38DF 49 01                    I.
-	beq     L38E6                           ; 38E1 F0 03                    ..
-	jmp     L38EE                           ; 38E3 4C EE 38                 L.8
-
-; ----------------------------------------------------------------------------
-L38E6:  ldy     #$00                            ; 38E6 A0 00                    ..
+	lbne	L38EE
+	ldy     #$00                            ; 38E6 A0 00                    ..
 	sty     $02F0                           ; 38E8 8C F0 02                 ...
 	jmp     L38F3                           ; 38EB 4C F3 38                 L.8
 
@@ -1801,9 +1798,10 @@ L390B:  rts                                     ; 390B 60                       
 ; ----------------------------------------------------------------------------
 L390C:  dey                                     ; 390C 88                       .
 L390D:  .byte   $D0                             ; 390D D0                       .
-L390E:  jmp     $3911                           ; 390E 4C 11 39                 L.9
 
 ; ----------------------------------------------------------------------------
+sub_390E:
+	prolog
 	sta     L390C                           ; 3911 8D 0C 39                 ..9
 	lda     L390C                           ; 3914 AD 0C 39                 ..9
 	and     #$7F                            ; 3917 29 7F                    ).
@@ -2658,7 +2656,7 @@ L3F2F:  lda     #$02                            ; 3F2F A9 02                    
 	lda     $A0                             ; 3F34 A5 A0                    ..
 	sta     L3F05                           ; 3F36 8D 05 3F                 ..?
 	lda     L3F05                           ; 3F39 AD 05 3F                 ..?
-	jsr     L390E                           ; 3F3C 20 0E 39                  .9
+	jsr     sub_390E
 	lda     L3F08                           ; 3F3F AD 08 3F                 ..?
 	eor     #$01                            ; 3F42 49 01                    I.
 	beq     L3F49                           ; 3F44 F0 03                    ..
@@ -2733,7 +2731,7 @@ L3FCB:  lda     #$02                            ; 3FCB A9 02                    
 	lda     $A0                             ; 3FD0 A5 A0                    ..
 	sta     L3F05                           ; 3FD2 8D 05 3F                 ..?
 	lda     L3F05                           ; 3FD5 AD 05 3F                 ..?
-	jsr     L390E                           ; 3FD8 20 0E 39                  .9
+	jsr     sub_390E
 L3FDB:  lda     L3F09                           ; 3FDB AD 09 3F                 ..?
 	eor     #$01                            ; 3FDE 49 01                    I.
 	lbne	L404B
@@ -2773,7 +2771,7 @@ L403B:  lda     #$02                            ; 403B A9 02                    
 	lda     $A0                             ; 4040 A5 A0                    ..
 	sta     L3F05                           ; 4042 8D 05 3F                 ..?
 	lda     L3F05                           ; 4045 AD 05 3F                 ..?
-	jsr     L390E                           ; 4048 20 0E 39                  .9
+	jsr     sub_390E
 L404B:  clc                                     ; 404B 18                       .
 	lda     L3F0C                           ; 404C AD 0C 3F                 ..?
 	adc     L3F09                           ; 404F 6D 09 3F                 m.?
@@ -2857,7 +2855,7 @@ L40D9:  lda     #$02                            ; 40D9 A9 02                    
 	lda     $A0                             ; 40DE A5 A0                    ..
 	sta     L3F05                           ; 40E0 8D 05 3F                 ..?
 	lda     L3F05                           ; 40E3 AD 05 3F                 ..?
-	jsr     L390E                           ; 40E6 20 0E 39                  .9
+	jsr     sub_390E
 L40E9:  lda     L3F06                           ; 40E9 AD 06 3F                 ..?
 	ora     L3F07                           ; 40EC 0D 07 3F                 ..?
 	beq     L40F4                           ; 40EF F0 03                    ..
