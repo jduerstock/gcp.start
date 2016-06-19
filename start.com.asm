@@ -10,19 +10,6 @@
 L000A           := $000A
 L0054           := $0054
 off_AE		:= $00AE
-L20B3           := $20B3
-L20CB           := $20CB
-L2C38           := $2C38
-L6944           := $6944
-L6962           := $6962
-L69C4           := $69C4
-L6E49           := $6E49
-L6F66           := $6F66
-L6F6D           := $6F6D
-L6F6E           := $6F6E
-L6F74           := $6F74
-L6FC4           := $6FC4
-LCEA0           := $CEA0
 LD0A0           := $D0A0
 LD420           := $D420
 LD8E6           := $D8E6
@@ -96,7 +83,9 @@ L2D2D:  .byte   $53                             ; 2D2D 53                       
 	.byte   $74                             ; 2D2E 74                       t
 	.byte   $72                             ; 2D2F 72                       r
 	plp                                     ; 2D30 28                       (
-	jsr     L2C38                           ; 2D31 20 38 2C                  8,
+	.byte	$20
+	.byte	$38
+	.byte	$2C
 	jsr     L3031                           ; 2D34 20 31 30                  10
 	bit     $2220                           ; 2D37 2C 20 22                 , "
 	.byte   $20                             ; 2D3A 20                        
@@ -274,7 +263,9 @@ L2E4E:  inc     $1E2C                           ; 2E4E EE 2C 1E                 
 	ldy     #$E9                            ; 2E56 A0 E9                    ..
 	inc     $CDA0                           ; 2E58 EE A0 CD                 ...
 	sbc     ($E9,x)                         ; 2E5B E1 E9                    ..
-	inc     LD0A0                           ; 2E5D EE A0 D0                 ...
+	.byte	$EE
+	.byte	$A0
+	.byte	$D0
 	.byte   $F2                             ; 2E60 F2                       .
 	.byte   $EF                             ; 2E61 EF                       .
 	.byte   $E7                             ; 2E62 E7                       .
