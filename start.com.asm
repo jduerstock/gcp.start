@@ -20,22 +20,11 @@ L6944           := $6944
 L6962           := $6962
 L69C4           := $69C4
 L6E49           := $6E49
-L6E55           := $6E55
-L6F42           := $6F42
 L6F66           := $6F66
 L6F6D           := $6F6D
 L6F6E           := $6F6E
 L6F74           := $6F74
 L6FC4           := $6FC4
-L7020           := $7020
-L726F           := $726F
-L7341           := $7341
-L7361           := $7361
-LA0A0           := $A0A0
-LAFD9           := $AFD9
-LC1A0           := $C1A0
-LC220           := $C220
-LC3A0           := $C3A0
 LCEA0           := $CEA0
 LD0A0           := $D0A0
 LD420           := $D420
@@ -309,7 +298,9 @@ L2E8A:  inc     $782C                           ; 2E8A EE 2C 78                 
 	brk                                     ; 2E8D 00                       .
 	.byte   $74                             ; 2E8E 74                       t
 	adc     $6D                             ; 2E8F 65 6D                    em
-	jsr     L6F66                           ; 2E91 20 66 6F                  fo
+	.byte	$20
+	.byte	$66
+	.byte	$6F
 	.byte   $72                             ; 2E94 72                       r
 	jsr     L4554                           ; 2E95 20 54 45                  TE
 	.byte   $52                             ; 2E98 52                       R
