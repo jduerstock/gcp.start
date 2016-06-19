@@ -302,7 +302,9 @@ L2E8A:  inc     $782C                           ; 2E8A EE 2C 78                 
 	.byte	$66
 	.byte	$6F
 	.byte   $72                             ; 2E94 72                       r
-	jsr     L4554                           ; 2E95 20 54 45                  TE
+	.byte	$20
+	.byte	$54
+	.byte	$45
 	.byte   $52                             ; 2E98 52                       R
 	.byte	$4D
 	.byte	$20
@@ -3535,9 +3537,7 @@ L4540:  lda     L44DC                           ; 4540 AD DC 44                 
 L454A:  jsr     L445B                           ; 454A 20 5B 44                  [D
 	lda     $A0                             ; 454D A5 A0                    ..
 	sta     L44DB                           ; 454F 8D DB 44                 ..D
-	.byte   $AD                             ; 4552 AD                       .
-	.byte   $DB                             ; 4553 DB                       .
-L4554:  .byte   $44                             ; 4554 44                       D
+	lda	L44DB
 	sta     $A0                             ; 4555 85 A0                    ..
 	rts                                     ; 4557 60                       `
 
@@ -6804,8 +6804,8 @@ L5EAB:  lda     #>L5E91
 ; ----------------------------------------------------------------------------
 L5EBE:	.byte	$0B,"D1:TERM.COM"
 
-L5ECA:  ldx     #$5E                            ; 5ECA A2 5E                    .^
-	lda     #$BE                            ; 5ECC A9 BE                    ..
+L5ECA:  ldx     #>L5EBE
+	lda     #<L5EBE
 	jsr     L3545                           ; 5ECE 20 45 35                  E5
 	jsr     L38FE                           ; 5ED1 20 FE 38                  .8
 	rts                                     ; 5ED4 60                       `
