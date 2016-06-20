@@ -4972,11 +4972,8 @@ L549A:  sec                                     ; 549A 38                       
 	sta     $AE                             ; 54A0 85 AE                    ..
 	lda     L5357                           ; 54A2 AD 57 53                 .WS
 	cmp     $AE                             ; 54A5 C5 AE                    ..
-	bcc     L54AC                           ; 54A7 90 03                    ..
-	jmp     L54DE                           ; 54A9 4C DE 54                 L.T
-
-; ----------------------------------------------------------------------------
-L54AC:  lda     L5355                           ; 54AC AD 55 53                 .US
+	lbcs	L54DE
+	lda     L5355                           ; 54AC AD 55 53                 .US
 	and     #$7F                            ; 54AF 29 7F                    ).
 	sta     L5355                           ; 54B1 8D 55 53                 .US
 	clc                                     ; 54B4 18                       .
