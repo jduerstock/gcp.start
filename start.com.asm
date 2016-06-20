@@ -2882,7 +2882,7 @@ L41BB:  brk                                     ; 41BB 00                       
 L41BC:  brk                                     ; 41BC 00                       .
 
 ; ----------------------------------------------------------------------------
-L41BD:
+sub_41BD:
 	stack_prolog L41B5, $05
 	lda	L41B9
 	sta	$AE
@@ -3044,20 +3044,14 @@ L4326:  brk                                     ; 4326 00                       
 
 ; ----------------------------------------------------------------------------
 L4327:  prolog
-	lda     L2CFB                           ; 432A AD FB 2C                 ..,
-	sta	L4326
-	lda     L4321                           ; 4330 AD 21 43                 .!C
-	sta     $A3                             ; 4333 85 A3                    ..
-	lda     #$43                            ; 4335 A9 43                    .C
-	sta     $A5                             ; 4337 85 A5                    ..
-	lda     #$22                            ; 4339 A9 22                    ."
-	sta     $A4                             ; 433B 85 A4                    ..
+	mv	L4326, L2CFB
+	mv	$A3, L4321
+	rdldi	$A4, L4322
 	ldy     L4320                           ; 433D AC 20 43                 . C
 	ldx     L2D5A                           ; 4340 AE 5A 2D                 .Z-
 	lda     #$01                            ; 4343 A9 01                    ..
-	jsr     L41BD                           ; 4345 20 BD 41                  .A
-	lda     L4326                           ; 4348 AD 26 43                 .&C
-	sta     L2CFB                           ; 434B 8D FB 2C                 ..,
+	jsr     sub_41BD
+	mv	L2CFB, L4326
 	ldxai	L4322
 	jsr     sub_4290
 	rts                                     ; 4355 60                       `
@@ -3083,7 +3077,7 @@ L4362:  lda     L2CFB                           ; 4362 AD FB 2C                 
 	ldy     L4358                           ; 4375 AC 58 43                 .XC
 	ldx     L2D5A                           ; 4378 AE 5A 2D                 .Z-
 	lda     #$01                            ; 437B A9 01                    ..
-	jsr     L41BD                           ; 437D 20 BD 41                  .A
+	jsr     sub_41BD
 	lda     L435E                           ; 4380 AD 5E 43                 .^C
 	sta     L2CFB                           ; 4383 8D FB 2C                 ..,
 	ldxai	L435A
@@ -3680,7 +3674,7 @@ L47B2:  sta     $A5                             ; 47B2 85 A5                    
 	ldy     #$79                            ; 47B4 A0 79                    .y
 	ldx     $A1                             ; 47B6 A6 A1                    ..
 	lda     L4573                           ; 47B8 AD 73 45                 .sE
-	jsr     L41BD                           ; 47BB 20 BD 41                  .A
+	jsr     sub_41BD
 	clc                                     ; 47BE 18                       .
 	lda     L2CF7                           ; 47BF AD F7 2C                 ..,
 	adc     L4571                           ; 47C2 6D 71 45                 mqE
