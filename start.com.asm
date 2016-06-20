@@ -5009,13 +5009,8 @@ L54EB:  lda     L5355                           ; 54EB AD 55 53                 
 	jmp     L53A2                           ; 54F2 4C A2 53                 L.S
 
 ; ----------------------------------------------------------------------------
-L54F5:  lda     L5352                           ; 54F5 AD 52 53                 .RS
-	sta     $AE                             ; 54F8 85 AE                    ..
-	lda     L5353                           ; 54FA AD 53 53                 .SS
-	sta     $AF                             ; 54FD 85 AF                    ..
-	lda     L5358                           ; 54FF AD 58 53                 .XS
-	ldy     #$00                            ; 5502 A0 00                    ..
-	sta     ($AE),y                         ; 5504 91 AE                    ..
+L54F5:	dmv	off_AE, L5352
+	stp8	L5358
 	lda     #$00                            ; 5506 A9 00                    ..
 	jsr     sub_38D6
 	rts                                     ; 550B 60                       `
