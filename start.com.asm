@@ -3597,13 +3597,7 @@ L4754:  lda     #$00                            ; 4754 A9 00                    
 	ldy     L4570                           ; 4758 AC 70 45                 .pE
 	ldxai	L472D
 	jsr     sub_3355
-L4762:  clc                                     ; 4762 18                       .
-	lda     L456B                           ; 4763 AD 6B 45                 .kE
-	adc     #$02                            ; 4766 69 02                    i.
-	sta     L456B                           ; 4768 8D 6B 45                 .kE
-	lda     L456C                           ; 476B AD 6C 45                 .lE
-	adc     #$00                            ; 476E 69 00                    i.
-	sta     L456C                           ; 4770 8D 6C 45                 .lE
+L4762:	add16i	L456B, L456B, $0002
 	inc     L456F                           ; 4773 EE 6F 45                 .oE
 	jmp     L45FF                           ; 4776 4C FF 45                 L.E
 
