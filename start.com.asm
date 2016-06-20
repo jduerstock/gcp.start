@@ -114,7 +114,8 @@ L2D5B:  inc     L5A2C                           ; 2D5B EE 2C 5A                 
 	.byte   $74                             ; 2D5F 74                       t
 	adc     #$6F                            ; 2D60 69 6F                    io
 	ror     $2028                           ; 2D62 6E 28 20                 n( 
-	bmi     L2D93                           ; 2D65 30 2C                    0,
+	.byte	$30
+	.byte	$2C
 	jsr     L3531                           ; 2D67 20 31 35                  15
 	and     #$00                            ; 2D6A 29 00                    ).
 	brk                                     ; 2D6C 00                       .
@@ -142,7 +143,9 @@ L2D5B:  inc     L5A2C                           ; 2D5B EE 2C 5A                 
 L2D8F:  .byte   $53                             ; 2D8F 53                       S
 	eor     $4E                             ; 2D90 45 4E                    EN
 	.byte   $44                             ; 2D92 44                       D
-L2D93:  jsr     L4F4C                           ; 2D93 20 4C 4F                  LO
+	.byte	$20
+	.byte	$4C
+	.byte	$4F
 	.byte   $47                             ; 2D96 47                       G
 	.byte   $4F                             ; 2D97 4F                       O
 	.byte	$4E,$20,$50
@@ -4680,8 +4683,7 @@ sub_4F19:
 	sta     $A3                             ; 4F45 85 A3                    ..
 	lda     #$03                            ; 4F47 A9 03                    ..
 	sta     $A5                             ; 4F49 85 A5                    ..
-	.byte   $A9                             ; 4F4B A9                       .
-L4F4C:  .byte   $04                             ; 4F4C 04                       .
+	lda	#$04
 	sta     $A6                             ; 4F4D 85 A6                    ..
 	lda     #$00                            ; 4F4F A9 00                    ..
 	sta     $A7                             ; 4F51 85 A7                    ..
