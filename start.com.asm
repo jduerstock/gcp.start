@@ -2611,18 +2611,15 @@ L3F65:  lda     L2CF6                           ; 3F65 AD F6 2C                 
 	lda     #$5E                            ; 3F7C A9 5E                    .^
 	cmp     L3F0A                           ; 3F7E CD 0A 3F                 ..?
 	lbcs	L3F90
-L3F86:	ldy     #$01                            ; 3F86 A0 01                    ..
-	sty     L3F08                           ; 3F88 8C 08 3F                 ..?
-	lda     #$00                            ; 3F8B A9 00                    ..
-	sta     $A0                             ; 3F8D 85 A0                    ..
+L3F86:	yldi	L3F08, $01
+	ldi	$A0, $00
 	rts                                     ; 3F8F 60                       `
 
 ; ----------------------------------------------------------------------------
-L3F90:  lda     L3F05                           ; 3F90 AD 05 3F                 ..?
-	sta     L2D58                           ; 3F93 8D 58 2D                 .X-
-	lda     #$2D                            ; 3F96 A9 2D                    .-
+L3F90:	mv	L2D58, L3F05
+	lda     #>L2D58
 	sta     L3F0D                           ; 3F98 8D 0D 3F                 ..?
-	lda     #$58                            ; 3F9B A9 58                    .X
+	lda     #<L2D58
 	sta     L3F0C                           ; 3F9D 8D 0C 3F                 ..?
 	lda     L3F05                           ; 3FA0 AD 05 3F                 ..?
 	sta     L3F0B                           ; 3FA3 8D 0B 3F                 ..?
