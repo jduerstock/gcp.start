@@ -3433,10 +3433,7 @@ L4579:  inc     L5A2C                           ; 4579 EE 2C 5A                 
 ; ----------------------------------------------------------------------------
 sub_45D3:
 	stack_prolog L455D, $0D
-	lda     #$45                            ; 45DC A9 45                    .E
-	sta     L456C                           ; 45DE 8D 6C 45                 .lE
-	lda     #$5F                            ; 45E1 A9 5F                    ._
-	sta     L456B                           ; 45E3 8D 6B 45                 .kE
+	rdldi	L456B, L455F
 	ldy     #$00                            ; 45E6 A0 00                    ..
 	sty     L4573                           ; 45E8 8C 73 45                 .sE
 	iny                                     ; 45EB C8                       .
