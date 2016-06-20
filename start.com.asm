@@ -2570,10 +2570,8 @@ sub_3F0F:
 	prolog
 	jsr     sub_34DF
 	ldi	L3F07, $00
-	lda     $A0                             ; 3F1A A5 A0                    ..
-	sta     L3F06                           ; 3F1C 8D 06 3F                 ..?
-	lda	L3F06
-	ora     L3F07                           ; 3F22 0D 07 3F                 ..?
+	mv	L3F06, $A0
+	test16	L3F06
 	lbne	L3F2F
 	ldi	$A0, $00
 	rts                                     ; 3F2E 60                       `
