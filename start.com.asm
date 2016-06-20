@@ -775,7 +775,9 @@ sub_31C5:
 sub_31C7:  
 	tax                                     ; 31C7 AA                       .
 	lda     $B7                             ; 31C8 A5 B7                    ..
-L31CA:  stx     $A1                             ; 31CA 86 A1                    ..
+
+sub_31CA:
+	stx     $A1                             ; 31CA 86 A1                    ..
 	ldy     $A1                             ; 31CC A4 A1                    ..
 L31CE:  ldx     #$0B                            ; 31CE A2 0B                    ..
 	jmp     L31A8                           ; 31D0 4C A8 31                 L.1
@@ -1424,7 +1426,7 @@ L368D:  lda     #$01                            ; 368D A9 01                    
 	lbeq	L369E
 	ldx     #$FD                            ; 3694 A2 FD                    ..
 	lda     #$00                            ; 3696 A9 00                    ..
-	jsr     L31CA                           ; 3698 20 CA 31                  .1
+	jsr     sub_31CA
 	jmp     L368D                           ; 369B 4C 8D 36                 L.6
 
 ; ----------------------------------------------------------------------------
@@ -3008,26 +3010,18 @@ L42C2:  lda     L42CD                           ; 42C2 AD CD 42                 
 L42CD:	.byte	$00
 
 ; ----------------------------------------------------------------------------
-L42CE:  clc                                     ; 42CE 18                       .
-	lda     L428E                           ; 42CF AD 8E 42                 ..B
-	adc     L428A                           ; 42D2 6D 8A 42                 m.B
-	sta     $AE                             ; 42D5 85 AE                    ..
-	lda     L428F                           ; 42D7 AD 8F 42                 ..B
-	adc     #$00                            ; 42DA 69 00                    i.
-	sta     $AF                             ; 42DC 85 AF                    ..
-	ldy     #$00                            ; 42DE A0 00                    ..
-	lda     ($AE),y                         ; 42E0 B1 AE                    ..
-	sta     L428D                           ; 42E2 8D 8D 42                 ..B
+L42CE:	add16m8	off_AE, L428E, L428A
+	ldp8	L428D
 	ldx     L428D                           ; 42E5 AE 8D 42                 ..B
 	lda     #$02                            ; 42E8 A9 02                    ..
-	jsr     L31CA                           ; 42EA 20 CA 31                  .1
+	jsr     sub_31CA
 	inc     L428A                           ; 42ED EE 8A 42                 ..B
 	jmp     L42C2                           ; 42F0 4C C2 42                 L.B
 
 ; ----------------------------------------------------------------------------
 L42F3:  ldx     #$0A                            ; 42F3 A2 0A                    ..
 	lda     #$02                            ; 42F5 A9 02                    ..
-	jsr     L31CA                           ; 42F7 20 CA 31                  .1
+	jsr     sub_31CA
 	rts                                     ; 42FA 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -4003,7 +3997,7 @@ L4A42:  lda     #$07                            ; 4A42 A9 07                    
 	sta     L495F                           ; 4A49 8D 5F 49                 ._I
 	ldx     L495F                           ; 4A4C AE 5F 49                 ._I
 	lda     #$02                            ; 4A4F A9 02                    ..
-	jsr     L31CA                           ; 4A51 20 CA 31                  .1
+	jsr     sub_31CA
 L4A54:  jsr     sub_34DF
 	lda     $A0                             ; 4A57 A5 A0                    ..
 	bne     L4A5E                           ; 4A59 D0 03                    ..
@@ -6075,14 +6069,14 @@ L5BBD:  lda     L5A2C                           ; 5BBD AD 2C 5A                 
 	sta     L5A2C                           ; 5BD8 8D 2C 5A                 .,Z
 	ldx     L5A2C                           ; 5BDB AE 2C 5A                 .,Z
 	lda     #$02                            ; 5BDE A9 02                    ..
-	jsr     L31CA                           ; 5BE0 20 CA 31                  .1
+	jsr     sub_31CA
 	inc     L5A2E                           ; 5BE3 EE 2E 5A                 ..Z
 	jmp     L5BF4                           ; 5BE6 4C F4 5B                 L.[
 
 ; ----------------------------------------------------------------------------
 L5BE9:  ldx     L5A2C                           ; 5BE9 AE 2C 5A                 .,Z
 	lda     #$02                            ; 5BEC A9 02                    ..
-	jsr     L31CA                           ; 5BEE 20 CA 31                  .1
+	jsr     sub_31CA
 	inc     L5A2E                           ; 5BF1 EE 2E 5A                 ..Z
 L5BF4:  jsr     sub_37AD
 	lda     $A0                             ; 5BF7 A5 A0                    ..
