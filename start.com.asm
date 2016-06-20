@@ -2507,24 +2507,17 @@ L3E9B:  lda     #$00                            ; 3E9B A9 00                    
 	rts                                     ; 3EBC 60                       `
 
 ; ----------------------------------------------------------------------------
-L3EBD:  jmp     L3EC0                           ; 3EBD 4C C0 3E                 L.>
-
-; ----------------------------------------------------------------------------
-L3EC0:  lda     $B148                           ; 3EC0 AD 48 B1                 .H.
+sub_3EBD:
+	prolog
+	lda     $B148                           ; 3EC0 AD 48 B1                 .H.
 	eor     #$01                            ; 3EC3 49 01                    I.
-	beq     L3ECA                           ; 3EC5 F0 03                    ..
-	jmp     L3EE2                           ; 3EC7 4C E2 3E                 L.>
-
-; ----------------------------------------------------------------------------
-L3ECA:  lda     $02EA                           ; 3ECA AD EA 02                 ...
+	lbne	L3EE2
+	lda     $02EA                           ; 3ECA AD EA 02                 ...
 	and     #$80                            ; 3ECD 29 80                    ).
 	sta     $AE                             ; 3ECF 85 AE                    ..
 	lda     $AE                             ; 3ED1 A5 AE                    ..
-	bne     L3ED8                           ; 3ED3 D0 03                    ..
-	jmp     L3EDD                           ; 3ED5 4C DD 3E                 L.>
-
-; ----------------------------------------------------------------------------
-L3ED8:  lda     #$01                            ; 3ED8 A9 01                    ..
+	lbeq	L3EDD
+	lda     #$01                            ; 3ED8 A9 01                    ..
 	sta     $A0                             ; 3EDA 85 A0                    ..
 	rts                                     ; 3EDC 60                       `
 
@@ -3758,7 +3751,7 @@ L4A1E:  lda     $B148                           ; 4A1E AD 48 B1                 
 	jmp     L4A38                           ; 4A25 4C 38 4A                 L8J
 
 ; ----------------------------------------------------------------------------
-L4A28:  jsr     L3EBD                           ; 4A28 20 BD 3E                  .>
+L4A28:  jsr     sub_3EBD
 	lda     $A0                             ; 4A2B A5 A0                    ..
 	beq     L4A32                           ; 4A2D F0 03                    ..
 	jmp     L4A38                           ; 4A2F 4C 38 4A                 L8J
@@ -3996,7 +3989,7 @@ L4C0B:  jsr     L4AA1                           ; 4C0B 20 A1 4A                 
 	ldy     #$00                            ; 4C0E A0 00                    ..
 	sty     $14                             ; 4C10 84 14                    ..
 	sty     $13                             ; 4C12 84 13                    ..
-L4C14:  jsr     L3EBD                           ; 4C14 20 BD 3E                  .>
+L4C14:  jsr     sub_3EBD
 	lda     $A0                             ; 4C17 A5 A0                    ..
 	lbeq	L4C2B
 	ldx     #$00                            ; 4C1E A2 00                    ..
@@ -4114,7 +4107,7 @@ L4CF0:  jsr     L4AA1                           ; 4CF0 20 A1 4A                 
 	lda     $02EA                           ; 4D05 AD EA 02                 ...
 	and     #$7F                            ; 4D08 29 7F                    ).
 	sta     $02EA                           ; 4D0A 8D EA 02                 ...
-L4D0D:  jsr     L3EBD                           ; 4D0D 20 BD 3E                  .>
+L4D0D:  jsr     sub_3EBD
 	lda     $A0                             ; 4D10 A5 A0                    ..
 	beq     L4D17                           ; 4D12 F0 03                    ..
 	jmp     L4D54                           ; 4D14 4C 54 4D                 LTM
@@ -5043,11 +5036,9 @@ L5534:  lda     $B148                           ; 5534 AD 48 B1                 
 
 ; ----------------------------------------------------------------------------
 L554D:	rdmv	L2F1D, L2F1B
-L5559:  ldy     #$00                            ; 5559 A0 00                    ..
-	sty     L550D                           ; 555B 8C 0D 55                 ..U
-L555E:  ldy     #$00                            ; 555E A0 00                    ..
-	sty     L2CF2                           ; 5560 8C F2 2C                 ..,
-	jsr     L3EBD                           ; 5563 20 BD 3E                  .>
+L5559:	yldi	L550D, $00
+L555E:	yldi	L2CF2, $00
+	jsr     sub_3EBD
 	lda     $A0                             ; 5566 A5 A0                    ..
 	sta     L5512                           ; 5568 8D 12 55                 ..U
 	jsr     L3E7A                           ; 556B 20 7A 3E                  z>
