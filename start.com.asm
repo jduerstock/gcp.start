@@ -6445,13 +6445,7 @@ L5E56:	ldi	$A3, $00
 	dmv	off_AE, L5CDF
 	ldi	$A5, $00
 	ldp8	$A4
-	clc                                     ; 5E6E 18                       .
-	lda     L5CDF                           ; 5E6F AD DF 5C                 ..\
-	adc     #$01                            ; 5E72 69 01                    i.
-	sta     $A6                             ; 5E74 85 A6                    ..
-	lda     L5CDF+1                         ; 5E76 AD E0 5C                 ..\
-	adc     #$00                            ; 5E79 69 00                    i.
-	sta     $A7                             ; 5E7B 85 A7                    ..
+	add16i	$A6, L5CDF, $0001
 	ldy     #$6C                            ; 5E7D A0 6C                    .l
 	ldx     #>L5E53
 	lda     #<L5E53
