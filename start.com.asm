@@ -3117,15 +3117,12 @@ L43BB:  lda     L438E                           ; 43BB AD 8E 43                 
 	lda     L2D5A                           ; 43CF AD 5A 2D                 .Z-
 	eor     L2CFD                           ; 43D2 4D FD 2C                 M.,
 	lbne	L4416
-	sec                                     ; 43DA 38                       8
-	lda     L2CF7                           ; 43DB AD F7 2C                 ..,
-	sbc     L2CFC                           ; 43DE ED FC 2C                 ..,
-	sta     L2CF7                           ; 43E1 8D F7 2C                 ..,
+	sub8m	L2CF7, L2CF7, L2CFC
 	clc                                     ; 43E4 18                       .
-	lda     #$FC                            ; 43E5 A9 FC                    ..
+	lda     #<L2CFC
 	adc     L2CFC                           ; 43E7 6D FC 2C                 m.,
 	sta     $A2                             ; 43EA 85 A2                    ..
-	lda     #$2C                            ; 43EC A9 2C                    .,
+	lda     #>L2CFC
 	adc     #$00                            ; 43EE 69 00                    i.
 	sta     $A3                             ; 43F0 85 A3                    ..
 	sec                                     ; 43F2 38                       8
@@ -3135,16 +3132,11 @@ L43BB:  lda     L438E                           ; 43BB AD 8E 43                 
 	lda     #$00                            ; 43FA A9 00                    ..
 	sta     $A5                             ; 43FC 85 A5                    ..
 	ldy     $A2                             ; 43FE A4 A2                    ..
-	ldx     #$2C                            ; 4400 A2 2C                    .,
-	lda     #$FC                            ; 4402 A9 FC                    ..
+	ldxai	L2CFC
 	jsr     L343B                           ; 4404 20 3B 34                  ;4
 	lda     L2CF7                           ; 4407 AD F7 2C                 ..,
-	bne     L440F                           ; 440A D0 03                    ..
-	jmp     L4416                           ; 440C 4C 16 44                 L.D
-
-; ----------------------------------------------------------------------------
-L440F:  ldx     #$2C                            ; 440F A2 2C                    .,
-	lda     #$FC                            ; 4411 A9 FC                    ..
+	lbeq	L4416
+L440F:	ldxai	L2CFC
 	jsr     L42FD                           ; 4413 20 FD 42                  .B
 L4416:  jmp     L4441                           ; 4416 4C 41 44                 LAD
 
