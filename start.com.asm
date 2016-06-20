@@ -6441,17 +6441,10 @@ L5E37:  lda     #>L5E21
 L5E53:	.byte   $02,"Cs"
 
 ; ----------------------------------------------------------------------------
-L5E56:  lda     #$00                            ; 5E56 A9 00                    ..
-	sta     $A3                             ; 5E58 85 A3                    ..
-	lda     L5CDF                           ; 5E5A AD DF 5C                 ..\
-	sta     $AE                             ; 5E5D 85 AE                    ..
-	lda     L5CDF+1
-	sta     $AF                             ; 5E62 85 AF                    ..
-	lda     #$00                            ; 5E64 A9 00                    ..
-	sta     $A5                             ; 5E66 85 A5                    ..
-	ldy     #$00                            ; 5E68 A0 00                    ..
-	lda     ($AE),y                         ; 5E6A B1 AE                    ..
-	sta     $A4                             ; 5E6C 85 A4                    ..
+L5E56:	ldi	$A3, $00
+	dmv	off_AE, L5CDF
+	ldi	$A5, $00
+	ldp8	$A4
 	clc                                     ; 5E6E 18                       .
 	lda     L5CDF                           ; 5E6F AD DF 5C                 ..\
 	adc     #$01                            ; 5E72 69 01                    i.
