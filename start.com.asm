@@ -3492,27 +3492,18 @@ L4655:	dmv	off_AE, L456B
 	lda     ($AE),y                         ; 4670 B1 AE                    ..
 	sta     $A0                             ; 4672 85 A0                    ..
 	clc                                     ; 4674 18                       .
-	lda     #$79                            ; 4675 A9 79                    .y
+	lda     #<L4579
 	adc     L4573                           ; 4677 6D 73 45                 msE
 	sta     $A1                             ; 467A 85 A1                    ..
-	lda     #$45                            ; 467C A9 45                    .E
+	lda     #>L4579
 	adc     #$00                            ; 467E 69 00                    i.
 	sta     $A2                             ; 4680 85 A2                    ..
 	ldy     $A2                             ; 4682 A4 A2                    ..
 	ldx     $A1                             ; 4684 A6 A1                    ..
 	lda     $A0                             ; 4686 A5 A0                    ..
 	jsr     L369F                           ; 4688 20 9F 36                  .6
-	clc                                     ; 468B 18                       .
-	lda     L4573                           ; 468C AD 73 45                 .sE
-	adc     #$02                            ; 468F 69 02                    i.
-	sta     L4573                           ; 4691 8D 73 45                 .sE
-	clc                                     ; 4694 18                       .
-	lda     L456B                           ; 4695 AD 6B 45                 .kE
-	adc     #$02                            ; 4698 69 02                    i.
-	sta     L456B                           ; 469A 8D 6B 45                 .kE
-	lda     L456C                           ; 469D AD 6C 45                 .lE
-	adc     #$00                            ; 46A0 69 00                    i.
-	sta     L456C                           ; 46A2 8D 6C 45                 .lE
+	add8i	L4573, L4573, $02
+	add16i	L456B, L456B, $0002
 	lda     L4571                           ; 46A5 AD 71 45                 .qE
 	beq     L46AD                           ; 46A8 F0 03                    ..
 	jmp     L46B0                           ; 46AA 4C B0 46                 L.F
