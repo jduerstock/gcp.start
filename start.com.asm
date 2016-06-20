@@ -2840,34 +2840,25 @@ L41B1:  jmp     L4113                           ; 41B1 4C 13 41                 
 L41B4:  rts                                     ; 41B4 60                       `
 
 ; ----------------------------------------------------------------------------
-L41B5:  brk                                     ; 41B5 00                       .
-L41B6:  brk                                     ; 41B6 00                       .
-L41B7:  brk                                     ; 41B7 00                       .
-L41B8:  brk                                     ; 41B8 00                       .
-L41B9:  brk                                     ; 41B9 00                       .
-L41BA:  brk                                     ; 41BA 00                       .
-L41BB:  brk                                     ; 41BB 00                       .
-L41BC:  brk                                     ; 41BC 00                       .
+L41B5:	.byte	$00
+L41B6:	.byte	$00
+L41B7:	.byte	$00
+L41B8:	.byte	$00
+L41B9:	.byte	$00
+L41BA:	.byte	$00
+L41BB:	.byte	$00
+L41BC:	.byte	$00
 
 ; ----------------------------------------------------------------------------
 sub_41BD:
 	stack_prolog L41B5, $05
-	lda	L41B9
-	sta	$AE
-	lda	L41BA
-	sta	$AF
+	dmv	off_AE, L41B9
 	clc                                     ; 41D0 18                       .
 	lda     L41B5                           ; 41D1 AD B5 41                 ..A
 	adc     #$03                            ; 41D4 69 03                    i.
 	ldy     #$00                            ; 41D6 A0 00                    ..
 	sta     ($AE),y                         ; 41D8 91 AE                    ..
-	clc                                     ; 41DA 18                       .
-	lda     L41B9                           ; 41DB AD B9 41                 ..A
-	adc     #$01                            ; 41DE 69 01                    i.
-	sta     $AE                             ; 41E0 85 AE                    ..
-	lda     L41BA                           ; 41E2 AD BA 41                 ..A
-	adc     #$00                            ; 41E5 69 00                    i.
-	sta     $AF                             ; 41E7 85 AF                    ..
+	add16i	off_AE, L41B9, $0001
 	lda     L41B6                           ; 41E9 AD B6 41                 ..A
 	sta     ($AE),y                         ; 41EC 91 AE                    ..
 	lda     L41B6                           ; 41EE AD B6 41                 ..A
