@@ -4664,10 +4664,11 @@ L4F02:  lda     L4D5C                           ; 4F02 AD 5C 4D                 
 ; ----------------------------------------------------------------------------
 L4F08:	.byte	13,"D1:CONFIG.DAT"
 L4F16:  .addr	L4F08
-L4F18:  brk                                     ; 4F18 00                       .
+L4F18:	.byte	$00
 
 ; ----------------------------------------------------------------------------
-L4F19:  prolog
+sub_4F19:  
+	prolog
 	lda     #$05                            ; 4F1C A9 05                    ..
 	jsr     L315E                           ; 4F1E 20 5E 31                  ^1
 	ldy     #$00                            ; 4F21 A0 00                    ..
@@ -6356,14 +6357,14 @@ L5D78:  ldx     #$5D                            ; 5D78 A2 5D                    
 	jmp     L5D9F                           ; 5D7F 4C 9F 5D                 L.]
 
 ; ----------------------------------------------------------------------------
-	.byte   $1C,"Call GCP, Inc for assistance"
+L5D82:	.byte   $1C,"Call GCP, Inc for assistance"
 
 ; ----------------------------------------------------------------------------
-L5D9F:  ldx     #$5D                            ; 5D9F A2 5D                    .]
-	lda     #$82                            ; 5DA1 A9 82                    ..
+L5D9F:  ldx     #>L5D82
+	lda     #<L5D82
 	jsr     sub_3151
 	jsr     sub_38FE
-L5DA9:  jsr     L4F19                           ; 5DA9 20 19 4F                  .O
+L5DA9:  jsr     sub_4F19
 	jsr     L3C90                           ; 5DAC 20 90 3C                  .<
 	lda     $A0                             ; 5DAF A5 A0                    ..
 	beq     L5DB6                           ; 5DB1 F0 03                    ..
