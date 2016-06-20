@@ -1974,11 +1974,8 @@ sub_3A5C:
 	jsr     sub_38D6
 	lda     $02FC                           ; 3A6A AD FC 02                 ...
 	eor     #$FF                            ; 3A6D 49 FF                    I.
-	bne     L3A74                           ; 3A6F D0 03                    ..
-	jmp     L3A79                           ; 3A71 4C 79 3A                 Ly:
-
-; ----------------------------------------------------------------------------
-L3A74:  lda     #$07                            ; 3A74 A9 07                    ..
+	lbeq	L3A79
+	lda     #$07                            ; 3A74 A9 07                    ..
 	jsr     L31A6                           ; 3A76 20 A6 31                  .1
 L3A79:  lda     L3A57                           ; 3A79 AD 57 3A                 .W:
 	sta     $AE                             ; 3A7C 85 AE                    ..
