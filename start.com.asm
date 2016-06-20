@@ -2866,10 +2866,7 @@ sub_41BD:
 	add8i	off_AE, L41B5, $03
 	add8m	L41BB, off_AE, L41B6
 	sty     L41BC                           ; 4205 8C BC 41                 ..A
-	sec                                     ; 4208 38                       8
-	lda     L41B5                           ; 4209 AD B5 41                 ..A
-	sbc     #$01                            ; 420C E9 01                    ..
-	sta     L421C                           ; 420E 8D 1C 42                 ..B
+	sub8i	L421C, L41B5, $01
 L4211:  lda     L421C                           ; 4211 AD 1C 42                 ..B
 	cmp     L41BC                           ; 4214 CD BC 41                 ..A
 	bcs     L421D                           ; 4217 B0 04                    ..
