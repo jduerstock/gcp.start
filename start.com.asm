@@ -1391,11 +1391,9 @@ L3604:	dmv	$AE, L3541
 	sub16m	off_AE, L353F, L353D
 	clc                                     ; 362C 18                       .
 	lda     $AE                             ; 362D A5 AE                    ..
-	.byte   $69                             ; 362F 69                       i
-L3630:  ora     ($8D,x)                         ; 3630 01 8D                    ..
-	.byte   $3B                             ; 3632 3B                       ;
-	and     $A5,x                           ; 3633 35 A5                    5.
-	.byte   $AF                             ; 3635 AF                       .
+	adc	#$01
+	sta	L353B
+	lda	$AF
 	adc     #$00                            ; 3636 69 00                    i.
 	sta     L353C                           ; 3638 8D 3C 35                 .<5
 	lda     L353C                           ; 363B AD 3C 35                 .<5
