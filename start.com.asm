@@ -3038,7 +3038,7 @@ L4300:  stx     L42FC                           ; 4300 8E FC 42                 
 	asl     $00                             ; 431E 06 00                    ..
 L4320:  .byte   $1E                             ; 4320 1E                       .
 L4321:  .byte   $43                             ; 4321 43                       C
-	inc     $042C                           ; 4322 EE 2C 04                 .,.
+L4322:	inc     $042C                           ; 4322 EE 2C 04                 .,.
 	brk                                     ; 4325 00                       .
 L4326:  brk                                     ; 4326 00                       .
 L4327:  jmp     L432A                           ; 4327 4C 2A 43                 L*C
@@ -3059,8 +3059,7 @@ L432E:  rol     $43                             ; 432E 26 43                    
 	jsr     L41BD                           ; 4345 20 BD 41                  .A
 	lda     L4326                           ; 4348 AD 26 43                 .&C
 	sta     L2CFB                           ; 434B 8D FB 2C                 ..,
-	ldx     #$43                            ; 434E A2 43                    .C
-	lda     #$22                            ; 4350 A9 22                    ."
+	ldxai	L4322
 	jsr     sub_4290
 	rts                                     ; 4355 60                       `
 
