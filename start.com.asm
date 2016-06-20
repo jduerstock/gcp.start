@@ -1995,11 +1995,8 @@ L3A8A:  lda     #$01                            ; 3A8A A9 01                    
 	sta     L3A5B                           ; 3AA0 8D 5B 3A                 .[:
 	lda     L3A5B                           ; 3AA3 AD 5B 3A                 .[:
 	cmp     #$61                            ; 3AA6 C9 61                    .a
-	bcs     L3AAD                           ; 3AA8 B0 03                    ..
-	jmp     L3AB6                           ; 3AAA 4C B6 3A                 L.:
-
-; ----------------------------------------------------------------------------
-L3AAD:  sec                                     ; 3AAD 38                       8
+	lbcc	L3AB6
+	sec                                     ; 3AAD 38                       8
 	lda     L3A5B                           ; 3AAE AD 5B 3A                 .[:
 	sbc     #$20                            ; 3AB1 E9 20                    . 
 	sta     L3A5B                           ; 3AB3 8D 5B 3A                 .[:
