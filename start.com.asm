@@ -309,7 +309,9 @@ L2EA3:  brk                                     ; 2EA3 00                       
 	and     ($3A),y                         ; 2EB6 31 3A                    1:
 	.byte   $54                             ; 2EB8 54                       T
 	eor     $52                             ; 2EB9 45 52                    ER
-	eor     L432E                           ; 2EBB 4D 2E 43                 M.C
+	.byte	$4D
+	.byte	$2E
+	.byte	$43
 	.byte   $4F                             ; 2EBE 4F                       O
 	eor     $2922                           ; 2EBF 4D 22 29                 M")
 	brk                                     ; 2EC2 00                       .
@@ -3041,12 +3043,11 @@ L4321:  .byte   $43                             ; 4321 43                       
 L4322:	inc     $042C                           ; 4322 EE 2C 04                 .,.
 	brk                                     ; 4325 00                       .
 L4326:  brk                                     ; 4326 00                       .
-L4327:  jmp     L432A                           ; 4327 4C 2A 43                 L*C
 
 ; ----------------------------------------------------------------------------
-L432A:  lda     L2CFB                           ; 432A AD FB 2C                 ..,
-	.byte   $8D                             ; 432D 8D                       .
-L432E:  rol     $43                             ; 432E 26 43                    &C
+L4327:  prolog
+	lda     L2CFB                           ; 432A AD FB 2C                 ..,
+	sta	L4326
 	lda     L4321                           ; 4330 AD 21 43                 .!C
 	sta     $A3                             ; 4333 85 A3                    ..
 	lda     #$43                            ; 4335 A9 43                    .C
