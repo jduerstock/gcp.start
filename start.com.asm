@@ -3486,17 +3486,9 @@ L4649:  beq     L4655                           ; 4649 F0 0A                    
 	lda     L4570                           ; 464B AD 70 45                 .pE
 	eor     #'s'
 	lbne	L472A
-L4655:  lda     L456B                           ; 4655 AD 6B 45                 .kE
-	sta     $AE                             ; 4658 85 AE                    ..
-	lda     L456C                           ; 465A AD 6C 45                 .lE
-	sta     $AF                             ; 465D 85 AF                    ..
-	ldy     #$00                            ; 465F A0 00                    ..
-	lda     ($AE),y                         ; 4661 B1 AE                    ..
-	sta     L4571                           ; 4663 8D 71 45                 .qE
-	lda     L456B                           ; 4666 AD 6B 45                 .kE
-	sta     $AE                             ; 4669 85 AE                    ..
-	lda     L456C                           ; 466B AD 6C 45                 .lE
-	sta     $AF                             ; 466E 85 AF                    ..
+L4655:	dmv	off_AE, L456B
+	ldp8	L4571
+	dmv	off_AE, L456B
 	lda     ($AE),y                         ; 4670 B1 AE                    ..
 	sta     $A0                             ; 4672 85 A0                    ..
 	clc                                     ; 4674 18                       .
