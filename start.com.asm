@@ -2998,10 +2998,7 @@ L4293:  stx     L4288                           ; 4293 8E 88 42                 
 	lda     L4287                           ; 42B0 AD 87 42                 ..B
 	sta     L428E                           ; 42B3 8D 8E 42                 ..B
 	sty     L428A                           ; 42B6 8C 8A 42                 ..B
-	sec                                     ; 42B9 38                       8
-	lda     L4289                           ; 42BA AD 89 42                 ..B
-	sbc     #$01                            ; 42BD E9 01                    ..
-	sta     L42CD                           ; 42BF 8D CD 42                 ..B
+	sub8i	L42CD, L4289, $01
 L42C2:  lda     L42CD                           ; 42C2 AD CD 42                 ..B
 	cmp     L428A                           ; 42C5 CD 8A 42                 ..B
 	bcs     L42CE                           ; 42C8 B0 04                    ..
