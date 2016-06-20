@@ -1390,10 +1390,7 @@ L3604:	dmv	$AE, L3541
 	ldp16	L353F
 	sub16m	off_AE, L353F, L353D
 	add16i	L353B, off_AE, $0001
-	lda     L353C                           ; 363B AD 3C 35                 .<5
-	sta     $A4                             ; 363E 85 A4                    ..
-	lda     L353B                           ; 3640 AD 3B 35                 .;5
-	sta     $A3                             ; 3643 85 A3                    ..
+	rdmv	$A3, L353B
 	ldy     L353E                           ; 3645 AC 3E 35                 .>5
 	ldx     L353D                           ; 3648 AE 3D 35                 .=5
 	lda     #$05                            ; 364B A9 05                    ..
