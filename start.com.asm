@@ -4671,19 +4671,9 @@ sub_4F19:
 	prolog
 	lda     #$05                            ; 4F1C A9 05                    ..
 	jsr     L315E                           ; 4F1E 20 5E 31                  ^1
-	ldy     #$00                            ; 4F21 A0 00                    ..
-	sty     L347C                           ; 4F23 8C 7C 34                 .|4
-	clc                                     ; 4F26 18                       .
-	lda     L4F16                           ; 4F27 AD 16 4F                 ..O
-	adc     #$01                            ; 4F2A 69 01                    i.
-	sta     $A1                             ; 4F2C 85 A1                    ..
-	lda     L4F16+1
-	adc     #$00                            ; 4F31 69 00                    i.
-	sta     $A2                             ; 4F33 85 A2                    ..
-	lda     L4F16                           ; 4F35 AD 16 4F                 ..O
-	sta     $AC                             ; 4F38 85 AC                    ..
-	lda     L4F16+1
-	sta     $AD                             ; 4F3D 85 AD                    ..
+	yldi	L347C, $00
+	add16i	$A1, L4F16, $0001
+	dmv	$Ac, L4F16
 	lda     #$00                            ; 4F3F A9 00                    ..
 	sta     $A4                             ; 4F41 85 A4                    ..
 	lda     ($AC),y                         ; 4F43 B1 AC                    ..
