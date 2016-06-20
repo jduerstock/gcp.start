@@ -1985,11 +1985,8 @@ L3A79:  lda     L3A57                           ; 3A79 AD 57 3A                 
 	lda     ($AE),y                         ; 3A85 B1 AE                    ..
 	sta     L3A59                           ; 3A87 8D 59 3A                 .Y:
 L3A8A:  lda     #$01                            ; 3A8A A9 01                    ..
-	bne     L3A91                           ; 3A8C D0 03                    ..
-	jmp     L3AFD                           ; 3A8E 4C FD 3A                 L.:
-
-; ----------------------------------------------------------------------------
-L3A91:  lda     #$07                            ; 3A91 A9 07                    ..
+	lbeq	L3AFD
+	lda     #$07                            ; 3A91 A9 07                    ..
 	jsr     L31A6                           ; 3A93 20 A6 31                  .1
 	lda     $A0                             ; 3A96 A5 A0                    ..
 	sta     L3A5B                           ; 3A98 8D 5B 3A                 .[:
