@@ -6382,9 +6382,7 @@ L5DCF:	lda     #$5D                            ; 5DCF A9 5D                    .
 	ldx     #$0A                            ; 5DD5 A2 0A                    ..
 	lda     #$08                            ; 5DD7 A9 08                    ..
 	jsr     sub_3BEB
-	.byte   $20                             ; 5DDC 20                        
-	.byte   $FE                             ; 5DDD FE                       .
-L5DDE:  sec                                     ; 5DDE 38                       8
+	jsr	sub_38FE
 L5DDF:  ldy     #$00                            ; 5DDF A0 00                    ..
 	sty     L2CF2                           ; 5DE1 8C F2 2C                 ..,
 	jsr     L5513                           ; 5DE4 20 13 55                  .U
