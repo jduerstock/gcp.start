@@ -2990,10 +2990,7 @@ L4290:
 	stxa	L4287
 	dmv	off_AE, L4287
 	ldp8	L4289
-	lda     L4288                           ; 42AA AD 88 42                 ..B
-	sta     L428F                           ; 42AD 8D 8F 42                 ..B
-	lda     L4287                           ; 42B0 AD 87 42                 ..B
-	sta     L428E                           ; 42B3 8D 8E 42                 ..B
+	rdmv	L428E, L4287
 	sty     L428A                           ; 42B6 8C 8A 42                 ..B
 	sub8i	L42CD, L4289, $01
 L42C2:  lda     L42CD                           ; 42C2 AD CD 42                 ..B
