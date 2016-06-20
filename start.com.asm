@@ -2863,14 +2863,8 @@ sub_41BD:
 	sta     ($AE),y                         ; 41EC 91 AE                    ..
 	lda     L41B6                           ; 41EE AD B6 41                 ..A
 	sta     L2CFB                           ; 41F1 8D FB 2C                 ..,
-	clc                                     ; 41F4 18                       .
-	lda     L41B5                           ; 41F5 AD B5 41                 ..A
-	adc     #$03                            ; 41F8 69 03                    i.
-	sta     $AE                             ; 41FA 85 AE                    ..
-	clc                                     ; 41FC 18                       .
-	lda     $AE                             ; 41FD A5 AE                    ..
-	adc     L41B6                           ; 41FF 6D B6 41                 m.A
-	sta     L41BB                           ; 4202 8D BB 41                 ..A
+	add8i	off_AE, L41B5, $03
+	add8m	L41BB, off_AE, L41B6
 	sty     L41BC                           ; 4205 8C BC 41                 ..A
 	sec                                     ; 4208 38                       8
 	lda     L41B5                           ; 4209 AD B5 41                 ..A
@@ -2882,7 +2876,9 @@ L4211:  lda     L421C                           ; 4211 AD 1C 42                 
 	jmp     L423E                           ; 4219 4C 3E 42                 L>B
 
 ; ----------------------------------------------------------------------------
-L421C:  brk                                     ; 421C 00                       .
+L421C:	.byte	$00
+
+; ----------------------------------------------------------------------------
 L421D:  clc                                     ; 421D 18                       .
 	lda     L41B7                           ; 421E AD B7 41                 ..A
 	adc     L41BC                           ; 4221 6D BC 41                 m.A
