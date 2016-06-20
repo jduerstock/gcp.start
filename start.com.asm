@@ -5824,8 +5824,8 @@ L5C9D:  prolog
 ; ----------------------------------------------------------------------------
 L5CC3:	.byte	10,"D:INIT.MAC"
 L5CCE:  .addr   L5CC3
-	brk                                     ; 5CD0 00                       .
-	brk                                     ; 5CD1 00                       .
+	.byte	$00
+	.byte	$00
 L5CD2:	.byte	$00
 L5CD3:	.byte   $0B,"ATARI-V1.06"
 
@@ -5840,10 +5840,7 @@ L5CE1:  prolog
 L5CE7:	.byte   $02,"K:"
 
 ; ----------------------------------------------------------------------------
-L5CEA:  lda     #$04                            ; 5CEA A9 04                    ..
-	sta     $A3                             ; 5CEC 85 A3                    ..
-	lda     #$00                            ; 5CEE A9 00                    ..
-	sta     $A4                             ; 5CF0 85 A4                    ..
+L5CEA:	dldi	$A3, $0004
 	ldy     #>L5CE7                         ; 5CF2 A0 5C                    .\
 	ldx     #<L5CE7                         ; 5CF4 A2 E7                    ..
 	lda     #$07                            ; 5CF6 A9 07                    ..
