@@ -3509,23 +3509,12 @@ L4655:	dmv	off_AE, L456B
 	jmp     L4779                           ; 46AD 4C 79 47                 LyG
 
 ; ----------------------------------------------------------------------------
-L46B0:  lda     L456B                           ; 46B0 AD 6B 45                 .kE
-	sta     $AE                             ; 46B3 85 AE                    ..
-	lda     L456C                           ; 46B5 AD 6C 45                 .lE
-	sta     $AF                             ; 46B8 85 AF                    ..
-	ldy     #$01                            ; 46BA A0 01                    ..
-	lda     ($AE),y                         ; 46BC B1 AE                    ..
-	sta     L4578                           ; 46BE 8D 78 45                 .xE
-	dey                                     ; 46C1 88                       .
-	lda     ($AE),y                         ; 46C2 B1 AE                    ..
-	sta     L4577                           ; 46C4 8D 77 45                 .wE
+L46B0:	dmv	off_AE, L456B
+	ldp16	L4577
 	lda     #$00                            ; 46C7 A9 00                    ..
 	cmp     L4571                           ; 46C9 CD 71 45                 .qE
-	bcc     L46D1                           ; 46CC 90 03                    ..
-	jmp     L4727                           ; 46CE 4C 27 47                 L'G
-
-; ----------------------------------------------------------------------------
-L46D1:  sty     L4572                           ; 46D1 8C 72 45                 .rE
+	lbcs	L4727
+	sty     L4572                           ; 46D1 8C 72 45                 .rE
 	sub8i	L46E8, L4571, $01
 L46DD:  lda     L46E8                           ; 46DD AD E8 46                 ..F
 	cmp     L4572                           ; 46E0 CD 72 45                 .rE
