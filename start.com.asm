@@ -1389,13 +1389,7 @@ L35EF:  lda     #$05                            ; 35EF A9 05                    
 L3604:	dmv	$AE, L3541
 	ldp16	L353F
 	sub16m	off_AE, L353F, L353D
-	clc                                     ; 362C 18                       .
-	lda     $AE                             ; 362D A5 AE                    ..
-	adc	#$01
-	sta	L353B
-	lda	$AF
-	adc     #$00                            ; 3636 69 00                    i.
-	sta     L353C                           ; 3638 8D 3C 35                 .<5
+	add16i	L353B, off_AE, $0001
 	lda     L353C                           ; 363B AD 3C 35                 .<5
 	sta     $A4                             ; 363E 85 A4                    ..
 	lda     L353B                           ; 3640 AD 3B 35                 .;5
