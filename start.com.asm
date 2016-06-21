@@ -1228,17 +1228,11 @@ L34BC:  rts                                     ; 34BC 60                       
 L34BD:	.byte	$00
 
 ; ----------------------------------------------------------------------------
-L34BE:
+sub_34BE:
 	prolog
 	sta     L34BD                           ; 34C1 8D BD 34                 ..4
-	lda     #$00                            ; 34C4 A9 00                    ..
-	sta     $A3                             ; 34C6 85 A3                    ..
-	lda     #$00                            ; 34C8 A9 00                    ..
-	sta     $A4                             ; 34CA 85 A4                    ..
-	lda     #$34                            ; 34CC A9 34                    .4
-	sta     $A6                             ; 34CE 85 A6                    ..
-	lda     #$79                            ; 34D0 A9 79                    .y
-	sta     $A5                             ; 34D2 85 A5                    ..
+	dldi	$A3, $0000
+	rdldi	$A5, L3479
 	ldy     #$0D                            ; 34D4 A0 0D                    ..
 	ldx     #$00                            ; 34D6 A2 00                    ..
 	lda     L34BD                           ; 34D8 AD BD 34                 ..4
@@ -1249,7 +1243,7 @@ L34BE:
 sub_34DF:  
 	prolog
 	lda     #$02                            ; 34E2 A9 02                    ..
-	jsr     L34BE                           ; 34E4 20 BE 34                  .4
+	jsr     sub_34BE
 	lda     #$00                            ; 34E7 A9 00                    ..
 	cmp     $02EB                           ; 34E9 CD EB 02                 ...
 	lbcs	L34F5
@@ -1320,20 +1314,11 @@ L3544:  .byte   $2C                             ; 3544 2C                       
 ; ----------------------------------------------------------------------------
 sub_3545:
 	prolog
-	stx     L3538                           ; 3548 8E 38 35                 .85
-	sta     L3537                           ; 354B 8D 37 35                 .75
-	lda     #$35                            ; 354E A9 35                    .5
-	sta     L3542                           ; 3550 8D 42 35                 .B5
-	lda     #$43                            ; 3553 A9 43                    .C
-	sta     L3541                           ; 3555 8D 41 35                 .A5
-	ldy     #$00                            ; 3558 A0 00                    ..
-	sty     L347C                           ; 355A 8C 7C 34                 .|4
-	lda     #$00                            ; 355D A9 00                    ..
-	sta     $05C5                           ; 355F 8D C5 05                 ...
-	lda     #$04                            ; 3562 A9 04                    ..
-	sta     $A3                             ; 3564 85 A3                    ..
-	lda     #$00                            ; 3566 A9 00                    ..
-	sta     $A4                             ; 3568 85 A4                    ..
+	stxa	L3537
+	rdldi	L3541, L3543
+	yldi	L347C, $00
+	ldi	$05C5, $00
+	dldi	$A3, $0004
 	ldy     L3538                           ; 356A AC 38 35                 .85
 	ldx     L3537                           ; 356D AE 37 35                 .75
 	lda     #$05                            ; 3570 A9 05                    ..
@@ -2018,10 +2003,8 @@ L3B0F:  stack_prolog L3B08, $03
 	jsr     sub_3405
 	lda     #$11                            ; 3B23 A9 11                    ..
 	jsr     sub_31C7
-	lda     #$02                            ; 3B28 A9 02                    ..
-	sta     L3B0C                           ; 3B2A 8D 0C 3B                 ..;
-	lda     L3B0A                           ; 3B2D AD 0A 3B                 ..;
-	sta     L3B3E                           ; 3B30 8D 3E 3B                 .>;
+	ldi	L3B0C, $02
+	mv	L3B3E, L3B0A
 L3B33:  lda     L3B3E                           ; 3B33 AD 3E 3B                 .>;
 	cmp     L3B0C                           ; 3B36 CD 0C 3B                 ..;
 	bcs     L3B3F                           ; 3B39 B0 04                    ..
@@ -4041,7 +4024,7 @@ L4D0D:  jsr     sub_3EBD
 
 ; ----------------------------------------------------------------------------
 L4D17:  lda     #$02                            ; 4D17 A9 02                    ..
-	jsr     L34BE                           ; 4D19 20 BE 34                  .4
+	jsr     sub_34BE
 	jsr     sub_37AD
 	lda     $A0                             ; 4D1F A5 A0                    ..
 	eor     #$01                            ; 4D21 49 01                    I.
