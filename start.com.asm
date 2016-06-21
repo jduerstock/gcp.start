@@ -2082,7 +2082,9 @@ L3BCA:  lda     L3BD5                           ; 3BCA AD D5 3B                 
 	jmp     L3BE1                           ; 3BD2 4C E1 3B                 L.;
 
 ; ----------------------------------------------------------------------------
-L3BD5:  .byte   $A9                             ; 3BD5 A9                       .
+L3BD5:  .byte   $A9
+
+; ----------------------------------------------------------------------------
 L3BD6:  lda     #$12                            ; 3BD6 A9 12                    ..
 	jsr     sub_31C7
 	inc     L3B0C                           ; 3BDB EE 0C 3B                 ..;
@@ -2094,19 +2096,16 @@ L3BE1:  lda     #$03                            ; 3BE1 A9 03                    
 	rts                                     ; 3BE6 60                       `
 
 ; ----------------------------------------------------------------------------
-L3BE7:  .byte   $85                             ; 3BE7 85                       .
-L3BE8:  .byte   $A3                             ; 3BE8 A3                       .
-L3BE9:  .byte   $A9                             ; 3BE9 A9                       .
+L3BE7:  .byte   $85
+L3BE8:  .byte   $A3
+L3BE9:  .byte   $A9
 L3BEA:	.byte	$00
 
 
 ; ----------------------------------------------------------------------------
 sub_3BEB:  
 	stack_prolog L3BE7, $03
-	lda     L3BE9                           ; 3BF4 AD E9 3B                 ..;
-	sta     $AE                             ; 3BF7 85 AE                    ..
-	lda     L3BEA                           ; 3BF9 AD EA 3B                 ..;
-	sta     $AF                             ; 3BFC 85 AF                    ..
+	dmv	off_AE, L3BE9
 	clc                                     ; 3BFE 18                       .
 	ldy     #$00                            ; 3BFF A0 00                    ..
 	lda     ($AE),y                         ; 3C01 B1 AE                    ..
