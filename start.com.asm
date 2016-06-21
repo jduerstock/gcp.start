@@ -5837,15 +5837,8 @@ L5CEA:	dldi	$A3, $0004
 L5D0E:  jsr     sub_5C9D
 	lda     #$05                            ; 5D11 A9 05                    ..
 	jsr     L315E                           ; 5D13 20 5E 31                  ^1
-	ldy     #$00                            ; 5D16 A0 00                    ..
-	sty     L347C                           ; 5D18 8C 7C 34                 .|4
-	clc                                     ; 5D1B 18                       .
-	lda     L5CCE                           ; 5D1C AD CE 5C                 ..\
-	adc     #$01                            ; 5D1F 69 01                    i.
-	sta     $A1                             ; 5D21 85 A1                    ..
-	lda     L5CCE+1                         ; 5D23 AD CF 5C                 ..\
-	adc     #$00                            ; 5D26 69 00                    i.
-	sta     $A2                             ; 5D28 85 A2                    ..
+	yldi	L347C, $00
+	add16i	$A1, L5CCE, $0001
 	lda     L5CCE                           ; 5D2A AD CE 5C                 ..\
 	sta     $AC                             ; 5D2D 85 AC                    ..
 	lda     L5CCE+1                         ; 5D2F AD CF 5C                 ..\
