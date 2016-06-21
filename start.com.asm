@@ -5856,11 +5856,10 @@ L5D0E:  jsr     sub_5C9D
 	jmp     L5D78                           ; 5D60 4C 78 5D                 Lx]
 
 ; ----------------------------------------------------------------------------
-	.byte   $14,"D:INIT.MAC not found"
+L5D63:	.byte   $14,"D:INIT.MAC not found"
 
 ; ----------------------------------------------------------------------------
-L5D78:  ldx     #$5D                            ; 5D78 A2 5D                    .]
-	lda     #$63                            ; 5D7A A9 63                    .c
+L5D78:	ldxai	L5D63
 	jsr     sub_3151
 	jmp     L5D9F                           ; 5D7F 4C 9F 5D                 L.]
 
@@ -5868,19 +5867,16 @@ L5D78:  ldx     #$5D                            ; 5D78 A2 5D                    
 L5D82:	.byte   $1C,"Call GCP, Inc for assistance"
 
 ; ----------------------------------------------------------------------------
-L5D9F:  ldx     #>L5D82
-	lda     #<L5D82
+L5D9F:	ldxai	L5D82
 	jsr     sub_3151
 	jsr     sub_38FE
 L5DA9:  jsr     sub_4F19
 	jsr     L3C90                           ; 5DAC 20 90 3C                  .<
 	lda     $A0                             ; 5DAF A5 A0                    ..
-	beq     L5DB6                           ; 5DB1 F0 03                    ..
-	jmp     L5DDF                           ; 5DB3 4C DF 5D                 L.]
+	lbne	L5DDF
+	jmp	L5DCF
 
 ; ----------------------------------------------------------------------------
-L5DB6:	jmp	L5DCF
-
 	.byte	$15
 	Inverse	" No R: Handler found "
 
