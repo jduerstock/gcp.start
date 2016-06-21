@@ -1645,15 +1645,12 @@ L37DC:	.byte	$00
 L37DD:	.byte	$00
 L37DE:	.byte	$00
 L37DF:	.byte	$00
-L37E0:  jmp     L37E3                           ; 37E0 4C E3 37                 L.7
 
 ; ----------------------------------------------------------------------------
-L37E3:  ldy     #$01                            ; 37E3 A0 01                    ..
-	sty     L37DF                           ; 37E5 8C DF 37                 ..7
-	lda     #$B8                            ; 37E8 A9 B8                    ..
-	sta     L37DD                           ; 37EA 8D DD 37                 ..7
-	lda     #$18                            ; 37ED A9 18                    ..
-	sta     L37DC                           ; 37EF 8D DC 37                 ..7
+sub_37E0:
+	prolog
+	yldi	L37DF, $01
+	rdldi	L37DC, $B818
 	lda     L37DC                           ; 37F2 AD DC 37                 ..7
 	sta     $AE                             ; 37F5 85 AE                    ..
 	lda     L37DD                           ; 37F7 AD DD 37                 ..7
@@ -5848,7 +5845,7 @@ L5CEA:	dldi	$A3, $0004
 	lda     $10                             ; 5CFB A5 10                    ..
 	and     #$7F                            ; 5CFD 29 7F                    ).
 	sta     $10                             ; 5CFF 85 10                    ..
-	jsr     L37E0                           ; 5D01 20 E0 37                  .7
+	jsr     sub_37E0
 	lda     $A0                             ; 5D04 A5 A0                    ..
 	beq     L5D0B                           ; 5D06 F0 03                    ..
 	jmp     L5D0E                           ; 5D08 4C 0E 5D                 L.]
