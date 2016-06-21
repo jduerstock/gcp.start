@@ -5839,33 +5839,21 @@ L5D0E:  jsr     sub_5C9D
 	jsr     L315E                           ; 5D13 20 5E 31                  ^1
 	yldi	L347C, $00
 	add16i	$A1, L5CCE, $0001
-	lda     L5CCE                           ; 5D2A AD CE 5C                 ..\
-	sta     $AC                             ; 5D2D 85 AC                    ..
-	lda     L5CCE+1                         ; 5D2F AD CF 5C                 ..\
-	sta     $AD                             ; 5D32 85 AD                    ..
-	lda     #$00                            ; 5D34 A9 00                    ..
-	sta     $A4                             ; 5D36 85 A4                    ..
+	dmv	$Ac, L5CCE
+	ldi	$A4, $00
 	lda     ($AC),y                         ; 5D38 B1 AC                    ..
 	sta     $A3                             ; 5D3A 85 A3                    ..
-	lda     #$03                            ; 5D3C A9 03                    ..
-	sta     $A5                             ; 5D3E 85 A5                    ..
-	lda     #$04                            ; 5D40 A9 04                    ..
-	sta     $A6                             ; 5D42 85 A6                    ..
-	lda     #$00                            ; 5D44 A9 00                    ..
-	sta     $A7                             ; 5D46 85 A7                    ..
+	dldi	$A5, $0403
+	ldi	$A7, $00
 	ldy     $A2                             ; 5D48 A4 A2                    ..
 	ldx     $A1                             ; 5D4A A6 A1                    ..
 	lda     #$05                            ; 5D4C A9 05                    ..
 	jsr     L347D                           ; 5D4E 20 7D 34                  }4
-	lda     #$00                            ; 5D51 A9 00                    ..
-	sta     $05C5                           ; 5D53 8D C5 05                 ...
+	ldi	$05C5, $00
 	lda     L347C                           ; 5D56 AD 7C 34                 .|4
 	cmp     #$80                            ; 5D59 C9 80                    ..
-	bcs     L5D60                           ; 5D5B B0 03                    ..
-	jmp     L5DA9                           ; 5D5D 4C A9 5D                 L.]
-
-; ----------------------------------------------------------------------------
-L5D60:  jmp     L5D78                           ; 5D60 4C 78 5D                 Lx]
+	lbcc	L5DA9
+	jmp     L5D78                           ; 5D60 4C 78 5D                 Lx]
 
 ; ----------------------------------------------------------------------------
 	.byte   $14,"D:INIT.MAC not found"
