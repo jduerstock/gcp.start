@@ -1651,35 +1651,24 @@ sub_37E0:
 	prolog
 	yldi	L37DF, $01
 	rdldi	L37DC, $B818
-	lda     L37DC                           ; 37F2 AD DC 37                 ..7
-	sta     $AE                             ; 37F5 85 AE                    ..
-	lda     L37DD                           ; 37F7 AD DD 37                 ..7
-	sta     $AF                             ; 37FA 85 AF                    ..
+	dmv	off_AE, L37DC
 	dey                                     ; 37FC 88                       .
 	lda     ($AE),y                         ; 37FD B1 AE                    ..
 	eor     #$FF                            ; 37FF 49 FF                    I.
 	sta     L37DE                           ; 3801 8D DE 37                 ..7
-	lda     L37DC                           ; 3804 AD DC 37                 ..7
-	sta     $AE                             ; 3807 85 AE                    ..
-	lda     L37DD                           ; 3809 AD DD 37                 ..7
-	sta     $AF                             ; 380C 85 AF                    ..
+	dmv	off_AE, L37DC
 	lda     L37DE                           ; 380E AD DE 37                 ..7
 	sta     ($AE),y                         ; 3811 91 AE                    ..
-	lda     L37DC                           ; 3813 AD DC 37                 ..7
-	sta     $AE                             ; 3816 85 AE                    ..
-	lda     L37DD                           ; 3818 AD DD 37                 ..7
-	sta     $AF                             ; 381B 85 AF                    ..
+	dmv	off_AE, L37DC
 	lda     ($AE),y                         ; 381D B1 AE                    ..
 	eor     L37DE                           ; 381F 4D DE 37                 M.7
-	bne     L3827                           ; 3822 D0 03                    ..
-	jmp     L3870                           ; 3824 4C 70 38                 Lp8
-
-; ----------------------------------------------------------------------------
-L3827:  jmp     L3840                           ; 3827 4C 40 38                 L@8
+	lbeq	L3870
+	jmp     L3840                           ; 3827 4C 40 38                 L@8
 
 ; ----------------------------------------------------------------------------
 L382A:	.byte	$15,"Insufficient Memory%E"
 
+; ----------------------------------------------------------------------------
 L3840:	ldxai	L382A
 	jsr     sub_3355
 	jmp     L3864                           ; 3847 4C 64 38                 Ld8
@@ -1687,6 +1676,7 @@ L3840:	ldxai	L382A
 ; ----------------------------------------------------------------------------
 L384A:	.byte	$19,"Please remove cartridge%E"
 
+; ----------------------------------------------------------------------------
 L3864:	ldxai	L384A
 	jsr     sub_3355
 	ldy     #$00                            ; 386B A0 00                    ..
@@ -5801,21 +5791,16 @@ L5C90:  rts                                     ; 5C90 60                       
 	brk                                     ; 5C9C 00                       .
 
 ; ----------------------------------------------------------------------------
-L5C9D:  prolog
+sub_5C9D:  
+	prolog
 	lda     #$00                            ; 5CA0 A9 00                    ..
 	jsr     sub_38D6
-	ldy     #$00                            ; 5CA5 A0 00                    ..
-	sty     $52                             ; 5CA7 84 52                    .R
-	lda     #$00                            ; 5CA9 A9 00                    ..
-	sta     L2E12                           ; 5CAB 8D 12 2E                 ...
-	lda     #$00                            ; 5CAE A9 00                    ..
-	sta     L2E30                           ; 5CB0 8D 30 2E                 .0.
-	lda     #$00                            ; 5CB3 A9 00                    ..
-	sta     L2E4E                           ; 5CB5 8D 4E 2E                 .N.
-	lda     #$00                            ; 5CB8 A9 00                    ..
-	sta     L2E6C                           ; 5CBA 8D 6C 2E                 .l.
-	lda     #$00                            ; 5CBD A9 00                    ..
-	sta     L2E8A                           ; 5CBF 8D 8A 2E                 ...
+	yldi	$52, $00
+	ldi	L2E12, $00
+	ldi	L2E30, $00
+	ldi	L2E4E, $00
+	ldi	L2E6C, $00
+	ldi	L2E8A, $00
 	rts                                     ; 5CC2 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -5847,12 +5832,9 @@ L5CEA:	dldi	$A3, $0004
 	sta     $10                             ; 5CFF 85 10                    ..
 	jsr     sub_37E0
 	lda     $A0                             ; 5D04 A5 A0                    ..
-	beq     L5D0B                           ; 5D06 F0 03                    ..
-	jmp     L5D0E                           ; 5D08 4C 0E 5D                 L.]
-
-; ----------------------------------------------------------------------------
-L5D0B:  jsr     sub_38FE
-L5D0E:  jsr     L5C9D                           ; 5D0E 20 9D 5C                  .\
+	lbne	L5D0E
+	jsr     sub_38FE
+L5D0E:  jsr     sub_5C9D
 	lda     #$05                            ; 5D11 A9 05                    ..
 	jsr     L315E                           ; 5D13 20 5E 31                  ^1
 	ldy     #$00                            ; 5D16 A0 00                    ..
