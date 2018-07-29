@@ -238,9 +238,7 @@ L2E1F:	.byte	$00
 L2E26:	.byte	$00
 	brk                                     ; 2E27 00                       .
 	.byte   $0B,"   "
-	bvc     L2EA3                           ; 2E2C 50 75                    Pu
-	.byte   $74                             ; 2E2E 74                       t
-	plp                                     ; 2E2F 28                       (
+	.byte	"Put("
 L2E30:  inc     $1E2C                           ; 2E30 EE 2C 1E                 .,.
 	brk                                     ; 2E33 00                       .
 	brk                                     ; 2E34 00                       .
@@ -251,22 +249,8 @@ L2E30:  inc     $1E2C                           ; 2E30 EE 2C 1E                 
 	.byte	$22
 L2E4E:  inc     $1E2C                           ; 2E4E EE 2C 1E                 .,.
 	brk                                     ; 2E51 00                       .
-	.byte   $F4                             ; 2E52 F4                       .
-	sbc     #$EE                            ; 2E53 E9 EE                    ..
-	.byte   $E7                             ; 2E55 E7                       .
-	ldy     #$E9                            ; 2E56 A0 E9                    ..
-	inc     $CDA0                           ; 2E58 EE A0 CD                 ...
-	sbc     ($E9,x)                         ; 2E5B E1 E9                    ..
-	.byte	$EE
-	.byte	$A0
-	.byte	$D0
-	.byte   $F2                             ; 2E60 F2                       .
-	.byte   $EF                             ; 2E61 EF                       .
-	.byte   $E7                             ; 2E62 E7                       .
-	.byte   $F2                             ; 2E63 F2                       .
-	.byte   $E1                             ; 2E64 E1                       .
-L2E65:  sbc     $22A0                           ; 2E65 ED A0 22                 .."
-	and     #$00                            ; 2E68 29 00                    ).
+	Inverse	"ting in Main Program "
+	.byte	$22,")",$00
 	brk                                     ; 2E6A 00                       .
 	.byte   $B6                             ; 2E6B B6                       .
 L2E6C:  inc     $1E2C                           ; 2E6C EE 2C 1E                 .,.
@@ -274,49 +258,16 @@ L2E6C:  inc     $1E2C                           ; 2E6C EE 2C 1E                 
 	.byte	"   ITerm()     ;initialize"
 L2E8A:  inc     $782C                           ; 2E8A EE 2C 78                 .,x
 	brk                                     ; 2E8D 00                       .
-	.byte   $74                             ; 2E8E 74                       t
-	adc     $6D                             ; 2E8F 65 6D                    em
-	.byte	$20
-	.byte	$66
-	.byte	$6F
-	.byte   $72                             ; 2E94 72                       r
-	.byte	$20
-	.byte	$54
-	.byte	$45
-	.byte   $52                             ; 2E98 52                       R
-	.byte	$4D
-	.byte	$20
-	.byte	$70
-	.byte   $72                             ; 2E9C 72                       r
-	.byte   $6F                             ; 2E9D 6F                       o
-	.byte   $67                             ; 2E9E 67                       g
-	.byte   $72                             ; 2E9F 72                       r
-	adc     ($6D,x)                         ; 2EA0 61 6D                    am
-	brk                                     ; 2EA2 00                       .
+	.byte	"tem for TERM program",$00
 L2EA3:	.byte	$00
 	adc     a:$6D,x                         ; 2EA4 7D 6D 00                 }m.
 	brk                                     ; 2EA7 00                       .
-	.byte	$19,"   RdBoot("
-	.byte	$20
-	.byte	$22
-	.byte	$44
-	and     ($3A),y                         ; 2EB6 31 3A                    1:
-	.byte   $54                             ; 2EB8 54                       T
-	eor     $52                             ; 2EB9 45 52                    ER
-	.byte	$4D
-	.byte	$2E
-	.byte	$43
-	.byte   $4F                             ; 2EBE 4F                       O
-	eor     $2922                           ; 2EBF 4D 22 29                 M")
+	.byte	$19,"   RdBoot( ",$22,"D1:TERM.COM",$22,")"
 	brk                                     ; 2EC2 00                       .
 	brk                                     ; 2EC3 00                       .
 	eor     a:$6D,x                         ; 2EC4 5D 6D 00                 ]m.
 	brk                                     ; 2EC7 00                       .
-	.byte	$08,"   "
-	eor     $4E                             ; 2ECC 45 4E                    EN
-	.byte   $44                             ; 2ECE 44                       D
-	plp                                     ; 2ECF 28                       (
-	and     #$00                            ; 2ED0 29 00                    ).
+	.byte	$08,"   END()",$00
 	brk                                     ; 2ED2 00                       .
 	lsr     a:$6D                           ; 2ED3 4E 6D 00                 Nm.
 	brk                                     ; 2ED6 00                       .
@@ -707,7 +658,8 @@ L3158:  jsr     sub_2F96
 	jmp     L3103                           ; 315B 4C 03 31                 L.1
 
 ; ----------------------------------------------------------------------------
-L315E:  jsr     L2F40                           ; 315E 20 40 2F                  @/
+sub_315E:
+	jsr     L2F40                           ; 315E 20 40 2F                  @/
 	jmp     L3103                           ; 3161 4C 03 31                 L.1
 
 ; ----------------------------------------------------------------------------
@@ -736,7 +688,9 @@ L317E:  ldy     #$00                            ; 317E A0 00                    
 	tax                                     ; 3187 AA                       .
 	ldy     $A2                             ; 3188 A4 A2                    ..
 	lda     $B7                             ; 318A A5 B7                    ..
-L318C:  pha                                     ; 318C 48                       H
+
+sub_318C:
+	pha                                     ; 318C 48                       H
 	lda     #$FF                            ; 318D A9 FF                    ..
 	sta     $A3                             ; 318F 85 A3                    ..
 	pla                                     ; 3191 68                       h
@@ -1092,7 +1046,7 @@ L33D5:  .byte   $D2                             ; 33D5 D2                       
 L33D6:  .byte   $33                             ; 33D6 33                       3
 	pha                                     ; 33D7 48                       H
 	lda     #$00                            ; 33D8 A9 00                    ..
-	jsr     L315E                           ; 33DA 20 5E 31                  ^1
+	jsr     sub_315E
 	lda     #$0C                            ; 33DD A9 0C                    ..
 	sta     $A3                             ; 33DF 85 A3                    ..
 	lda     #$00                            ; 33E1 A9 00                    ..
@@ -1100,7 +1054,7 @@ L33D6:  .byte   $33                             ; 33D6 33                       
 	ldy     L33D6                           ; 33E6 AC D6 33                 ..3
 	jsr     sub_3127
 	lda     #$06                            ; 33EC A9 06                    ..
-	jsr     L315E                           ; 33EE 20 5E 31                  ^1
+	jsr     sub_315E
 	pla                                     ; 33F1 68                       h
 	sta     $A4                             ; 33F2 85 A4                    ..
 	and     #$30                            ; 33F4 29 30                    )0
@@ -1415,7 +1369,7 @@ L3685:  jmp     L3575                           ; 3685 4C 75 35                 
 
 ; ----------------------------------------------------------------------------
 L3688:  lda     #$05                            ; 3688 A9 05                    ..
-	jsr     L315E                           ; 368A 20 5E 31                  ^1
+	jsr     sub_315E
 L368D:  lda     #$01                            ; 368D A9 01                    ..
 	lbeq	L369E
 	ldx     #$FD                            ; 3694 A2 FD                    ..
@@ -2184,7 +2138,7 @@ L3C8F:	.byte	$00
 sub_3C90:
 	prolog
 	lda     #$05                            ; 3C93 A9 05                    ..
-	jsr     L315E                           ; 3C95 20 5E 31                  ^1
+	jsr     sub_315E
 	lda     $B148                           ; 3C98 AD 48 B1                 .H.
 	eor     #$01                            ; 3C9B 49 01                    I.
 	beq     L3CA2                           ; 3C9D F0 03                    ..
@@ -2250,7 +2204,7 @@ L3CAC:  lda     #$02                            ; 3CAC A9 02                    
 
 ; ----------------------------------------------------------------------------
 L3D0F:  lda     #$02                            ; 3D0F A9 02                    ..
-	jsr     L315E                           ; 3D11 20 5E 31                  ^1
+	jsr     sub_315E
 	lda     #$00                            ; 3D14 A9 00                    ..
 	sta     $05C2                           ; 3D16 8D C2 05                 ...
 	lda     #$0D                            ; 3D19 A9 0D                    ..
@@ -2433,7 +2387,7 @@ L3E56:  lda     #$00                            ; 3E56 A9 00                    
 	lda     #$02                            ; 3E6A A9 02                    ..
 	jsr     sub_31D7
 L3E6F:  lda     #$02                            ; 3E6F A9 02                    ..
-	jsr     L315E                           ; 3E71 20 5E 31                  ^1
+	jsr     sub_315E
 	ldy     #$00                            ; 3E74 A0 00                    ..
 	sty     L2E0F                           ; 3E76 8C 0F 2E                 ...
 	rts                                     ; 3E79 60                       `
@@ -3451,7 +3405,7 @@ L4816:  lda     #$00                            ; 4816 A9 00                    
 
 ; ----------------------------------------------------------------------------
 L4832:  lda     #$02                            ; 4832 A9 02                    ..
-	jsr     L315E                           ; 4834 20 5E 31                  ^1
+	jsr     sub_315E
 L4837:  rts                                     ; 4837 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -3515,7 +3469,7 @@ sub_483A:
 
 ; ----------------------------------------------------------------------------
 L48A8:  lda     #$02                            ; 48A8 A9 02                    ..
-	jsr     L315E                           ; 48AA 20 5E 31                  ^1
+	jsr     sub_315E
 	lda     #$0D                            ; 48AD A9 0D                    ..
 	sta     $A3                             ; 48AF 85 A3                    ..
 	ldy     #>L3479
@@ -4271,7 +4225,7 @@ L4F18:	.byte	$00
 sub_4F19:  
 	prolog
 	lda     #$05                            ; 4F1C A9 05                    ..
-	jsr     L315E                           ; 4F1E 20 5E 31                  ^1
+	jsr     sub_315E
 	yldi	L347C, $00
 	add16i	$A1, L4F16, $0001
 	dmv	$Ac, L4F16
@@ -4305,19 +4259,19 @@ L4F6B:  lda     #$00                            ; 4F6B A9 00                    
 L4F70:  ldy     #$2E                            ; 4F70 A0 2E                    ..
 	ldx     #$12                            ; 4F72 A2 12                    ..
 	lda     #$05                            ; 4F74 A9 05                    ..
-	jsr     L318C                           ; 4F76 20 8C 31                  .1
+	jsr     sub_318C
 	ldy     #$2E                            ; 4F79 A0 2E                    ..
 	ldx     #$30                            ; 4F7B A2 30                    .0
 	lda     #$05                            ; 4F7D A9 05                    ..
-	jsr     L318C                           ; 4F7F 20 8C 31                  .1
+	jsr     sub_318C
 	ldy     #$2E                            ; 4F82 A0 2E                    ..
 	ldx     #$4E                            ; 4F84 A2 4E                    .N
 	lda     #$05                            ; 4F86 A9 05                    ..
-	jsr     L318C                           ; 4F88 20 8C 31                  .1
+	jsr     sub_318C
 	ldy     #$2E                            ; 4F8B A0 2E                    ..
 	ldx     #$8A                            ; 4F8D A2 8A                    ..
 	lda     #$05                            ; 4F8F A9 05                    ..
-	jsr     L318C                           ; 4F91 20 8C 31                  .1
+	jsr     sub_318C
 	lda     #$05                            ; 4F94 A9 05                    ..
 	jsr     L32A9                           ; 4F96 20 A9 32                  .2
 	lda     $A0                             ; 4F99 A5 A0                    ..
@@ -4331,7 +4285,7 @@ L4F70:  ldy     #$2E                            ; 4F70 A0 2E                    
 L4FA8:  lda     L4F18                           ; 4FA8 AD 18 4F                 ..O
 	sta     $B149                           ; 4FAB 8D 49 B1                 .I.
 L4FAE:  lda     #$05                            ; 4FAE A9 05                    ..
-	jsr     L315E                           ; 4FB0 20 5E 31                  ^1
+	jsr     sub_315E
 	lda     #$01                            ; 4FB3 A9 01                    ..
 	sta     $A0                             ; 4FB5 85 A0                    ..
 	rts                                     ; 4FB7 60                       `
@@ -4340,7 +4294,7 @@ L4FAE:  lda     #$05                            ; 4FAE A9 05                    
 sub_4FB8:
 	prolog
 	lda     #$05                            ; 4FBB A9 05                    ..
-	jsr     L315E                           ; 4FBD 20 5E 31                  ^1
+	jsr     sub_315E
 	ldy     #$00                            ; 4FC0 A0 00                    ..
 	sty     L347C                           ; 4FC2 8C 7C 34                 .|4
 	clc                                     ; 4FC5 18                       .
@@ -4401,7 +4355,7 @@ L500F:  ldy     #$2E                            ; 500F A0 2E                    
 	lda     #$05                            ; 5036 A9 05                    ..
 	jsr     L3227                           ; 5038 20 27 32                  '2
 	lda     #$05                            ; 503B A9 05                    ..
-	jsr     L315E                           ; 503D 20 5E 31                  ^1
+	jsr     sub_315E
 	lda     #$01                            ; 5040 A9 01                    ..
 	sta     $A0                             ; 5042 85 A0                    ..
 	rts                                     ; 5044 60                       `
@@ -5204,8 +5158,8 @@ L576C:  lda     #$57                            ; 576C A9 57                    
 L577C:	.byte	$02,"ED"
 
 ; ----------------------------------------------------------------------------
-L577F:  ldx     #$57                            ; 577F A2 57                    .W
-	lda     #$7C                            ; 5781 A9 7C                    .|
+L577F:  ldx     #>L577C
+	lda     #<L577C
 	jsr     sub_3A5C
 	lda     $A0                             ; 5786 A5 A0                    ..
 	sta     L550C                           ; 5788 8D 0C 55                 ..U
@@ -5798,7 +5752,8 @@ L5CDF:  .addr	L5CD3
 
 
 ; ----------------------------------------------------------------------------
-L5CE1:  prolog
+sub_5CE1:
+	prolog
 	jmp     L5CEA                           ; 5CE4 4C EA 5C                 L.\
 
 ; ----------------------------------------------------------------------------
@@ -5815,11 +5770,11 @@ L5CEA:	dldi	$A3, $0004
 	sta     $10                             ; 5CFF 85 10                    ..
 	jsr     sub_37E0
 	lda     $A0                             ; 5D04 A5 A0                    ..
-	lbne	L5D0E
+	lbne	:+
 	jsr     sub_38FE
-L5D0E:  jsr     sub_5C9D
+:	jsr	sub_5C9D
 	lda     #$05                            ; 5D11 A9 05                    ..
-	jsr     L315E                           ; 5D13 20 5E 31                  ^1
+	jsr     sub_315E
 	yldi	L347C, $00
 	add16i	$A1, L5CCE, $0001
 	dmv	$Ac, L5CCE
@@ -5971,5 +5926,5 @@ L5ECA:  ldx     #>L5EBE
 
 	.segment "SEG01"
 
-	.addr	L5CE1
+	.addr	sub_5CE1
 
