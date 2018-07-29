@@ -51,8 +51,7 @@ L2CFC:	.byte	$00
 L2CFD:  jsr     $2CEE                           ; 2CFD 20 EE 2C                  .,
 	.byte   $5A                             ; 2D00 5A                       Z
 	brk                                     ; 2D01 00                       .
-	jsr     L4E49                           ; 2D02 20 49 4E                  IN
-	.byte   $43                             ; 2D05 43                       C
+	.byte	" INC"
 	brk                                     ; 2D06 00                       .
 	brk                                     ; 2D07 00                       .
 	ora     $6F,y                           ; 2D08 19 6F 00                 .o.
@@ -216,15 +215,8 @@ L2DF6:	.byte	$00
 	and     $6E                             ; 2DFC 25 6E                    %n
 	brk                                     ; 2DFE 00                       .
 	brk                                     ; 2DFF 00                       .
-	ora     L2D3B,y                         ; 2E00 19 3B 2D                 .;-
-	and     $202D                           ; 2E03 2D 2D 20                 -- 
-	.byte   $42                             ; 2E06 42                       B
-	.byte   $4F                             ; 2E07 4F                       O
-	.byte   $4F                             ; 2E08 4F                       O
-	.byte   $54                             ; 2E09 54                       T
-	jsr     L4E49                           ; 2E0A 20 49 4E                  IN
-	.byte   $20                             ; 2E0D 20                        
-	.byte   $54                             ; 2E0E 54                       T
+	.byte	$19
+	.byte	";--- BOOT IN T"
 L2E0F:	.byte	$00
 L2E10:	.byte	$00
 	brk                                     ; 2E11 00                       .
@@ -418,7 +410,8 @@ sub_2F8D:
 	jmp     sub_2F58
 
 ; ----------------------------------------------------------------------------
-L2F96:  stx     $A5                             ; 2F96 86 A5                    ..
+sub_2F96:
+	stx     $A5                             ; 2F96 86 A5                    ..
 	sty     $A6                             ; 2F98 84 A6                    ..
 	ldx     #$00                            ; 2F9A A2 00                    ..
 	stx     $A3                             ; 2F9C 86 A3                    ..
@@ -472,7 +465,9 @@ L2FDC:  rts                                     ; 2FDC 60                       
 ; ----------------------------------------------------------------------------
 L2FDD:  ldy     $D3                             ; 2FDD A4 D3                    ..
 	bpl     L2FF1                           ; 2FDF 10 10                    ..
-L2FE1:  sta     $86                             ; 2FE1 85 86                    ..
+
+sub_2FE1:
+	sta     $86                             ; 2FE1 85 86                    ..
 	stx     $87                             ; 2FE3 86 87                    ..
 	sec                                     ; 2FE5 38                       8
 	lda     #$00                            ; 2FE6 A9 00                    ..
@@ -488,7 +483,7 @@ L2FF1:  rts                                     ; 2FF1 60                       
 L2FF2:  stx     $D3                             ; 2FF2 86 D3                    ..
 	cpx     #$00                            ; 2FF4 E0 00                    ..
 	bpl     L2FFB                           ; 2FF6 10 03                    ..
-	jsr     L2FE1                           ; 2FF8 20 E1 2F                  ./
+	jsr     sub_2FE1
 L2FFB:  sta     $82                             ; 2FFB 85 82                    ..
 	stx     $83                             ; 2FFD 86 83                    ..
 	lda     $85                             ; 2FFF A5 85                    ..
@@ -497,7 +492,7 @@ L2FFB:  sta     $82                             ; 2FFB 85 82                    
 	eor     $D3                             ; 3004 45 D3                    E.
 	sta     $D3                             ; 3006 85 D3                    ..
 	lda     $84                             ; 3008 A5 84                    ..
-	jsr     L2FE1                           ; 300A 20 E1 2F                  ./
+	jsr     sub_2FE1
 	sta     $84                             ; 300D 85 84                    ..
 	stx     $85                             ; 300F 86 85                    ..
 L3011:  lda     #$00                            ; 3011 A9 00                    ..
@@ -708,7 +703,7 @@ sub_3151:
 	tax                                     ; 3153 AA                       .
 	ldy     $A1                             ; 3154 A4 A1                    ..
 	lda     $B7                             ; 3156 A5 B7                    ..
-L3158:  jsr     L2F96                           ; 3158 20 96 2F                  ./
+L3158:  jsr     sub_2F96
 	jmp     L3103                           ; 315B 4C 03 31                 L.1
 
 ; ----------------------------------------------------------------------------
@@ -4184,11 +4179,11 @@ L4E35:  lda     $B148                           ; 4E35 AD 48 B1                 
 L4E3F:  ldx     L4D5A                           ; 4E3F AE 5A 4D                 .ZM
 	lda     L4D59                           ; 4E42 AD 59 4D                 .YM
 	jsr     L4B28                           ; 4E45 20 28 4B                  (K
-	.byte   $A5                             ; 4E48 A5                       .
-L4E49:  ldy     #$8D                            ; 4E49 A0 8D                    ..
-	.byte   $5C                             ; 4E4B 5C                       \
-	eor     $694C                           ; 4E4C 4D 4C 69                 MLi
-	.byte   $4E                             ; 4E4F 4E                       N
+	lda	$A0
+	sta	L4D5C
+	jmp	L4E69
+
+; ----------------------------------------------------------------------------
 L4E50:  ldx     L4D5A                           ; 4E50 AE 5A 4D                 .ZM
 	lda     L4D59                           ; 4E53 AD 59 4D                 .YM
 	jsr     sub_3164
