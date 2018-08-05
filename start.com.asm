@@ -1933,8 +1933,7 @@ L3AFA:  jmp     L3A8A                           ; 3AFA 4C 8A 3A                 
 ; ----------------------------------------------------------------------------
 L3AFD:  lda     #$00                            ; 3AFD A9 00                    ..
 	jsr     sub_38D6
-	lda     L3A5B                           ; 3B02 AD 5B 3A                 .[:
-	sta     $A0                             ; 3B05 85 A0                    ..
+	mv	$A0, L3A5B
 	rts                                     ; 3B07 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -1991,8 +1990,7 @@ L3B6F:  ldy     L3B0E                           ; 3B6F AC 0E 3B                 
 	jsr     sub_3405
 	lda     #$7C                            ; 3B7A A9 7C                    .|
 	jsr     sub_31C7
-	lda     #$02                            ; 3B7F A9 02                    ..
-	sta     L3B0C                           ; 3B81 8D 0C 3B                 ..;
+	ldi	L3B0C, $02
 	lda     L3B0A                           ; 3B84 AD 0A 3B                 ..;
 	sta     L3B95                           ; 3B87 8D 95 3B                 ..;
 L3B8A:  lda     L3B95                           ; 3B8A AD 95 3B                 ..;
@@ -2068,16 +2066,20 @@ sub_3BEB:
 	ldx     L3BE8                           ; 3C0D AE E8 3B                 ..;
 	lda     L3BE7                           ; 3C10 AD E7 3B                 ..;
 	jsr     L3B0F                           ; 3C13 20 0F 3B                  .;
+
 	clc                                     ; 3C16 18                       .
 	lda     L3BE7                           ; 3C17 AD E7 3B                 ..;
 	adc     #$01                            ; 3C1A 69 01                    i.
 	sta     $A0                             ; 3C1C 85 A0                    ..
+
 	lda     #$00                            ; 3C1E A9 00                    ..
 	sta     $A1                             ; 3C20 85 A1                    ..
+
 	clc                                     ; 3C22 18                       .
 	lda     L3BE8                           ; 3C23 AD E8 3B                 ..;
 	adc     #$01                            ; 3C26 69 01                    i.
 	sta     $A2                             ; 3C28 85 A2                    ..
+
 	ldy     $A2                             ; 3C2A A4 A2                    ..
 	ldx     $A1                             ; 3C2C A6 A1                    ..
 	lda     $A0                             ; 3C2E A5 A0                    ..
@@ -2096,8 +2098,7 @@ sub_3C3E:
 	sta     L3C3D                           ; 3C41 8D 3D 3C                 .=<
 	lda     L3C3D                           ; 3C44 AD 3D 3C                 .=<
 	lbne	L3C57
-	lda     #$22                            ; 3C4C A9 22                    ."
-	sta     $022F                           ; 3C4E 8D 2F 02                 ./.
+	ldi	$022F, $22
 	ldy     #$00                            ; 3C51 A0 00                    ..
 	sty     $D01D                           ; 3C53 8C 1D D0                 ...
 	rts                                     ; 3C56 60                       `
@@ -2108,8 +2109,7 @@ L3C57:  ldy     #$00                            ; 3C57 A0 00                    
 	sty     $D00B                           ; 3C5C 8C 0B D0                 ...
 	sty     $D010                           ; 3C5F 8C 10 D0                 ...
 	ldi	$022F, $2A
-	lda     #$B0                            ; 3C67 A9 B0                    ..
-	sta     $D407                           ; 3C69 8D 07 D4                 ...
+	ldi	$D407, $B0
 	lda     $026F                           ; 3C6C AD 6F 02                 .o.
 	and     #$C0                            ; 3C6F 29 C0                    ).
 	sta     $AE                             ; 3C71 85 AE                    ..
@@ -2139,11 +2139,8 @@ sub_3C90:
 	jsr     sub_315E
 	lda     $B148                           ; 3C98 AD 48 B1                 .H.
 	eor     #$01                            ; 3C9B 49 01                    I.
-	beq     L3CA2                           ; 3C9D F0 03                    ..
-	jmp     L3D0F                           ; 3C9F 4C 0F 3D                 L.=
-
-; ----------------------------------------------------------------------------
-L3CA2:  lda     L2E0F                           ; 3CA2 AD 0F 2E                 ...
+	lbne	L3D0F
+	lda     L2E0F                           ; 3CA2 AD 0F 2E                 ...
 	eor     #$01                            ; 3CA5 49 01                    I.
 	beq     L3CAC                           ; 3CA7 F0 03                    ..
 	jmp     L3D0F                           ; 3CA9 4C 0F 3D                 L.=
