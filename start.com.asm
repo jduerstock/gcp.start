@@ -2181,41 +2181,30 @@ L3CAC:  lda     #$02                            ; 3CAC A9 02                    
 	ldx     #$00                            ; 3CEA A2 00                    ..
 	lda     #$02                            ; 3CEC A9 02                    ..
 	jsr     sub_31D7
-	lda     #$00                            ; 3CF1 A9 00                    ..
-	sta     $A3                             ; 3CF3 85 A3                    ..
-	lda     #$00                            ; 3CF5 A9 00                    ..
-	sta     $A4                             ; 3CF7 85 A4                    ..
-	lda     #$34                            ; 3CF9 A9 34                    .4
-	sta     $A6                             ; 3CFB 85 A6                    ..
-	lda     #$79                            ; 3CFD A9 79                    .y
-	sta     $A5                             ; 3CFF 85 A5                    ..
+	ldi	$A3, $00
+	ldi	$A4, $00
+	ldi	$A6, >L3479
+	ldi	$A5, <L3479
 	ldy     #$59                            ; 3D01 A0 59                    .Y
 	ldx     #$00                            ; 3D03 A2 00                    ..
 	lda     #$02                            ; 3D05 A9 02                    ..
 	jsr     sub_31D7
-	lda     #$01                            ; 3D0A A9 01                    ..
-	sta     $A0                             ; 3D0C 85 A0                    ..
+	ldi	$A0, $01
 	rts                                     ; 3D0E 60                       `
 
 ; ----------------------------------------------------------------------------
 L3D0F:  lda     #$02                            ; 3D0F A9 02                    ..
 	jsr     sub_315E
-	lda     #$00                            ; 3D14 A9 00                    ..
-	sta     $05C2                           ; 3D16 8D C2 05                 ...
-	lda     #$0D                            ; 3D19 A9 0D                    ..
-	sta     $A3                             ; 3D1B 85 A3                    ..
-	ldy     #$34                            ; 3D1D A0 34                    .4
-	ldx     #$79                            ; 3D1F A2 79                    .y
+	ldi	$05C2, $00
+	ldi	$A3, $0D
+	ldy     #>L3479
+	ldx     #<L3479
 	lda     #$02                            ; 3D21 A9 02                    ..
 	jsr     sub_3127
-	lda     #$C0                            ; 3D26 A9 C0                    ..
-	sta     $A3                             ; 3D28 85 A3                    ..
-	lda     #$00                            ; 3D2A A9 00                    ..
-	sta     $A4                             ; 3D2C 85 A4                    ..
-	lda     #$34                            ; 3D2E A9 34                    .4
-	sta     $A6                             ; 3D30 85 A6                    ..
-	lda     #$79                            ; 3D32 A9 79                    .y
-	sta     $A5                             ; 3D34 85 A5                    ..
+	ldi	$A3, $C0
+	ldi	$A4, $00
+	ldi	$A6, $34
+	ldi	$A5, $79
 	ldy     #$22                            ; 3D36 A0 22                    ."
 	ldx     #$00                            ; 3D38 A2 00                    ..
 	lda     #$02                            ; 3D3A A9 02                    ..
