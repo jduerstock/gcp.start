@@ -2864,23 +2864,19 @@ L4359:  .byte   $43                             ; 4359 43                       
 L435A:	inc     $042C                           ; 435A EE 2C 04                 .,.
 	brk                                     ; 435D 00                       .
 L435E:	.byte	$00
-L435F:  jmp     L4362                           ; 435F 4C 62 43                 LbC
 
 ; ----------------------------------------------------------------------------
-L4362:  lda     L2CFB                           ; 4362 AD FB 2C                 ..,
-	sta     L435E                           ; 4365 8D 5E 43                 .^C
-	lda     L4359                           ; 4368 AD 59 43                 .YC
-	sta     $A3                             ; 436B 85 A3                    ..
-	lda     #$43                            ; 436D A9 43                    .C
-	sta     $A5                             ; 436F 85 A5                    ..
-	lda     #$5A                            ; 4371 A9 5A                    .Z
-	sta     $A4                             ; 4373 85 A4                    ..
+sub_435F:
+	prolog
+	mv	L435E, L2CFB
+	mv	$A3, L4359
+	ldi	$A5, >L435A
+	ldi	$A4, <L435A
 	ldy     L4358                           ; 4375 AC 58 43                 .XC
 	ldx     L2D5A                           ; 4378 AE 5A 2D                 .Z-
 	lda     #$01                            ; 437B A9 01                    ..
 	jsr     sub_41BD
-	lda     L435E                           ; 4380 AD 5E 43                 .^C
-	sta     L2CFB                           ; 4383 8D FB 2C                 ..,
+	mv	L2CFB, L435E
 	ldxai	L435A
 	jsr     sub_4290
 	rts                                     ; 438D 60                       `
@@ -2929,9 +2925,7 @@ L440F:	ldxai	L2CFC
 L4416:  jmp     L4441                           ; 4416 4C 41 44                 LAD
 
 ; ----------------------------------------------------------------------------
-L4419:  lda     L4390                           ; 4419 AD 90 43                 ..C
-	eor     #$15                            ; 441C 49 15                    I.
-	lbne	L442D
+L4419:	ifm8eqi L4390, $15, L442D
 	ldxai	L2CFC
 	jsr     sub_42FD
 	jmp     L4441                           ; 442A 4C 41 44                 LAD
@@ -3032,14 +3026,10 @@ sub_44DE:
 	jsr     sub_4391
 	lda     $A0                             ; 44EC A5 A0                    ..
 	sta     L44DB                           ; 44EE 8D DB 44                 ..D
-	lda     L44DB                           ; 44F1 AD DB 44                 ..D
-	eor     #$01                            ; 44F4 49 01                    I.
-	lbne	L4509
+	ifm8eqi	L44DB, $01, L4509
 	jsr     sub_445B
-	lda     $A0                             ; 44FE A5 A0                    ..
-	sta     L44DB                           ; 4500 8D DB 44                 ..D
-	lda     L44DB                           ; 4503 AD DB 44                 ..D
-	sta     $A0                             ; 4506 85 A0                    ..
+	mv	L44DB, $A0
+	mv	$A0, L44DB
 	rts                                     ; 4508 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -3048,12 +3038,9 @@ L4509:	ldi	$A0, $00
 
 ; ----------------------------------------------------------------------------
 L450E:  jsr     sub_3F0F
-	lda     $A0                             ; 4511 A5 A0                    ..
-	sta     L44DB                           ; 4513 8D DB 44                 ..D
-	lda     L44DB                           ; 4516 AD DB 44                 ..D
-	eor     #$04                            ; 4519 49 04                    I.
-	lbne	L4526
-	jsr     L435F                           ; 4520 20 5F 43                  _C
+	mv	L44DB, $A0
+	ifm8eqi L44DB, $04, L4526
+	jsr     sub_435F
 	jmp	L4558
 
 ; ----------------------------------------------------------------------------
