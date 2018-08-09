@@ -1705,9 +1705,7 @@ sub_390E:
 	lda     L390C                           ; 391C AD 0C 39                 ..9
 	eor     #$0A                            ; 391F 49 0A                    I.
 	beq     L392D                           ; 3921 F0 0A                    ..
-L3923:  lda     L390C                           ; 3923 AD 0C 39                 ..9
-	eor     #$9B                            ; 3926 49 9B                    I.
-	lbne	L3933
+L3923:	ifm8eqi	L390C, $9B, L3933
 L392D:	jsr     sub_31C5
 	jmp     L396B                           ; 3930 4C 6B 39                 Lk9
 
