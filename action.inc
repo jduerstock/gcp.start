@@ -343,3 +343,15 @@ ptr:
 	.addr	ptr
 .endmacro
 
+.macro	ifm8eqi	a1, a2, a3
+	lda     a1
+	eor     #a2
+	lbne	a3
+.endmacro
+
+.macro	ifm8eqm	a1, a2, a3
+	lda     a1
+	eor     a2
+	lbne	a3
+.endmacro
+

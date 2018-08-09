@@ -2894,27 +2894,17 @@ sub_4391:
 	prolog
 	yldi	L438F, $00
 	jsr     sub_3F0F
-	lda     $A0                             ; 439C A5 A0                    ..
-	sta     L438E                           ; 439E 8D 8E 43                 ..C
-	lda     L2D5B                           ; 43A1 AD 5B 2D                 .[-
-	sta     L4390                           ; 43A4 8D 90 43                 ..C
-	lda     L438E                           ; 43A7 AD 8E 43                 ..C
-	eor     #$04                            ; 43AA 49 04                    I.
-	lbne	L43BB
+	mv	L438E, $A0
+	mv	L4390, L2D5B
+	ifm8eqi	L438E, $04, L43BB
 	ldxai	L2CFC
 	jsr     sub_42FD
 	jmp     L4453                           ; 43B8 4C 53 44                 LSD
 
 ; ----------------------------------------------------------------------------
-L43BB:  lda     L438E                           ; 43BB AD 8E 43                 ..C
-	eor     #$01                            ; 43BE 49 01                    I.
-	lbne	L4444
-	lda     L4390                           ; 43C5 AD 90 43                 ..C
-	eor     #$06                            ; 43C8 49 06                    I.
-	lbne	L4419
-	lda     L2D5A                           ; 43CF AD 5A 2D                 .Z-
-	eor     L2CFD                           ; 43D2 4D FD 2C                 M.,
-	lbne	L4416
+L43BB:	ifm8eqi	L438E, $01, L4444
+	ifm8eqi	L4390, $06, L4419
+	ifm8eqm L2D5A, L2CFD, L4416
 	sub8m	L2CF7, L2CF7, L2CFC
 	clc                                     ; 43E4 18                       .
 	lda     #<L2CFC
