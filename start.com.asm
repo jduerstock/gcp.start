@@ -62,10 +62,7 @@ L2CFD:  jsr     $2CEE                           ; 2CFD 20 EE 2C                 
 	ora     ($6F),y                         ; 2D10 11 6F                    .o
 	brk                                     ; 2D12 00                       .
 	brk                                     ; 2D13 00                       .
-	.byte   $0B,"   "
-	bvc     L2D8F                           ; 2D18 50 75                    Pu
-	.byte   $74                             ; 2D1A 74                       t
-	plp                                     ; 2D1B 28                       (
+	.byte   $0B,"   Put("
 	.byte	$20
 	.byte	$27
 	.byte	$7D
@@ -73,15 +70,7 @@ L2CFD:  jsr     $2CEE                           ; 2CFD 20 EE 2C                 
 	brk                                     ; 2D21 00                       .
 	.byte   $FF                             ; 2D22 FF                       .
 	ror     a:$00                           ; 2D23 6E 00 00                 n..
-	.byte	$2A,"   "
-	.byte   $42                             ; 2D2A 42                       B
-	.byte   $6F                             ; 2D2B 6F                       o
-	sei                                     ; 2D2C 78                       x
-L2D2D:  .byte   $53                             ; 2D2D 53                       S
-	.byte   $74                             ; 2D2E 74                       t
-	.byte   $72                             ; 2D2F 72                       r
-	plp                                     ; 2D30 28                       (
-	.byte	$20
+	.byte	$2A,"   BoxStr( "
 	.byte	$38
 	.byte	$2C
 	jsr     L3031                           ; 2D34 20 31 30                  10
@@ -136,12 +125,7 @@ L2D5B:  inc     L5A2C                           ; 2D5B EE 2C 5A                 
 	.byte   $9C                             ; 2D85 9C                       .
 	ror     a:$00                           ; 2D86 6E 00 00                 n..
 	.byte   $13                             ; 2D89 13                       .
-	.byte   $3B                             ; 2D8A 3B                       ;
-	and     L2D2D                           ; 2D8B 2D 2D 2D                 ---
-	.byte   $20                             ; 2D8E 20                        
-L2D8F:  .byte   $53                             ; 2D8F 53                       S
-	eor     $4E                             ; 2D90 45 4E                    EN
-	.byte   $44                             ; 2D92 44                       D
+	.byte	";--- SEND"
 	.byte	$20
 	.byte	$4C
 	.byte	$4F
@@ -4988,13 +4972,7 @@ L5795:  ldy     #$13                            ; 5795 A0 13                    
 	.byte   $12                             ; 57A6 12                       .
 	.byte   $12                             ; 57A7 12                       .
 	.byte   $12                             ; 57A8 12                       .
-	ldy     #$C1                            ; 57A9 A0 C1                    ..
-	sbc     $F4,x                           ; 57AB F5 F4                    ..
-	.byte   $EF                             ; 57AD EF                       .
-	lda     $EFE3                           ; 57AE AD E3 EF                 ...
-	inc     $E5EE                           ; 57B1 EE EE E5                 ...
-	.byte   $E3                             ; 57B4 E3                       .
-	.byte   $F4                             ; 57B5 F4                       .
+	Inverse	" Auto-connect"
 	ldy     #$F3                            ; 57B6 A0 F3                    ..
 	sbc     $F1                             ; 57B8 E5 F1                    ..
 	sbc     $E5,x                           ; 57BA F5 E5                    ..
