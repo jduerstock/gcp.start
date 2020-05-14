@@ -152,28 +152,7 @@ L2D5B:  inc     L5A2C                           ; 2D5B EE 2C 5A                 
 	brk                                     ; 2DB8 00                       .
 	.byte   $73                             ; 2DB9 73                       s
 	.byte   $22                             ; 2DBA 22                       "
-	bit     $2720                           ; 2DBB 2C 20 27                 , '
-	.byte	$6C
-	.byte	$2C
-	.byte	$20
-	.byte	$6C
-	.byte	$6F
-	.byte	$67
-	.byte   $6F                             ; 2DC4 6F                       o
-	ror     $6D5F                           ; 2DC5 6E 5F 6D                 n_m
-	.byte   $73                             ; 2DC8 73                       s
-	.byte   $67                             ; 2DC9 67                       g
-	plp                                     ; 2DCA 28                       (
-	bmi     L2DF6                           ; 2DCB 30 29                    0)
-	bit     $6C20                           ; 2DCD 2C 20 6C                 , l
-	.byte   $6F                             ; 2DD0 6F                       o
-	.byte   $67                             ; 2DD1 67                       g
-	.byte   $6F                             ; 2DD2 6F                       o
-	ror     $6D5F                           ; 2DD3 6E 5F 6D                 n_m
-	.byte   $73                             ; 2DD6 73                       s
-	.byte   $67                             ; 2DD7 67                       g
-	.byte   $2B                             ; 2DD8 2B                       +
-	and     ($29),y                         ; 2DD9 31 29                    1)
+	.byte	", 'l, logon_msg(0), logon_msg+1)"
 	brk                                     ; 2DDB 00                       .
 	brk                                     ; 2DDC 00                       .
 	.byte   $44                             ; 2DDD 44                       D
@@ -940,9 +919,7 @@ L332C:  sta     $A4                             ; 332C 85 A4                    
 	lda     #$04                            ; 3330 A9 04                    ..
 	sta     $A6                             ; 3332 85 A6                    ..
 	lda     #$24                            ; 3334 A9 24                    .$
-	.byte   $20                             ; 3336 20                        
-	.byte   $C7                             ; 3337 C7                       .
-L3338:  .byte   $31                             ; 3338 31                       1
+	jsr	sub_31C7
 L3339:  lda     #$00                            ; 3339 A9 00                    ..
 	ldx     #$04                            ; 333B A2 04                    ..
 L333D:  asl     $A4                             ; 333D 06 A4                    ..
@@ -1025,15 +1002,10 @@ L33C7:  jsr     L31FF                           ; 33C7 20 FF 31                 
 	jmp     L3372                           ; 33CA 4C 72 33                 Lr3
 
 ; ----------------------------------------------------------------------------
-	.byte   $02                             ; 33CD 02                       .
-	.byte   $53                             ; 33CE 53                       S
-	.byte   $3A                             ; 33CF 3A                       :
-L33D0:  .byte   $CD                             ; 33D0 CD                       .
-L33D1:  .byte   $33                             ; 33D1 33                       3
-	.byte   $02                             ; 33D2 02                       .
-	eor     $3A                             ; 33D3 45 3A                    E:
-L33D5:  .byte   $D2                             ; 33D5 D2                       .
-L33D6:  .byte   $33                             ; 33D6 33                       3
+L33CD:	.byte   $02,"S:"
+L33D0:  .word   L33CD
+L33D2:	.byte   $02,"E:"
+L33D5:  .word   L33D2
 	pha                                     ; 33D7 48                       H
 	lda     #$00                            ; 33D8 A9 00                    ..
 	jsr     sub_315E
@@ -1041,7 +1013,7 @@ L33D6:  .byte   $33                             ; 33D6 33                       
 	sta     $A3                             ; 33DF 85 A3                    ..
 	lda     #$00                            ; 33E1 A9 00                    ..
 	ldx     L33D5                           ; 33E3 AE D5 33                 ..3
-	ldy     L33D6                           ; 33E6 AC D6 33                 ..3
+	ldy     L33D5+1
 	jsr     sub_3127
 	lda     #$06                            ; 33EC A9 06                    ..
 	jsr     sub_315E
@@ -1052,7 +1024,7 @@ L33D6:  .byte   $33                             ; 33D6 33                       
 	sta     $A3                             ; 33F8 85 A3                    ..
 	lda     #$06                            ; 33FA A9 06                    ..
 	ldx     L33D0                           ; 33FC AE D0 33                 ..3
-	ldy     L33D1                           ; 33FF AC D1 33                 ..3
+	ldy     L33D0+1
 	jmp     sub_3127
 
 ; ----------------------------------------------------------------------------
@@ -4965,26 +4937,17 @@ L5795:  ldy     #$13                            ; 5795 A0 13                    
 	jmp     L57C6                           ; 579E 4C C6 57                 L.W
 
 ; ----------------------------------------------------------------------------
-	bit     $12                             ; 57A1 24 12                    $.
-	.byte   $12                             ; 57A3 12                       .
-	.byte   $12                             ; 57A4 12                       .
-	.byte   $12                             ; 57A5 12                       .
-	.byte   $12                             ; 57A6 12                       .
-	.byte   $12                             ; 57A7 12                       .
-	.byte   $12                             ; 57A8 12                       .
-	Inverse	" Auto-connect"
-	ldy     #$F3                            ; 57B6 A0 F3                    ..
-	sbc     $F1                             ; 57B8 E5 F1                    ..
-	sbc     $E5,x                           ; 57BA F5 E5                    ..
-	inc     $E5E3                           ; 57BC EE E3 E5                 ...
-	ldy     #$12                            ; 57BF A0 12                    ..
+L57A1:
+	.byte	$24,$12,$12,$12,$12,$12,$12,$12
+	Inverse	" Auto-connect sequence "
+	.byte	$12
 	.byte   $12                             ; 57C1 12                       .
 	.byte   $12                             ; 57C2 12                       .
 	.byte   $12                             ; 57C3 12                       .
 	.byte   $12                             ; 57C4 12                       .
 	.byte   $12                             ; 57C5 12                       .
-L57C6:  ldx     #$57                            ; 57C6 A2 57                    .W
-	lda     #$A1                            ; 57C8 A9 A1                    ..
+L57C6:  ldx     #>L57A1
+	lda     #<L57A1
 	jsr     sub_3151
 	lda     #$2E                            ; 57CD A9 2E                    ..
 	sta     $A3                             ; 57CF 85 A3                    ..
