@@ -2379,9 +2379,8 @@ L3F08:	.byte	$00
 L3F09:	.byte	$00
 L3F0A:	.byte	$00
 L3F0B:	.byte	$00
-L3F0C:	.byte	$00
-L3F0D:	.byte	$00
-	brk                                     ; 3F0E 00                       .
+L3F0C:	.byte	$00,$00
+	.byte	$00
 
 ; ----------------------------------------------------------------------------
 sub_3F0F:
@@ -2435,11 +2434,10 @@ L3F86:	yldi	L3F08, $01
 ; ----------------------------------------------------------------------------
 L3F90:	mv	L2D58, L3F05
 	lda     #>L2D58
-	sta     L3F0D                           ; 3F98 8D 0D 3F                 ..?
+	sta     L3F0C+1
 	lda     #<L2D58
-	sta     L3F0C                           ; 3F9D 8D 0C 3F                 ..?
-	lda     L3F05                           ; 3FA0 AD 05 3F                 ..?
-	sta     L3F0B                           ; 3FA3 8D 0B 3F                 ..?
+	sta     L3F0C
+	mv	L3F0B, L3F05
 	ldy     #$01                            ; 3FA6 A0 01                    ..
 	sty     L2CF6                           ; 3FA8 8C F6 2C                 ..,
 	sty     L3F09                           ; 3FAB 8C 09 3F                 ..?
@@ -2497,7 +2495,7 @@ L404B:  clc                                     ; 404B 18                       
 	lda     L3F0C                           ; 404C AD 0C 3F                 ..?
 	adc     L3F09                           ; 404F 6D 09 3F                 m.?
 	sta     $AE                             ; 4052 85 AE                    ..
-	lda     L3F0D                           ; 4054 AD 0D 3F                 ..?
+	lda     L3F0C+1
 	adc     #$00                            ; 4057 69 00                    i.
 	sta     $AF                             ; 4059 85 AF                    ..
 	lda     L3F05                           ; 405B AD 05 3F                 ..?
@@ -2647,6 +2645,7 @@ L41B6:	.byte	$00
 L41B7:	.byte	$00
 L41B8:	.byte	$00
 L41B9:	.byte	$00
+;
 L41BA:	.byte	$00
 L41BB:	.byte	$00
 L41BC:	.byte	$00
@@ -2669,7 +2668,9 @@ sub_41BD:
 	add8m	L41BB, off_AE, L41B6
 	sty     L41BC                           ; 4205 8C BC 41                 ..A
 	sub8i	L421C, L41B5, $01
-L4211:  lda     L421C                           ; 4211 AD 1C 42                 ..B
+L4211:
+	; while (L421C < L41BC) {
+	lda     L421C                           ; 4211 AD 1C 42                 ..B
 	cmp     L41BC                           ; 4214 CD BC 41                 ..A
 	bcs     L421D                           ; 4217 B0 04                    ..
 	jmp     L423E                           ; 4219 4C 3E 42                 L>B
@@ -2678,14 +2679,19 @@ L4211:  lda     L421C                           ; 4211 AD 1C 42                 
 L421C:	.byte	$00
 
 ; ----------------------------------------------------------------------------
-L421D:	add16m8	off_AE, L41B7, L41BC
+L421D:
+	; AE = L41B7 + L41BC;
+	add16m8	off_AE, L41B7, L41BC
+	; L41BB += *AE;
 	clc                                     ; 422D 18                       .
 	lda     L41BB                           ; 422E AD BB 41                 ..A
 	ldy     #$00                            ; 4231 A0 00                    ..
 	adc     ($AE),y                         ; 4233 71 AE                    q.
 	sta     L41BB                           ; 4235 8D BB 41                 ..A
+	; L41BC++;
 	inc     L41BC                           ; 4238 EE BC 41                 ..A
 	jmp     L4211                           ; 423B 4C 11 42                 L.B
+	; }
 
 ; ----------------------------------------------------------------------------
 L423E:	add16i	$A0, L41B9, $0002
@@ -2709,6 +2715,7 @@ L423E:	add16i	$A0, L41B9, $0002
 	lda     L41BA                           ; 4275 AD BA 41                 ..A
 	adc     #$00                            ; 4278 69 00                    i.
 	sta     $AD                             ; 427A 85 AD                    ..
+;	*$AC = 0 - L41BB;
 	sec                                     ; 427C 38                       8
 	lda     #$00                            ; 427D A9 00                    ..
 	sbc     L41BB                           ; 427F ED BB 41                 ..A
