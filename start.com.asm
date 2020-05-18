@@ -12,6 +12,8 @@ ROWCRS		:= $0054
 off_AE		:= $00AE
 CDTMV3		:= $021C
 CDTMF3		:= $022A
+ICCOM		:= $0342
+ICBA		:= $0344
 LD8E6           := $D8E6
 LD9AA           := $D9AA
 CIOV		:= $E456
@@ -31,11 +33,12 @@ CIOV		:= $E456
 	.segment "HDR00"
 
 	.word	$FFFF
-	.addr	$2CEC
+	.addr	L2CEC
 	.addr	$5ED5
 
 	.segment "SEG00"
 
+L2CEC:
 	.byte   $49                             ; 2CEC 49                       I
 L2CED:  lsr     $D6                             ; 2CED 46 D6                    F.
 	lsr     a:$02,x                         ; 2CEF 5E 02 00                 ^..
@@ -74,10 +77,8 @@ L2CFD:  jsr     $2CEE                           ; 2CFD 20 EE 2C                 
 	.byte	$2A,"   BoxStr( "
 	.byte	$38
 	.byte	$2C
-	jsr     L3031                           ; 2D34 20 31 30                  10
-	bit     $2220                           ; 2D37 2C 20 22                 , "
-	.byte   $20                             ; 2D3A 20                        
-L2D3B:  ldy     #$C1                            ; 2D3B A0 C1                    ..
+	.byte	" 10, ",$22," "
+	ldy     #$C1                            ; 2D3B A0 C1                    ..
 	.byte   $E3                             ; 2D3D E3                       .
 	.byte   $E3                             ; 2D3E E3                       .
 	sbc     $F3                             ; 2D3F E5 F3                    ..
@@ -149,8 +150,8 @@ L2D5B:  inc     L5A2C                           ; 2D5B EE 2C 5A                 
 	.byte   $74                             ; 2DB1 74                       t
 	bvc     L2E1F                           ; 2DB2 50 6B                    Pk
 	.byte   $74                             ; 2DB4 74                       t
-	inc     L5A2C                           ; 2DB5 EE 2C 5A                 .,Z
-	brk                                     ; 2DB8 00                       .
+L2DB5:
+	.byte	$EE,$2C,$5A,$00
 	.byte   $73                             ; 2DB9 73                       s
 	.byte   $22                             ; 2DBA 22                       "
 	.byte	", 'l, logon_msg(0), logon_msg+1)"
@@ -297,7 +298,7 @@ sub_2F58:
 	asl     a                               ; 2F5B 0A                       .
 	tax                                     ; 2F5C AA                       .
 	tya                                     ; 2F5D 98                       .
-	sta     $0342,x                         ; 2F5E 9D 42 03                 .B.
+	sta     ICCOM,x                         ; 2F5E 9D 42 03                 .B.
 	lda     $A3                             ; 2F61 A5 A3                    ..
 	beq     L2F6F                           ; 2F63 F0 0A                    ..
 	sta     $034A,x                         ; 2F65 9D 4A 03                 .J.
@@ -312,10 +313,10 @@ L2F6F:  tay                                     ; 2F6F A8                       
 	clc                                     ; 2F7A 18                       .
 	lda     $A5                             ; 2F7B A5 A5                    ..
 	adc     #$01                            ; 2F7D 69 01                    i.
-	sta     $0344,x                         ; 2F7F 9D 44 03                 .D.
+	sta     ICBA,x
 	lda     $A6                             ; 2F82 A5 A6                    ..
 	adc     #$00                            ; 2F84 69 00                    i.
-	sta     $0345,x                         ; 2F86 9D 45 03                 .E.
+	sta     ICBA+1,x
 	jmp     CIOV
 
 ; ----------------------------------------------------------------------------
@@ -338,7 +339,7 @@ sub_2F96:
 	jsr     sub_2F58
 	bne     L2FAF                           ; 2FA3 D0 0A                    ..
 	lda     #$0B                            ; 2FA5 A9 0B                    ..
-	sta     $0342,x                         ; 2FA7 9D 42 03                 .B.
+	sta     ICCOM,x
 	lda     #$9B                            ; 2FAA A9 9B                    ..
 	jmp     CIOV
 
@@ -685,7 +686,7 @@ L31A8:
 	asl     a                               ; 31AD 0A                       .
 	tax                                     ; 31AE AA                       .
 	lda     $A4                             ; 31AF A5 A4                    ..
-	sta     $0342,x                         ; 31B1 9D 42 03                 .B.
+	sta     ICCOM,x
 	lda     #$00                            ; 31B4 A9 00                    ..
 	sta     $0348,x                         ; 31B6 9D 48 03                 .H.
 	sta     $0349,x                         ; 31B9 9D 49 03                 .I.
@@ -1117,7 +1118,7 @@ L347D:  and     #$0F                            ; 347D 29 0F                    
 	asl     a                               ; 3486 0A                       .
 	tax                                     ; 3487 AA                       .
 	lda     $A5                             ; 3488 A5 A5                    ..
-	sta     $0342,x                         ; 348A 9D 42 03                 .B.
+	sta     ICCOM,x
 	lda     $A3                             ; 348D A5 A3                    ..
 	sta     $0348,x                         ; 348F 9D 48 03                 .H.
 	lda     $A4                             ; 3492 A5 A4                    ..
@@ -1128,9 +1129,9 @@ L347D:  and     #$0F                            ; 347D 29 0F                    
 	lda     $A7                             ; 349E A5 A7                    ..
 	sta     $034B,x                         ; 34A0 9D 4B 03                 .K.
 L34A3:  tya                                     ; 34A3 98                       .
-	sta     $0345,x                         ; 34A4 9D 45 03                 .E.
+	sta     ICBA+1,x
 	lda     $A1                             ; 34A7 A5 A1                    ..
-	sta     $0344,x                         ; 34A9 9D 44 03                 .D.
+	sta     ICBA,x
 	jsr     CIOV
 	sty     L347C                           ; 34AF 8C 7C 34                 .|4
 	cpy     #$88                            ; 34B2 C0 88                    ..
@@ -1258,10 +1259,7 @@ L3592:  lda     #$05                            ; 3592 A9 05                    
 	jmp     L35CF                           ; 35A4 4C CF 35                 L.5
 
 ; ----------------------------------------------------------------------------
-L35A7:  lda     L3541                           ; 35A7 AD 41 35                 .A5
-	sta     $AE                             ; 35AA 85 AE                    ..
-	lda     L3542                           ; 35AC AD 42 35                 .B5
-	sta     $AF                             ; 35AF 85 AF                    ..
+L35A7:	dmv	$AE, L3541
 	ldy     #$01                            ; 35B1 A0 01                    ..
 	lda     ($AE),y                         ; 35B3 B1 AE                    ..
 	sta     L353E                           ; 35B5 8D 3E 35                 .>5
@@ -2411,8 +2409,7 @@ L3F2F:  lda     #$02                            ; 3F2F A9 02                    
 	ldy     #$00                            ; 3F53 A0 00                    ..
 	sty     L3F08                           ; 3F55 8C 08 3F                 ..?
 	sty     L2CF6                           ; 3F58 8C F6 2C                 ..,
-	lda     #$04                            ; 3F5B A9 04                    ..
-	sta     $A0                             ; 3F5D 85 A0                    ..
+	ldi	$A0, $04
 	rts                                     ; 3F5F 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -2721,11 +2718,9 @@ L423E:	add16i	$A0, L41B9, $0002
 
 ; ----------------------------------------------------------------------------
 L4287:	.byte	$00
-L4288:  .byte   $85                             ; 4288 85                       .
-L4289:  .byte   $AF                             ; 4289 AF                       .
-L428A:	.byte	$00
-	brk                                     ; 428B 00                       .
-	brk                                     ; 428C 00                       .
+L4288:  .byte   $85
+L4289:  .byte   $AF
+L428A:	.byte	$00,$00,$00
 L428D:	.byte	$00
 L428E:	.byte	$00
 L428F:	.byte	$00
@@ -2803,8 +2798,7 @@ sub_4327:
 ; ----------------------------------------------------------------------------
 L4356:	.byte	$15,$00
 L4358:  .addr	L4356
-L435A:	inc     $042C                           ; 435A EE 2C 04                 .,.
-	brk                                     ; 435D 00                       .
+L435A:	.byte	$EE,$2C,$04,$00
 L435E:	.byte	$00
 
 ; ----------------------------------------------------------------------------
@@ -2912,10 +2906,10 @@ sub_445B:
 L446B:  jsr     sub_4327
 	lda     L2D5A                           ; 446E AD 5A 2D                 .Z-
 	eor     L4459                           ; 4471 4D 59 44                 MYD
-	bne     L447B                           ; 4474 D0 05                    ..
+	bne     :+
 	ora     #$00                            ; 4476 09 00                    ..
 	eor     L445A                           ; 4478 4D 5A 44                 MZD
-L447B:	lbeq	L44D6
+:	lbeq	L44D6
 	ldi	L445A, $00
 	lda     L2D5A                           ; 4485 AD 5A 2D                 .Z-
 	sta     L4459                           ; 4488 8D 59 44                 .YD
@@ -2940,15 +2934,14 @@ L447B:	lbeq	L44D6
 	jmp     L44CC                           ; 44B4 4C CC 44                 L.D
 
 ; ----------------------------------------------------------------------------
-L44B7:	ldi	$A3, $2D
-	ldi	$A5, $00
-	ldi	$A4, $5A
-	ldy     #$5B                            ; 44C3 A0 5B                    .[
-	ldx     #$2D                            ; 44C5 A2 2D                    .-
-	lda     #$B5                            ; 44C7 A9 B5                    ..
+L44B7:	ldi	$A3, >L2D5B
+	ldi	$A5, >$005A
+	ldi	$A4, <$005A
+	ldy     #<L2D5B
+	ldx     #>L2DB5
+	lda     #<L2DB5
 	jsr     sub_343B
-L44CC:  ldy     #$00                            ; 44CC A0 00                    ..
-	sty     L2CF8                           ; 44CE 8C F8 2C                 ..,
+L44CC:	yldi	L2CF8, $00
 	ldi	$A0, $01
 	rts                                     ; 44D5 60                       `
 
@@ -3014,20 +3007,16 @@ L455D:	.byte	$00
 L455E:	.byte	$00
 L455F:	.res	12,$00
 L456B:	.byte	$00
-L456C:	.byte	$00
-	brk                                     ; 456D 00                       .
-	brk                                     ; 456E 00                       .
+L456C:	.byte	$00,$00,$00
 L456F:	.byte	$00
 L4570:	.byte	$00
 L4571:	.byte	$00
 L4572:	.byte	$00
 L4573:	.byte	$00
-L4574:	.byte	$00
-	.byte   $EE                             ; 4575 EE                       .
-	.byte   $2C                             ; 4576 2C                       ,
-L4577:  .byte   $02                             ; 4577 02                       .
+L4574:	.byte	$00,$EE,$2C
+L4577:  .byte   $02
 L4578:	.byte	$00
-L4579:  inc     L5A2C                           ; 4579 EE 2C 5A                 .,Z
+L4579:	.byte	$EE,$2C,$5A
 	.res	87,$00
 
 ; ----------------------------------------------------------------------------
@@ -4999,7 +4988,7 @@ L5857:	.byte	$00
 L5858:	.byte	$00
 
 ; ----------------------------------------------------------------------------
-L5859:
+sub_5859:
 	stack_prolog L5854, $03
 	ldy     #$00                            ; 5862 A0 00                    ..
 	sty     L5858                           ; 5864 8C 58 58                 .XX
@@ -5255,7 +5244,7 @@ L5ABE:  lda     L5A2F                           ; 5ABE AD 2F 5A                 
 	ldy     #$7C                            ; 5AC3 A0 7C                    .|
 	ldx     L5A34                           ; 5AC5 AE 34 5A                 .4Z
 	lda     L5A33                           ; 5AC8 AD 33 5A                 .3Z
-	jsr     L5859                           ; 5ACB 20 59 58                  YX
+	jsr     sub_5859
 	lda     $A0                             ; 5ACE A5 A0                    ..
 	sta     L5A30                           ; 5AD0 8D 30 5A                 .0Z
 	lda     L5A30                           ; 5AD3 AD 30 5A                 .0Z
@@ -5322,6 +5311,7 @@ L5B51:  lda     L5A2C                           ; 5B51 AD 2C 5A                 
 	lda     #$2E                            ; 5B7F A9 2E                    ..
 	adc     #$00                            ; 5B81 69 00                    i.
 	sta     $AF                             ; 5B83 85 AF                    ..
+;
 	clc                                     ; 5B85 18                       .
 	lda     $AE                             ; 5B86 A5 AE                    ..
 	adc     #$01                            ; 5B88 69 01                    i.
@@ -5329,12 +5319,13 @@ L5B51:  lda     L5A2C                           ; 5B51 AD 2C 5A                 
 	lda     $AF                             ; 5B8D A5 AF                    ..
 	adc     #$00                            ; 5B8F 69 00                    i.
 	sta     L5A34                           ; 5B91 8D 34 5A                 .4Z
+;
 	lda     L5A2F                           ; 5B94 AD 2F 5A                 ./Z
 	sta     $A3                             ; 5B97 85 A3                    ..
 	ldy     #$5D                            ; 5B99 A0 5D                    .]
 	ldx     L5A34                           ; 5B9B AE 34 5A                 .4Z
 	lda     L5A33                           ; 5B9E AD 33 5A                 .3Z
-	jsr     L5859                           ; 5BA1 20 59 58                  YX
+	jsr     sub_5859
 	lda     $A0                             ; 5BA4 A5 A0                    ..
 	sta     L5A30                           ; 5BA6 8D 30 5A                 .0Z
 	clc                                     ; 5BA9 18                       .
