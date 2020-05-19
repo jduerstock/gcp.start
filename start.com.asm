@@ -1343,8 +1343,10 @@ L368D:  lda     #$01                            ; 368D A9 01                    
 L369E:  rts                                     ; 369E 60                       `
 
 ; ----------------------------------------------------------------------------
-L369F:  stx     $AE                             ; 369F 86 AE                    ..
-	sty     $AF                             ; 36A1 84 AF                    ..
+sub_369F:
+	; byte to hex string  
+	stx     $AE
+	sty     $AE+1
 	ldy     #$00                            ; 36A3 A0 00                    ..
 	tax                                     ; 36A5 AA                       .
 	lsr     a                               ; 36A6 4A                       J
@@ -1353,16 +1355,16 @@ L369F:  stx     $AE                             ; 369F 86 AE                    
 	lsr     a                               ; 36A9 4A                       J
 	ora     #$30                            ; 36AA 09 30                    .0
 	cmp     #$3A                            ; 36AC C9 3A                    .:
-	bcc     L36B2                           ; 36AE 90 02                    ..
+	bcc     :+
 	adc     #$06                            ; 36B0 69 06                    i.
-L36B2:  sta     ($AE),y                         ; 36B2 91 AE                    ..
+:	sta     ($AE),y                         ; 36B2 91 AE                    ..
 	txa                                     ; 36B4 8A                       .
 	and     #$0F                            ; 36B5 29 0F                    ).
 	ora     #$30                            ; 36B7 09 30                    .0
 	cmp     #$3A                            ; 36B9 C9 3A                    .:
-	bcc     L36BF                           ; 36BB 90 02                    ..
+	bcc     :+
 	adc     #$06                            ; 36BD 69 06                    i.
-L36BF:  iny                                     ; 36BF C8                       .
+:	iny                                     ; 36BF C8                       .
 	sta     ($AE),y                         ; 36C0 91 AE                    ..
 	rts                                     ; 36C2 60                       `
 
@@ -3041,27 +3043,36 @@ L45FF:  lda     L460A                           ; 45FF AD 0A 46                 
 L460A:	.byte	$00
 
 ; ----------------------------------------------------------------------------
-L460B:	add16m8 off_AE, L455D, L456F
+L460B:	; L4570 = L455D[L456F];
+	add16m8 off_AE, L455D, L456F
+	; switch L4570:
 	ldp8	L4570
+	; case 'C';
 	lda     L4570                           ; 4622 AD 70 45                 .pE
 	eor     #'C'
 	lbne	L4644
+	; L4579[L4573] = *L456B; 
 	dmv	off_AE, L456B
 	lda     ($AE),y                         ; 4636 B1 AE                    ..
 	ldx     L4573                           ; 4638 AE 73 45                 .sE
 	sta     L4579,x                         ; 463B 9D 79 45                 .yE
+	; L4573++;
 	inc     L4573                           ; 463E EE 73 45                 .sE
+	; break;
 	jmp     L4762                           ; 4641 4C 62 47                 LbG
 
 ; ----------------------------------------------------------------------------
-L4644:  lda     L4570                           ; 4644 AD 70 45                 .pE
+L4644:	; case 'S','s',:
+	lda     L4570                           ; 4644 AD 70 45                 .pE
 	eor     #'S'
 L4649:  beq     L4655                           ; 4649 F0 0A                    ..
 	lda     L4570                           ; 464B AD 70 45                 .pE
 	eor     #'s'
 	lbne	L472A
-L4655:	dmv	off_AE, L456B
+L4655:	; L4571 = *L456B;
+	dmv	off_AE, L456B
 	ldp8	L4571
+	; 
 	dmv	off_AE, L456B
 	lda     ($AE),y                         ; 4670 B1 AE                    ..
 	sta     $A0                             ; 4672 85 A0                    ..
@@ -3075,7 +3086,7 @@ L4655:	dmv	off_AE, L456B
 	ldy     $A2                             ; 4682 A4 A2                    ..
 	ldx     $A1                             ; 4684 A6 A1                    ..
 	lda     $A0                             ; 4686 A5 A0                    ..
-	jsr     L369F                           ; 4688 20 9F 36                  .6
+	jsr     sub_369F
 	add8i	L4573, L4573, $02
 	add16i	L456B, L456B, $0002
 	lda     L4571                           ; 46A5 AD 71 45                 .qE
