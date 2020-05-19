@@ -2373,8 +2373,7 @@ L3F00:	ldi	$A0, $FF
 
 ; ----------------------------------------------------------------------------
 L3F05:	.byte	$00
-L3F06:	.byte	$00
-L3F07:	.byte	$00
+L3F06:	.byte	$00,$00
 L3F08:	.byte	$00
 L3F09:	.byte	$00
 L3F0A:	.byte	$00
@@ -2386,7 +2385,7 @@ L3F0C:	.byte	$00,$00
 sub_3F0F:
 	prolog
 	jsr     sub_34DF
-	ldi	L3F07, $00
+	ldi	L3F06+1, $00
 	mv	L3F06, $A0
 	test16	L3F06
 	lbne	L3F2F
@@ -2442,7 +2441,7 @@ L3F90:	mv	L2D58, L3F05
 	sty     L2CF6                           ; 3FA8 8C F6 2C                 ..,
 	sty     L3F09                           ; 3FAB 8C 09 3F                 ..?
 	jsr     sub_34DF
-	ldi	L3F07, $00
+	ldi	L3F06+1, $00
 	mv	L3F06, $A0
 	test16	L3F06
 	lbne	L3FCB
@@ -2452,8 +2451,7 @@ L3F90:	mv	L2D58, L3F05
 ; ----------------------------------------------------------------------------
 L3FCB:  lda     #$02                            ; 3FCB A9 02                    ..
 	jsr     sub_31A6
-	lda     $A0                             ; 3FD0 A5 A0                    ..
-	sta     L3F05                           ; 3FD2 8D 05 3F                 ..?
+	mv	L3F05, $A0
 	lda     L3F05                           ; 3FD5 AD 05 3F                 ..?
 	jsr     sub_390E
 L3FDB:  lda     L3F09                           ; 3FDB AD 09 3F                 ..?
@@ -2475,8 +2473,7 @@ L3FFA:	add16m8 $AE, L3F0C, L3F09
 	sta     L3F0B                           ; 4018 8D 0B 3F                 ..?
 	inc     L3F09                           ; 401B EE 09 3F                 ..?
 	jsr     sub_34DF
-	lda     #$00                            ; 4021 A9 00                    ..
-	sta     L3F07                           ; 4023 8D 07 3F                 ..?
+	ldi	L3F06+1, $00
 	lda     $A0                             ; 4026 A5 A0                    ..
 	sta     L3F06                           ; 4028 8D 06 3F                 ..?
 	test16	L3F06
@@ -2501,14 +2498,17 @@ L404B:  clc                                     ; 404B 18                       
 	lda     L3F05                           ; 405B AD 05 3F                 ..?
 	ldy     #$00                            ; 405E A0 00                    ..
 	sta     ($AE),y                         ; 4060 91 AE                    ..
+	;
 	clc                                     ; 4062 18                       .
 	lda     L3F0B                           ; 4063 AD 0B 3F                 ..?
 	adc     L3F05                           ; 4066 6D 05 3F                 m.?
 	sta     L3F0B                           ; 4069 8D 0B 3F                 ..?
+;
 	inc     L3F09                           ; 406C EE 09 3F                 ..?
 	lda     L3F05                           ; 406F AD 05 3F                 ..?
 	eor     #$0A                            ; 4072 49 0A                    I.
 	lbne	L40A8
+;
 	clc                                     ; 4079 18                       .
 	lda     L3F0A                           ; 407A AD 0A 3F                 ..?
 	adc     #$01                            ; 407D 69 01                    i.
@@ -2548,14 +2548,12 @@ L40B3:  ldy     #$01                            ; 40B3 A0 01                    
 
 ; ----------------------------------------------------------------------------
 L40BD:  jsr     sub_34DF
-	lda     #$00                            ; 40C0 A9 00                    ..
-	sta     L3F07                           ; 40C2 8D 07 3F                 ..?
-	lda     $A0                             ; 40C5 A5 A0                    ..
-	sta     L3F06                           ; 40C7 8D 06 3F                 ..?
+	ldi	L3F06+1, $00
+	mv	L3F06, $A0
 	lda     #$00                            ; 40CA A9 00                    ..
 	cmp     L3F06                           ; 40CC CD 06 3F                 ..?
 	lda     #$00                            ; 40CF A9 00                    ..
-	sbc     L3F07                           ; 40D1 ED 07 3F                 ..?
+	sbc     L3F06+1
 	bcc     L40D9                           ; 40D4 90 03                    ..
 	jmp     L40E9                           ; 40D6 4C E9 40                 L.@
 
@@ -2567,13 +2565,9 @@ L40D9:  lda     #$02                            ; 40D9 A9 02                    
 	lda     L3F05                           ; 40E3 AD 05 3F                 ..?
 	jsr     sub_390E
 L40E9:  lda     L3F06                           ; 40E9 AD 06 3F                 ..?
-	ora     L3F07                           ; 40EC 0D 07 3F                 ..?
-	beq     L40F4                           ; 40EF F0 03                    ..
-	jmp     L404B                           ; 40F1 4C 4B 40                 LK@
-
-; ----------------------------------------------------------------------------
-L40F4:  lda     #$00                            ; 40F4 A9 00                    ..
-	sta     $A0                             ; 40F6 85 A0                    ..
+	ora     L3F06+1
+	lbne	L404B
+	ldi	$A0, $00
 	rts                                     ; 40F8 60                       `
 
 ; ----------------------------------------------------------------------------
@@ -2845,6 +2839,7 @@ L43BB:	ifm8eqi	L438E, $01, L4444
 	ifm8eqi	L4390, $06, L4419
 	ifm8eqm L2D5A, L2CFD, L4416
 	sub8m	L2CF7, L2CF7, L2CFC
+;
 	clc                                     ; 43E4 18                       .
 	lda     #<L2CFC
 	adc     L2CFC                           ; 43E7 6D FC 2C                 m.,
@@ -2852,12 +2847,13 @@ L43BB:	ifm8eqi	L438E, $01, L4444
 	lda     #>L2CFC
 	adc     #$00                            ; 43EE 69 00                    i.
 	sta     $A3                             ; 43F0 85 A3                    ..
+;
 	sec                                     ; 43F2 38                       8
 	lda     #$5A                            ; 43F3 A9 5A                    .Z
 	sbc     L2CFC                           ; 43F5 ED FC 2C                 ..,
 	sta     $A4                             ; 43F8 85 A4                    ..
-	lda     #$00                            ; 43FA A9 00                    ..
-	sta     $A5                             ; 43FC 85 A5                    ..
+;
+	ldi	$A5, $00
 	ldy     $A2                             ; 43FE A4 A2                    ..
 	ldxai	L2CFC
 	jsr     sub_343B
@@ -3010,11 +3006,10 @@ L4558:  lda     #$00                            ; 4558 A9 00                    
 	rts                                     ; 455C 60                       `
 
 ; ----------------------------------------------------------------------------
-L455D:	.byte	$00
-L455E:	.byte	$00
+L455D:	.byte	$00,$00
 L455F:	.res	12,$00
-L456B:	.byte	$00
-L456C:	.byte	$00,$00,$00
+L456B:	.byte	$00,$00
+L456D:	.byte	$00,$00
 L456F:	.byte	$00
 L4570:	.byte	$00
 L4571:	.byte	$00
@@ -3498,33 +3493,26 @@ L4AD5:	.byte	$16," "
 	Inverse	" Waiting For Carrier "
 
 ; ----------------------------------------------------------------------------
-L4AEC:  lda     #$4A                            ; 4AEC A9 4A                    .J
+L4AEC:  lda     #>L4AD5
 	sta     $A3                             ; 4AEE 85 A3                    ..
-	ldy     #$D5                            ; 4AF0 A0 D5                    ..
+	ldy     #<L4AD5
 	ldx     #$0A                            ; 4AF2 A2 0A                    ..
 	lda     #$08                            ; 4AF4 A9 08                    ..
 	jsr     sub_3BEB
 	rts                                     ; 4AF9 60                       `
 
 ; ----------------------------------------------------------------------------
-	jmp     L4AFD                           ; 4AFA 4C FD 4A                 L.J
-
-; ----------------------------------------------------------------------------
-L4AFD:  ldy     #$00                            ; 4AFD A0 00                    ..
-	sty     $D302                           ; 4AFF 8C 02 D3                 ...
-	lda     #$50                            ; 4B02 A9 50                    .P
-	sta     $D300                           ; 4B04 8D 00 D3                 ...
-	lda     #$3C                            ; 4B07 A9 3C                    .<
-	sta     $D302                           ; 4B09 8D 02 D3                 ...
-	lda     #$4F                            ; 4B0C A9 4F                    .O
-	sta     $D300                           ; 4B0E 8D 00 D3                 ...
+L4AFA:	prolog
+	yldi	$D302, $00
+	ldi	$D300, $50
+	ldi	$D302, $3C
+	ldi	$D300, $4F
 	rts                                     ; 4B11 60                       `
 
 ; ----------------------------------------------------------------------------
-L4B12:  jmp     L4B15                           ; 4B12 4C 15 4B                 L.K
-
-; ----------------------------------------------------------------------------
-L4B15:  lda     $D300                           ; 4B15 AD 00 D3                 ...
+sub_4B12:  
+	prolog
+	lda     $D300                           ; 4B15 AD 00 D3                 ...
 	and     #$BF                            ; 4B18 29 BF                    ).
 	sta     $D300                           ; 4B1A 8D 00 D3                 ...
 	rts                                     ; 4B1D 60                       `
@@ -3546,7 +3534,7 @@ L4B28:  prolog
 	stx     L4B1E+1
 	sta     L4B1E                           ; 4B2E 8D 1E 4B                 ..K
 	jsr     sub_3E7A
-	jsr     L4B12                           ; 4B34 20 12 4B                  .K
+	jsr     sub_4B12
 	ldx     #$00                            ; 4B37 A2 00                    ..
 	lda     L4B20                           ; 4B39 AD 20 4B                 . K
 	jsr     sub_3756
@@ -3600,7 +3588,7 @@ L4BBE:  jsr     sub_3E7A
 	ldx     #$00                            ; 4BC1 A2 00                    ..
 	lda     L4B23                           ; 4BC3 AD 23 4B                 .#K
 	jsr     sub_3756
-	jsr     L4B12                           ; 4BC9 20 12 4B                  .K
+	jsr     sub_4B12
 	ldx     #$00                            ; 4BCC A2 00                    ..
 	lda     L4B22                           ; 4BCE AD 22 4B                 ."K
 	jsr     sub_3756
@@ -4046,11 +4034,8 @@ L4F70:  ldy     #$2E                            ; 4F70 A0 2E                    
 	sta     L4F18                           ; 4F9B 8D 18 4F                 ..O
 	lda     $B148                           ; 4F9E AD 48 B1                 .H.
 	eor     #$03                            ; 4FA1 49 03                    I.
-	beq     L4FA8                           ; 4FA3 F0 03                    ..
-	jmp     L4FAE                           ; 4FA5 4C AE 4F                 L.O
-
-; ----------------------------------------------------------------------------
-L4FA8:  lda     L4F18                           ; 4FA8 AD 18 4F                 ..O
+	lbne	L4FAE
+	lda     L4F18                           ; 4FA8 AD 18 4F                 ..O
 	sta     $B149                           ; 4FAB 8D 49 B1                 .I.
 L4FAE:  lda     #$05                            ; 4FAE A9 05                    ..
 	jsr     sub_315E
